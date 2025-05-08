@@ -1,20 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Munim A | Portfolio</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    header, footer { background-color: #222; color: #fff; padding: 20px; text-align: center; }
-    nav a { margin: 0 15px; color: #fff; text-decoration: none; }
-    section { padding: 40px 20px; max-width: 900px; margin: auto; }
-    h1, h2 { color: #333; }
-    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .project { border: 1px solid #ccc; padding: 15px; border-radius: 5px; background: #f9f9f9; }
-    .skills span { background: #e0e0e0; margin: 5px; padding: 8px 12px; display: inline-block; border-radius: 4px; }
+    /* --- Base Styles --- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header, footer {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00aaff;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .project {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 5px;
+      background: #f9f9f9;
+      transition: transform 0.3s;
+    }
+    .project:hover {
+      transform: scale(1.03);
+    }
+    .skills span {
+      background: #e0e0e0;
+      margin: 5px;
+      padding: 8px 12px;
+      display: inline-block;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .resume-button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .resume-button:hover {
+      background: #0056b3;
+    }
+
+    /* --- Dark Mode Styles --- */
+    .dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+    .dark-mode header, .dark-mode footer {
+      background-color: #1f1f1f;
+    }
+    .dark-mode .project {
+      background: #1f1f1f;
+      border-color: #444;
+    }
+    .dark-mode .skills span {
+      background-color: #333;
+    }
+
+    /* --- Toggle Button --- */
+    .dark-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 5px 10px;
+      cursor: pointer;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
 
+<!-- === DARK MODE TOGGLE BUTTON === -->
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+
+<!-- === HEADER WITH NAVIGATION === -->
 <header>
   <h1>Munim A</h1>
   <nav>
@@ -22,14 +117,17 @@
     <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
+    <a class="resume-button" href="Munim_Resume.pdf" target="_blank">📄 Resume</a>
   </nav>
 </header>
 
+<!-- === ABOUT SECTION === -->
 <section id="about">
   <h2>About Me</h2>
   <p>I'm Munim, a student and aspiring developer passionate about coding, design, and cybersecurity. I enjoy building projects that make life easier and learning new tech.</p>
 </section>
 
+<!-- === PROJECTS SECTION === -->
 <section id="projects">
   <h2>Projects</h2>
   <div class="projects">
@@ -48,6 +146,7 @@
   </div>
 </section>
 
+<!-- === SKILLS SECTION === -->
 <section id="skills">
   <h2>Skills</h2>
   <div class="skills">
@@ -60,14 +159,23 @@
   </div>
 </section>
 
+<!-- === CONTACT SECTION === -->
 <section id="contact">
   <h2>Contact</h2>
   <p>Feel free to reach out at: <strong>munim764@gmail.com</strong></p>
 </section>
 
+<!-- === FOOTER === -->
 <footer>
   <p>© 2025 Munim A. All rights reserved.</p>
 </footer>
+
+<!-- === DARK MODE SCRIPT === -->
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
 
 </body>
 </html>
