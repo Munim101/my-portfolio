@@ -2,9 +2,72 @@
 <html>
 <head>
   <title>Munim A | Portfolio</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+    header, footer { background-color: #222; color: #fff; padding: 20px; text-align: center; }
+    nav a { margin: 0 15px; color: #fff; text-decoration: none; }
+    section { padding: 40px 20px; max-width: 900px; margin: auto; }
+    h1, h2 { color: #333; }
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .project { border: 1px solid #ccc; padding: 15px; border-radius: 5px; background: #f9f9f9; }
+    .skills span { background: #e0e0e0; margin: 5px; padding: 8px 12px; display: inline-block; border-radius: 4px; }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Munim A's Website</h1>
-  <p>This is my portfolio with my projects, experience, and more.</p>
+
+<header>
+  <h1>Munim A</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>I'm Munim, a student and aspiring developer passionate about coding, design, and cybersecurity. I enjoy building projects that make life easier and learning new tech.</p>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>Web Scraper</h3>
+      <p>A Python tool that extracts data from websites using BeautifulSoup and Selenium.</p>
+    </div>
+    <div class="project">
+      <h3>Hangman Game</h3>
+      <p>A simple terminal-based word game coded in Python for fun and learning.</p>
+    </div>
+    <div class="project">
+      <h3>HTML Portfolio</h3>
+      <p>This website, built to showcase my work and growth as a developer.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>Python</span>
+    <span>Git</span>
+    <span>VS Code</span>
+    <span>Java</span>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Feel free to reach out at: <strong>munim764@gmail.com</strong></p>
+</section>
+
+<footer>
+  <p>© 2025 Munim A. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
