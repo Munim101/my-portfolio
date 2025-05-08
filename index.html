@@ -1,192 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Munim A | Portfolio</title>
   <style>
-    /* === Base Styles === */
-    body {
-      font-family: Arial, sans-serif;
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      line-height: 1.6;
-      background-color: #fff;
-      color: #000;
-      transition: background-color 0.4s, color 0.4s;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
     }
     header, footer {
-      background-color: #222;
+      background-color: #111;
       color: #fff;
-      padding: 20px;
       text-align: center;
+      padding: 2rem 1rem;
     }
     nav a {
-      margin: 0 12px;
       color: #fff;
       text-decoration: none;
-      transition: color 0.3s ease;
+      margin: 0 15px;
+      font-weight: bold;
+      transition: color 0.3s;
     }
     nav a:hover {
-      color: #00aaff;
+      color: #00c3ff;
     }
     section {
-      padding: 40px 20px;
-      max-width: 900px;
+      padding: 3rem 1rem;
+      max-width: 1000px;
       margin: auto;
+      text-align: center;
     }
-    h1, h2 {
-      color: #333;
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #222;
     }
-
-    /* === Projects Layout === */
     .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
     }
     .project {
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 8px;
-      background: #f9f9f9;
-      transition: transform 0.3s ease;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      width: 280px;
+      transition: transform 0.3s;
     }
     .project:hover {
-      transform: scale(1.03);
+      transform: translateY(-5px);
     }
-
-    /* === Skills === */
     .skills span {
-      background: #e0e0e0;
-      margin: 5px;
+      background: #ddd;
       padding: 8px 12px;
+      border-radius: 5px;
+      margin: 5px;
       display: inline-block;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
+      transition: background 0.3s;
     }
-
-    /* === Resume Button === */
     .resume-button {
       display: inline-block;
-      margin-left: 15px;
-      padding: 8px 15px;
+      margin-top: 20px;
+      padding: 10px 20px;
       background: #007bff;
       color: #fff;
-      text-decoration: none;
+      border: none;
       border-radius: 5px;
-      transition: background 0.3s ease;
+      text-decoration: none;
+      transition: background 0.3s;
     }
     .resume-button:hover {
       background: #0056b3;
     }
-
-    /* === Dark Mode === */
     .dark-mode {
       background-color: #121212;
-      color: #f5f5f5;
+      color: #e0e0e0;
     }
     .dark-mode header, .dark-mode footer {
-      background-color: #1f1f1f;
+      background-color: #1a1a1a;
     }
     .dark-mode .project {
-      background: #1f1f1f;
-      border-color: #444;
+      background-color: #1e1e1e;
     }
     .dark-mode .skills span {
-      background-color: #333;
+      background-color: #2a2a2a;
     }
-
-    /* === Dark Mode Toggle Button === */
     .dark-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      padding: 6px 12px;
-      cursor: pointer;
-      background: #333;
+      background: #444;
       color: #fff;
       border: none;
+      padding: 8px 12px;
       border-radius: 5px;
-      z-index: 999;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- 🌙 Dark Mode Toggle -->
-  <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+<button class="dark-toggle" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
 
-  <!-- 👤 Header -->
-  <header>
-    <h1>Munim A</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-      <a class="resume-button" href="Munim_Resume.pdf" target="_blank">📄 Resume</a>
-    </nav>
-  </header>
+<header>
+  <h1>Munim A</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+    <a class="resume-button" href="Munim_Resume.pdf" target="_blank">📄 Resume</a>
+  </nav>
+</header>
 
-  <!-- 💡 About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      Hi, I'm Munim — a curious builder, passionate learner, and tech enthusiast on a journey to create things that matter.
-      Whether it's crafting sleek websites, solving coding puzzles, or diving into cybersecurity challenges, I thrive when I'm learning something new.
-      I believe technology should empower people, and I love using code to turn ideas into reality. This portfolio is just the start — the best is yet to come.
-    </p>
-  </section>
+<section id="about">
+  <h2>About Me</h2>
+  <p>
+    I'm Munim — a passionate tech explorer and creative coder. I love building useful tools, crafting sleek interfaces, and learning everything I can about cybersecurity, AI, and design.
+    Each project I create is a step in my journey, and I'm excited to share it with the world.
+  </p>
+</section>
 
-  <!-- 🛠️ Projects Section -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project">
-        <h3>Web Scraper</h3>
-        <p>A Python tool that extracts data from websites using BeautifulSoup and Selenium.</p>
-      </div>
-      <div class="project">
-        <h3>Hangman Game</h3>
-        <p>A terminal-based word game built with Python for fun and learning.</p>
-      </div>
-      <div class="project">
-        <h3>HTML Portfolio</h3>
-        <p>This very website — showcasing my growth and skills as a developer.</p>
-      </div>
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <h3>Web Scraper</h3>
+      <p>A Python-based scraper using BeautifulSoup and Selenium to automate data collection.</p>
     </div>
-  </section>
-
-  <!-- 🔧 Skills Section -->
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>Python</span>
-      <span>Git</span>
-      <span>VS Code</span>
-      <span>Java</span>
+    <div class="project">
+      <h3>Hangman Game</h3>
+      <p>A classic hangman game built in Python with terminal interactivity for fun and learning.</p>
     </div>
-  </section>
+    <div class="project">
+      <h3>Personal Portfolio</h3>
+      <p>This website — my creative space to showcase what I do and love.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- 📬 Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Feel free to reach out at: <strong>munim764@gmail.com</strong></p>
-  </section>
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>Java</span>
+    <span>Python</span>
+    <span>Git</span>
+    <span>VS Code</span>
+    <span>Selenium</span>
+  </div>
+</section>
 
-  <!-- 🔚 Footer -->
-  <footer>
-    <p>© 2025 Munim A. All rights reserved.</p>
-  </footer>
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Reach out to me anytime at <strong>munim764@gmail.com</strong></p>
+</section>
 
-  <!-- 🌑 Dark Mode Script -->
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-    }
-  </script>
+<footer>
+  <p>© 2025 Munim A. All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
 
 </body>
 </html>
