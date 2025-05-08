@@ -2,106 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Munim Awal | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      line-height: 1.6;
-      background-color: #fff;
-      color: #000;
-      transition: background-color 0.4s, color 0.4s;
+      background-color: #f9f9f9;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
     }
     header, footer {
-      background-color: #222;
+      background-color: #111;
       color: #fff;
       padding: 20px;
       text-align: center;
     }
     nav a {
-      margin: 0 12px;
+      margin: 0 15px;
       color: #fff;
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-weight: bold;
     }
     nav a:hover {
-      color: #00aaff;
+      color: #1e90ff;
     }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
+    .container {
+      max-width: 1000px;
       margin: auto;
+      padding: 40px 20px;
     }
     h1, h2 {
-      color: #333;
+      color: #222;
     }
-    .projects {
+    .section {
+      margin-bottom: 40px;
+    }
+    .projects, .skills {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
     }
-    .project {
-      border: 1px solid #ccc;
-      padding: 15px;
+    .card {
+      background: #fff;
       border-radius: 8px;
-      background: #f9f9f9;
-      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s;
     }
-    .project:hover {
-      transform: scale(1.03);
+    .card:hover {
+      transform: translateY(-5px);
     }
     .skills span {
-      background: #e0e0e0;
+      display: inline-block;
+      padding: 10px 15px;
       margin: 5px;
-      padding: 8px 12px;
-      display: inline-block;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-    .resume-button {
-      display: inline-block;
-      margin-left: 15px;
-      padding: 8px 15px;
-      background: #007bff;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-    }
-    .resume-button:hover {
-      background: #0056b3;
-    }
-    .dark-mode {
-      background-color: #121212;
-      color: #f5f5f5;
-    }
-    .dark-mode header, .dark-mode footer {
-      background-color: #1f1f1f;
-    }
-    .dark-mode .project {
-      background: #1f1f1f;
-      border-color: #444;
-    }
-    .dark-mode .skills span {
-      background-color: #333;
+      background: #e0e0e0;
+      border-radius: 30px;
     }
     .dark-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      padding: 6px 12px;
-      cursor: pointer;
-      background: #333;
+      padding: 8px 12px;
+      background: #222;
       color: #fff;
       border: none;
       border-radius: 5px;
-      z-index: 999;
+      cursor: pointer;
+    }
+    .dark-mode {
+      background-color: #1e1e1e;
+      color: #e0e0e0;
+    }
+    .dark-mode header,
+    .dark-mode footer {
+      background-color: #000;
+    }
+    .dark-mode .card {
+      background-color: #2c2c2c;
+      color: #fff;
+    }
+    footer .social-icons a {
+      margin: 0 10px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.3s;
+    }
+    footer .social-icons a:hover {
+      color: #00aaff;
     }
   </style>
 </head>
 <body>
+
   <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
   <header>
     <h1>Munim Awal</h1>
     <nav>
@@ -109,64 +107,61 @@
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
-      <a class="resume-button" href="Munim_Resume.pdf" target="_blank">📄 Resume</a>
     </nav>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I'm Munim — a tech enthusiast focused on cybersecurity, programming, and creative solutions. I enjoy building tools that improve digital life, from custom scripts to full desktop applications. I love experimenting with Python, Java, HTML/CSS, and tools like Git and batch scripting.
-    </p>
-  </section>
+  <div class="container">
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>I’m Munim Awal — a developer with a passion for coding, building tools that help people, and constantly exploring the world of cybersecurity and programming. Whether I'm writing Python scripts, managing databases, or designing clean user interfaces, I love making things that work smart and look great.</p>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="project">
-        <h3>System Resource Tracker App</h3>
-        <p>A desktop application built with Python and Tkinter to monitor CPU, memory, and disk usage in real-time. Designed with a simple interface using psutil.</p>
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="card">
+          <h3>System Resource Tracker App</h3>
+          <p>Python desktop app that tracks CPU, memory, and disk usage in real time using <code>psutil</code> and <code>tkinter</code>.</p>
+        </div>
+        <div class="card">
+          <h3>System Speed Booster</h3>
+          <p>A Python + batch script tool to clean up Windows PCs and boost gaming performance.</p>
+        </div>
+        <div class="card">
+          <h3>Web Scraper</h3>
+          <p>Automated web scraping project using BeautifulSoup and Selenium to extract web content.</p>
+        </div>
       </div>
-      <div class="project">
-        <h3>System Speed Booster Script</h3>
-        <p>Python and batch script that improves Windows performance by managing startup apps and cleaning temp files. Tested across multiple devices with visible improvements.</p>
-      </div>
-      <div class="project">
-        <h3>Web Scraper</h3>
-        <p>Python tool using BeautifulSoup and Selenium to extract useful data from websites.</p>
-      </div>
-      <div class="project">
-        <h3>Hangman Game</h3>
-        <p>A terminal-based Python game built for practice and fun.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <span>Python</span>
-      <span>Java</span>
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>Batch Scripting</span>
-      <span>Git</span>
-      <span>VS Code</span>
-      <span>Microsoft Office</span>
-      <span>Troubleshooting</span>
-      <span>Cybersecurity Fundamentals</span>
-      <span>Database Management</span>
-      <span>IT Project Management</span>
-    </div>
-  </section>
+    <section id="skills" class="section">
+      <h2>Technical Skills</h2>
+      <div class="skills">
+        <span>Python</span>
+        <span>Java</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+        <span>Batch Scripting</span>
+        <span>Git</span>
+        <span>VS Code</span>
+        <span>Microsoft Office</span>
+        <span>Troubleshooting</span>
+      </div>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email me at: <strong>munim764@gmail.com</strong></p>
-  </section>
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Feel free to reach out via email: <strong>munim764@gmail.com</strong></p>
+    </section>
+  </div>
 
   <footer>
     <p>© 2025 Munim Awal. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://github.com/Munim101" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:munim764@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
   </footer>
 
   <script>
@@ -174,5 +169,6 @@
       document.body.classList.toggle("dark-mode");
     }
   </script>
+
 </body>
 </html>
