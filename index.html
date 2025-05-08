@@ -3,126 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <title>Munim Awal | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* === Base Styles === */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f2f5;
-      color: #333;
-      transition: background-color 0.3s, color 0.3s;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #000;
+      transition: background-color 0.4s, color 0.4s;
     }
     header, footer {
-      background-color: #111;
+      background-color: #222;
       color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 20px 0;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
     }
     nav a {
-      margin: 0 15px;
+      margin: 0 12px;
       color: #fff;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
     nav a:hover {
       color: #00aaff;
     }
-    .container {
-      max-width: 960px;
-      margin: auto;
+    section {
       padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
     }
-    h2 {
+    h1, h2 {
       color: #333;
-      margin-bottom: 10px;
     }
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
     .project {
-      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
       border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+      background: #f9f9f9;
+      transition: transform 0.3s ease;
     }
     .project:hover {
-      transform: translateY(-5px);
+      transform: scale(1.03);
     }
     .skills span {
-      display: inline-block;
       background: #e0e0e0;
-      margin: 6px;
-      padding: 8px 14px;
-      border-radius: 20px;
+      margin: 5px;
+      padding: 8px 12px;
+      display: inline-block;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
     }
     .resume-button {
+      display: inline-block;
+      margin-left: 15px;
+      padding: 8px 15px;
       background: #007bff;
       color: #fff;
-      padding: 10px 18px;
       text-decoration: none;
       border-radius: 5px;
-      margin-left: 20px;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     .resume-button:hover {
       background: #0056b3;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+    .dark-mode header, .dark-mode footer {
+      background-color: #1f1f1f;
+    }
+    .dark-mode .project {
+      background: #1f1f1f;
+      border-color: #444;
+    }
+    .dark-mode .skills span {
+      background-color: #333;
     }
     .dark-toggle {
       position: fixed;
       top: 20px;
       right: 20px;
+      padding: 6px 12px;
+      cursor: pointer;
       background: #333;
       color: #fff;
       border: none;
-      padding: 8px 14px;
       border-radius: 5px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    /* === Footer Icons === */
-    .social-icons a {
-      color: #fff;
-      margin: 0 10px;
-      font-size: 22px;
-      transition: color 0.3s;
-    }
-    .social-icons a:hover {
-      color: #00aaff;
-    }
-
-    /* === Dark Mode === */
-    .dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-    .dark-mode header, .dark-mode footer {
-      background-color: #000;
-    }
-    .dark-mode .project {
-      background: #1f1f1f;
-      color: #fff;
-    }
-    .dark-mode .skills span {
-      background-color: #333;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
-
   <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-
   <header>
     <h1>Munim Awal</h1>
     <nav>
@@ -134,58 +113,60 @@
     </nav>
   </header>
 
-  <div class="container">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I'm Munim Awal — a passionate learner and aspiring developer who loves building things that solve problems and make life easier. Whether it's creating web apps or exploring cybersecurity, I enjoy turning ideas into reality through code. Always learning. Always growing.
-      </p>
-    </section>
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm Munim — a tech enthusiast focused on cybersecurity, programming, and creative solutions. I enjoy building tools that improve digital life, from custom scripts to full desktop applications. I love experimenting with Python, Java, HTML/CSS, and tools like Git and batch scripting.
+    </p>
+  </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="projects">
-        <div class="project">
-          <h3>Web Scraper</h3>
-          <p>Python tool using BeautifulSoup and Selenium to extract structured data from websites.</p>
-        </div>
-        <div class="project">
-          <h3>Hangman Game</h3>
-          <p>Terminal-based Python game for practicing logic and learning loops and conditions.</p>
-        </div>
-        <div class="project">
-          <h3>Portfolio Website</h3>
-          <p>This site — clean, responsive, modern. Built with HTML, CSS, and a sprinkle of passion.</p>
-        </div>
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project">
+        <h3>System Resource Tracker App</h3>
+        <p>A desktop application built with Python and Tkinter to monitor CPU, memory, and disk usage in real-time. Designed with a simple interface using psutil.</p>
       </div>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>Python</span>
-        <span>Git</span>
-        <span>VS Code</span>
-        <span>Java</span>
+      <div class="project">
+        <h3>System Speed Booster Script</h3>
+        <p>Python and batch script that improves Windows performance by managing startup apps and cleaning temp files. Tested across multiple devices with visible improvements.</p>
       </div>
-    </section>
+      <div class="project">
+        <h3>Web Scraper</h3>
+        <p>Python tool using BeautifulSoup and Selenium to extract useful data from websites.</p>
+      </div>
+      <div class="project">
+        <h3>Hangman Game</h3>
+        <p>A terminal-based Python game built for practice and fun.</p>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Reach out at: <strong>munim764@gmail.com</strong></p>
-    </section>
-  </div>
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <span>Python</span>
+      <span>Java</span>
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>Batch Scripting</span>
+      <span>Git</span>
+      <span>VS Code</span>
+      <span>Microsoft Office</span>
+      <span>Troubleshooting</span>
+      <span>Cybersecurity Fundamentals</span>
+      <span>Database Management</span>
+      <span>IT Project Management</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email me at: <strong>munim764@gmail.com</strong></p>
+  </section>
 
   <footer>
     <p>© 2025 Munim Awal. All rights reserved.</p>
-    <div class="social-icons">
-      <a href="https://github.com/Munim101" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/munimawal" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="mailto:munim764@gmail.com"><i class="fas fa-envelope"></i></a>
-    </div>
   </footer>
 
   <script>
@@ -193,6 +174,5 @@
       document.body.classList.toggle("dark-mode");
     }
   </script>
-
 </body>
 </html>
