@@ -6,7 +6,7 @@
   <title>Munim Awal | Portfolio</title>
   <meta
     name="description"
-    content="Munim Awal portfolio website showcasing projects, skills, and contact information."
+    content="Munim Awal portfolio showcasing IT, data analytics, cybersecurity, and software projects."
   />
   <link
     rel="stylesheet"
@@ -16,15 +16,16 @@
     :root {
       --bg: #f5f7fb;
       --surface: #ffffff;
-      --surface-2: #f0f3f8;
-      --text: #1f2937;
-      --muted: #5b6472;
+      --surface-2: #eef2f7;
+      --text: #172033;
+      --muted: #5f6b7a;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
-      --border: #dbe2ea;
+      --border: #d8e0ea;
       --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
       --header-bg: rgba(255, 255, 255, 0.92);
       --badge-bg: #e8eefc;
+      --hero-accent: linear-gradient(135deg, #2563eb, #0f172a);
     }
 
     body.dark-mode {
@@ -39,6 +40,7 @@
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
       --header-bg: rgba(15, 23, 42, 0.92);
       --badge-bg: #1e3a8a;
+      --hero-accent: linear-gradient(135deg, #1d4ed8, #020617);
     }
 
     * {
@@ -63,13 +65,8 @@
       text-decoration: none;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
     .container {
-      width: min(1120px, 92%);
+      width: min(1150px, 92%);
       margin: 0 auto;
     }
 
@@ -91,7 +88,7 @@
     }
 
     .logo {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 800;
       letter-spacing: 0.3px;
     }
@@ -99,12 +96,12 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     nav a {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--muted);
       transition: color 0.2s ease;
     }
@@ -149,26 +146,39 @@
     }
 
     .hero {
-      padding: 88px 0 60px;
+      padding: 82px 0 56px;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px;
-      align-items: center;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-text,
+    .hero-card {
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .hero-text {
+      background: var(--hero-accent);
+      color: #fff;
+      padding: 42px 36px;
     }
 
     .hero-text h1 {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(2.3rem, 5vw, 4rem);
       line-height: 1.1;
-      margin: 0 0 16px;
+      margin: 0 0 14px;
     }
 
     .hero-text p {
       font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 700px;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 720px;
       margin-bottom: 24px;
     }
 
@@ -176,17 +186,16 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
 
-    .hero-badges span,
-    .skills span {
+    .hero-badges span {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--badge-bg);
-      color: var(--text);
-      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.16);
       padding: 8px 13px;
       border-radius: 999px;
       font-weight: 700;
@@ -201,29 +210,26 @@
 
     .hero-buttons .secondary-btn {
       background: transparent;
-      color: var(--text);
+      color: #fff;
       padding: 11px 18px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       border-radius: 10px;
       font-weight: 700;
     }
 
     .hero-buttons .secondary-btn:hover {
-      background: var(--surface-2);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     .hero-card {
-      background: linear-gradient(145deg, var(--surface), var(--surface-2));
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: var(--shadow);
+      background: var(--surface);
+      padding: 28px;
     }
 
     .hero-card h3 {
       margin-top: 0;
       margin-bottom: 16px;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
     .quick-info {
@@ -233,7 +239,7 @@
 
     .quick-info div {
       padding: 14px 16px;
-      background: var(--surface);
+      background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: 14px;
     }
@@ -241,34 +247,56 @@
     .quick-info strong {
       display: block;
       margin-bottom: 4px;
+      color: var(--text);
     }
 
     section {
-      padding: 34px 0;
+      padding: 28px 0;
     }
 
     .section-title {
-      font-size: 1.9rem;
-      margin-bottom: 10px;
+      font-size: 1.95rem;
+      margin-bottom: 8px;
     }
 
     .section-subtitle {
       color: var(--muted);
-      max-width: 760px;
-      margin-bottom: 28px;
+      max-width: 780px;
+      margin-bottom: 26px;
     }
 
     .about-box,
     .project,
-    .contact-card {
+    .contact-card,
+    .education-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 18px;
       box-shadow: var(--shadow);
     }
 
-    .about-box {
+    .about-box,
+    .education-card {
       padding: 28px;
+    }
+
+    .education-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .edu-school {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .edu-meta {
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
     .projects {
@@ -279,7 +307,7 @@
 
     .project {
       padding: 22px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
     .project:hover {
@@ -309,10 +337,63 @@
       gap: 10px;
     }
 
-    .contact-grid {
+    .skills span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--badge-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .experience-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
+    }
+
+    .experience-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .experience-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .experience-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .experience-company {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .experience-date {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .experience-item ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+
+    .experience-item li {
+      margin-bottom: 8px;
+      color: var(--muted);
     }
 
     .contact-card {
@@ -331,14 +412,14 @@
     }
 
     footer {
-      margin-top: 34px;
+      margin-top: 28px;
       border-top: 1px solid var(--border);
       padding: 26px 0 34px;
       text-align: center;
       color: var(--muted);
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       .hero-grid {
         grid-template-columns: 1fr;
       }
@@ -356,7 +437,7 @@
 
     @media (max-width: 560px) {
       .hero {
-        padding-top: 60px;
+        padding-top: 58px;
       }
 
       .hero-buttons,
@@ -370,6 +451,16 @@
         width: 100%;
         text-align: center;
       }
+
+      .hero-text,
+      .hero-card,
+      .about-box,
+      .education-card,
+      .project,
+      .experience-item,
+      .contact-card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -380,10 +471,12 @@
 
       <nav>
         <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
-        <a class="resume-button" href="Munim_Resume.pdf" target="_blank">Resume</a>
+        <a class="resume-button" href="Munim_Awal_Resume_5.pdf" target="_blank">Resume</a>
         <button class="toggle-btn" onclick="toggleDarkMode()" id="themeToggle">Dark Mode</button>
       </nav>
     </div>
@@ -395,16 +488,16 @@
         <div class="hero-text">
           <h1>IT, Data, and Cybersecurity Student</h1>
           <p>
-            I am Munim Awal, a Computer Information Systems student focused on
-            cybersecurity, IT support, data analysis, and practical problem solving.
-            I build projects with Python, SQL, HTML, CSS, and Java, and I enjoy
-            creating clean solutions that are useful in real work settings.
+            I am Munim Awal, a Computer Information Systems student at Cal Poly Pomona
+            with hands-on experience in IT support, data analysis, SQL, dashboards,
+            internal systems, and technical problem solving. I enjoy building practical
+            tools and using technology to make work more organized, efficient, and reliable.
           </p>
 
           <div class="hero-badges">
             <span><i class="fa-solid fa-shield-halved"></i> Cybersecurity</span>
-            <span><i class="fa-solid fa-database"></i> Data Analytics</span>
-            <span><i class="fa-solid fa-code"></i> Software Projects</span>
+            <span><i class="fa-solid fa-database"></i> SQL & Data</span>
+            <span><i class="fa-solid fa-chart-column"></i> Tableau & Excel</span>
             <span><i class="fa-solid fa-laptop-code"></i> IT Support</span>
           </div>
 
@@ -418,20 +511,20 @@
           <h3>Quick Overview</h3>
           <div class="quick-info">
             <div>
+              <strong>School</strong>
+              California State Polytechnic University, Pomona
+            </div>
+            <div>
               <strong>Major</strong>
-              Computer Information Systems
+              Business Administration, Computer Information Systems
             </div>
             <div>
               <strong>Focus</strong>
-              Cybersecurity, IT Support, Data Analysis
+              Cybersecurity, IT Support, Data Analysis, Business Technology
             </div>
             <div>
               <strong>Tools</strong>
-              Python, Java, SQL, HTML/CSS, GitHub, Microsoft Office
-            </div>
-            <div>
-              <strong>Goal</strong>
-              Build strong technical experience through projects, internships, and real-world work
+              Python, Java, SQL, Excel, Tableau, GitHub, Microsoft Office
             </div>
           </div>
         </div>
@@ -442,22 +535,92 @@
       <div class="container">
         <h2 class="section-title">About Me</h2>
         <p class="section-subtitle">
-          A quick summary of who I am and what I am working toward.
+          A student focused on technology, systems, and real-world problem solving.
         </p>
 
         <div class="about-box">
           <p>
-            I am a motivated student with experience in technical projects,
-            IT-related work, and problem solving. My interests include
-            cybersecurity, data systems, business technology, and software tools
-            that improve efficiency. I enjoy learning by building real projects
-            and applying technical skills to practical needs.
+            I am a motivated student building experience across IT support, cybersecurity,
+            data systems, and analytics. My background includes technical support work,
+            data entry and reporting, internal system organization, SQL queries, dashboard work,
+            and business technology projects.
           </p>
           <p>
-            I am currently focused on strengthening my background in IT,
-            databases, analytics, and security while building a portfolio that
-            reflects both technical skill and professional growth.
+            I enjoy learning by building useful projects and applying technical skills to
+            practical work. My goal is to continue growing through internships, professional
+            experience, and hands-on technical projects that strengthen both my IT and data background.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <p class="section-subtitle">
+          My academic background and coursework.
+        </p>
+
+        <div class="education-grid">
+          <div class="education-card">
+            <div class="edu-school">California State Polytechnic University, Pomona</div>
+            <div class="edu-meta">Expected December 2027</div>
+            <p>B.S. Business Administration, Computer Information Systems</p>
+            <p>Kellogg Honors College</p>
+          </div>
+
+          <div class="education-card">
+            <div class="edu-school">California State University, Los Angeles</div>
+            <div class="edu-meta">2023 to 2025</div>
+            <p>Computer Information Systems, Cybersecurity Focus</p>
+            <p>Relevant coursework in business intelligence, database design, systems analysis, and cybersecurity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">
+          Roles where I built hands-on technical, data, and support experience.
+        </p>
+
+        <div class="experience-list">
+          <div class="experience-item">
+            <div class="experience-top">
+              <div>
+                <div class="experience-title">IT Data Analyst, Student Professional Worker I</div>
+                <div class="experience-company">Los Angeles County Public Defender, Los Angeles, CA</div>
+              </div>
+              <div class="experience-date">2025 to Present</div>
+            </div>
+
+            <ul>
+              <li>Help build and maintain a centralized internal system used across departments to organize financial data, case-related records, training logs, attendance, certification expiration dates, and employee task tracking.</li>
+              <li>Maintain and update 50 plus records weekly through data entry, database maintenance, record validation, and SQL queries to support accurate reporting and reliable internal records.</li>
+              <li>Upload, organize, and manage 120 plus documents monthly in internal database systems to improve access, retrieval, and workflow efficiency.</li>
+              <li>Track 25 plus training sessions and monitor 400 plus employee certifications using Excel, logs, structured reporting tools, and SQL queries.</li>
+              <li>Support attorneys with case file preparation, evidence gathering, document organization, and filings through courthouse and online filing systems.</li>
+            </ul>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-top">
+              <div>
+                <div class="experience-title">IT Support Intern</div>
+                <div class="experience-company">Manual Arts High School, Los Angeles, CA</div>
+              </div>
+              <div class="experience-date">2021 to 2022</div>
+            </div>
+
+            <ul>
+              <li>Provided technical support for classroom and lab technology by troubleshooting hardware, software, and connectivity issues for students and staff.</li>
+              <li>Performed computer setup, maintenance, and basic system support to keep devices and instructional technology working for daily use.</li>
+              <li>Assisted teachers and staff with resolving technical issues, helping improve reliability and reduce classroom disruptions.</li>
+              <li>Tutored students in Algebra, Chemistry, and Computer Science, strengthening communication, problem solving, and one-on-one support skills.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -466,35 +629,45 @@
       <div class="container">
         <h2 class="section-title">Projects</h2>
         <p class="section-subtitle">
-          Some of the projects I have built and worked on.
+          Technical projects that reflect my interests in data, systems, and software tools.
         </p>
 
         <div class="projects">
           <div class="project">
-            <h3>Web Scraper</h3>
+            <h3>Business Intelligence Dashboard</h3>
             <p>
-              Built a Python-based scraper that collects data from websites using
-              Selenium and BeautifulSoup for automation and structured extraction.
+              Built an interactive dashboard using Excel and Tableau to analyze sales,
+              profit trends, category performance, cleaned data, PivotTables, and visual reports
+              for better business insight.
             </p>
-            <div class="stack">Python · Selenium · BeautifulSoup</div>
+            <div class="stack">Excel · Tableau · Data Visualization · PivotTables</div>
           </div>
 
           <div class="project">
-            <h3>System Tracker</h3>
+            <h3>Grocery Sales Database</h3>
             <p>
-              Created a Python application that monitors CPU, memory, and disk
-              usage in real time to help track system performance.
+              Designed a relational database and wrote SQL queries to analyze sales trends,
+              product performance, and structured business data for reporting and decision making.
             </p>
-            <div class="stack">Python · psutil · GUI</div>
+            <div class="stack">MySQL · SQL · Database Design</div>
           </div>
 
           <div class="project">
-            <h3>Portfolio Website</h3>
+            <h3>System Resource Tracker</h3>
             <p>
-              Designed and coded this portfolio website to present my background,
-              projects, skills, and resume in a clean and responsive format.
+              Developed a Python-based tool to monitor system performance and automate
+              basic cleanup and optimization tasks.
             </p>
-            <div class="stack">HTML · CSS · JavaScript · GitHub Pages</div>
+            <div class="stack">Python · System Monitoring</div>
+          </div>
+
+          <div class="project">
+            <h3>AI Web Scraper</h3>
+            <p>
+              Created a tool to collect, organize, and display website data through a simple
+              interface for easier use and testing.
+            </p>
+            <div class="stack">Python · Streamlit · Selenium · BeautifulSoup</div>
           </div>
         </div>
       </div>
@@ -504,22 +677,25 @@
       <div class="container">
         <h2 class="section-title">Skills</h2>
         <p class="section-subtitle">
-          Technical tools and areas I work with.
+          Technical skills and tools I use across projects and work.
         </p>
 
         <div class="skills">
           <span>Python</span>
           <span>Java</span>
           <span>SQL</span>
+          <span>Excel</span>
+          <span>Tableau</span>
+          <span>PivotTables</span>
+          <span>Data Visualization</span>
+          <span>Data Cleaning</span>
           <span>HTML/CSS</span>
-          <span>JavaScript</span>
-          <span>Cybersecurity</span>
           <span>Git/GitHub</span>
+          <span>Cybersecurity</span>
           <span>IT Support</span>
-          <span>Microsoft Office</span>
           <span>Troubleshooting</span>
-          <span>Data Analysis</span>
-          <span>Batch Scripting</span>
+          <span>Microsoft Office</span>
+          <span>Hardware/Software Support</span>
         </div>
       </div>
     </section>
@@ -540,6 +716,13 @@
           </div>
 
           <div class="contact-card">
+            <h3>Phone</h3>
+            <p>
+              <a href="tel:2133223910">(213) 322-3910</a>
+            </p>
+          </div>
+
+          <div class="contact-card">
             <h3>GitHub</h3>
             <p>
               <a href="https://github.com/Munim101" target="_blank">github.com/Munim101</a>
@@ -547,8 +730,10 @@
           </div>
 
           <div class="contact-card">
-            <h3>Location</h3>
-            <p>Los Angeles, California</p>
+            <h3>LinkedIn</h3>
+            <p>
+              <a href="https://linkedin.com/in/munim-awal" target="_blank">linkedin.com/in/munim-awal</a>
+            </p>
           </div>
         </div>
       </div>
