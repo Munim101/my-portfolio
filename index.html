@@ -250,7 +250,7 @@
       font-size: 0.9rem; font-weight: 400; color: var(--text);
       padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); margin-bottom: 0.8rem;
     }
-    .info-val:last-child { border-bottom: none; }
+    .info-val:last-of-type { border-bottom: none; }
     .stat-row {
       display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem;
       margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
@@ -406,6 +406,7 @@
     }
 
     #skills { background: var(--surface); }
+    .skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
     .skill-group-title {
       font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
@@ -422,15 +423,24 @@
       transform: translateY(-2px); box-shadow: 0 8px 20px var(--glow);
     }
     .chip i { font-size: 0.8rem; color: var(--accent); }
-    .skill-bars { display: grid; gap: 1.1rem; }
-    .sbar-label { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 500; margin-bottom: 0.4rem; }
-    .sbar-pct { color: var(--accent); font-size: 0.75rem; }
-    .sbar-track { height: 4px; border-radius: 10px; background: var(--card); overflow: hidden; }
-    .sbar-fill {
-      height: 100%; border-radius: 10px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+
+    /* skill levels — no percentages */
+    .skill-levels { display: grid; gap: 0.75rem; }
+    .slevel {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.1rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      transition: border-color 0.2s, transform 0.2s;
     }
+    .slevel:hover { border-color: var(--border-h); transform: translateX(3px); }
+    .slevel-name { font-size: 0.88rem; font-weight: 500; }
+    .slevel-badge {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .lvl-adv { background: rgba(99,179,237,0.1); color: var(--accent); border: 1px solid rgba(99,179,237,0.2); }
+    .lvl-pro { background: rgba(159,122,234,0.1); color: var(--accent2); border: 1px solid rgba(159,122,234,0.2); }
+    .lvl-wk  { background: rgba(99,103,128,0.15); color: var(--muted); border: 1px solid var(--border); }
 
     .contact-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
     .contact-desc { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 2rem; line-height: 1.85; }
@@ -477,7 +487,7 @@
     .footer-right { font-size: 0.8rem; color: var(--muted); }
 
     @media (max-width: 860px) {
-      .hero-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid, .contact-wrap, .skills-wrap { grid-template-columns: 1fr; }
       nav { gap: 1.2rem; }
       .timeline { padding-left: 1.75rem; }
       .form-row { grid-template-columns: 1fr; }
@@ -509,13 +519,14 @@
   </div>
 </header>
 
+<!-- HERO -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid">
     <div class="hero-left">
       <div class="hero-eyebrow reveal d1"><div class="dot"></div>Available for opportunities</div>
       <h1 class="reveal d2">Munim<br><span class="line2">Awal</span></h1>
-      <p class="hero-desc reveal d3">IT Data Analyst at LA County Public Defender's Office. Business Administration (CIS) student at Cal Poly Pomona. I build practical tools and turn raw data into clean decisions.</p>
+      <p class="hero-desc reveal d3">IT Data Analyst at the LA County Public Defender's Office and CIS student at Cal Poly Pomona. I build practical tools, improve workflows, and turn data into useful insights.</p>
       <div class="hero-actions reveal d4">
         <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
         <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Me</a>
@@ -531,29 +542,39 @@
     <div class="hero-card reveal-right d2">
       <div class="card-title">Quick Overview</div>
       <div class="info-label">School</div><div class="info-val">Cal Poly Pomona</div>
-      <div class="info-label">Major</div><div class="info-val">Business Admin, CIS</div>
-      <div class="info-label">Graduation</div><div class="info-val">May 2027</div>
+      <div class="info-label">Major</div><div class="info-val">Business Administration, CIS</div>
+      <div class="info-label">Graduation</div><div class="info-val">Expected May 2027</div>
       <div class="info-label">Location</div><div class="info-val">Los Angeles, CA</div>
       <div class="info-label">Honors</div><div class="info-val">Kellogg Honors College</div>
       <div class="stat-row">
-        <div class="stat-box"><span class="stat-num" data-count="5">0</span><span class="stat-lbl">Languages</span></div>
-        <div class="stat-box"><span class="stat-num" data-count="400">0</span><span class="stat-lbl">Certs Tracked</span></div>
-        <div class="stat-box"><span class="stat-num" data-count="4">0</span><span class="stat-lbl">Projects</span></div>
+        <div class="stat-box">
+          <span class="stat-num" data-count="5">0</span>
+          <span class="stat-lbl">Languages</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" data-count="400">0</span>
+          <span class="stat-lbl">Certs Tracked</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" data-count="4">0</span>
+          <span class="stat-lbl">Projects</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="inner">
     <div class="sec-eyebrow reveal">About Me</div>
-    <h2 class="sec-title reveal d1">The Person <span>Behind the Code</span></h2>
-    <p class="sec-sub reveal d2">Student, analyst, and builder based in Los Angeles.</p>
+    <h2 class="sec-title reveal d1">Student. Analyst. <span>Builder.</span></h2>
+    <p class="sec-sub reveal d2">Based in Los Angeles, building experience in IT, data, and cybersecurity.</p>
     <div class="about-grid">
       <div class="about-body reveal-left d1">
-        <p>I'm building experience across IT support, cybersecurity, data systems, analytics, and technical operations. My background includes internal system work, SQL queries, dashboard development, and business technology tools used to improve efficiency.</p>
-        <p>At the LA County Public Defender's Office I maintain 50+ records weekly, organize 120+ monthly documents, and track 400+ employee certifications — all while supporting attorneys with case file and filing operations.</p>
-        <p>Outside of work I'm at the gym, on the basketball court, or working on side projects. I speak English, Bengali, Hindi, Urdu, and beginner Spanish.</p>
+        <p>I am building hands-on experience in IT support, data systems, analytics, cybersecurity, and technical operations. My background includes internal system work, SQL queries, dashboard development, and business technology tools used to improve efficiency and organization.</p>
+        <p>At the LA County Public Defender's Office, I maintain 50+ records each week, organize 120+ documents each month, and track 400+ employee certifications while supporting attorneys with case files and filing operations.</p>
+        <p>Outside of work, I spend time at the gym, play basketball, and build side projects.</p>
       </div>
       <div class="detail-grid reveal-right d2">
         <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Los Angeles, CA</span></div>
@@ -568,42 +589,44 @@
   </div>
 </section>
 
+<!-- EDUCATION -->
 <section id="education">
   <div class="inner">
     <div class="sec-eyebrow reveal">Education</div>
     <h2 class="sec-title reveal d1">Academic <span>Background</span></h2>
-    <p class="sec-sub reveal d2">Where I'm learning and what I'm building toward.</p>
+    <p class="sec-sub reveal d2">Where I have studied and what I am building toward.</p>
     <div class="edu-grid">
       <div class="edu-card reveal d1">
         <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
         <div class="edu-school">Cal Poly Pomona</div>
-        <div class="edu-degree">B.S. Business Administration, Computer Information Systems</div>
+        <div class="edu-degree">B.S. in Business Administration, Computer Information Systems</div>
         <span class="edu-date">Expected May 2027</span>
-        <div class="edu-detail">Kellogg Honors College · MISSA member. CIS option focused on data systems, cybersecurity, and business intelligence.</div>
+        <div class="edu-detail">Kellogg Honors College and MISSA member. Focused on data systems, cybersecurity, and business intelligence.</div>
       </div>
       <div class="edu-card reveal d2">
         <div class="edu-icon"><i class="fa-solid fa-university"></i></div>
         <div class="edu-school">Cal State Los Angeles</div>
         <div class="edu-degree">Computer Information Systems — Cybersecurity Focus</div>
         <span class="edu-date">2023 – 2025</span>
-        <div class="edu-detail">Coursework in systems analysis, database design, cybersecurity principles, and business intelligence. Credits transferred to CPP.</div>
+        <div class="edu-detail">Studied Computer Information Systems with a cybersecurity focus. Completed coursework in systems analysis, database design, cybersecurity, and business intelligence before transferring to CPP.</div>
       </div>
       <div class="edu-card reveal d3">
         <div class="edu-icon"><i class="fa-solid fa-school"></i></div>
         <div class="edu-school">Manual Arts Senior High School</div>
         <div class="edu-degree">High School Diploma</div>
         <span class="edu-date">Graduated 2023</span>
-        <div class="edu-detail">Graduated with a 4.0 GPA. Served as an IT Support Intern for the school's tech department.</div>
+        <div class="edu-detail">Graduated with a 4.0 GPA. Served as an IT Support Intern for the school's technology department.</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="inner">
     <div class="sec-eyebrow reveal">Experience</div>
-    <h2 class="sec-title reveal d1">Where I've <span>Made Impact</span></h2>
-    <p class="sec-sub reveal d2">Professional roles that shaped my technical and analytical skills.</p>
+    <h2 class="sec-title reveal d1">Professional <span>Experience</span></h2>
+    <p class="sec-sub reveal d2">Roles that shaped my technical and analytical skills.</p>
     <div class="timeline">
       <div class="tl-item reveal d1">
         <div class="tl-dot"></div>
@@ -617,10 +640,10 @@
           </div>
           <ul class="tl-list">
             <li>Support a centralized internal system used across departments for records, training data, certifications, and task tracking.</li>
-            <li>Maintain 50+ records weekly through data entry, validation, database updates, and SQL-related work.</li>
-            <li>Organize 120+ documents monthly to improve retrieval, reporting, and workflow efficiency.</li>
+            <li>Maintain 50+ records weekly through data entry, validation, database updates, and SQL queries.</li>
+            <li>Organize 120+ documents each month to improve retrieval, reporting, and workflow efficiency.</li>
             <li>Track 25+ training sessions and monitor 400+ employee certifications using Excel and structured reporting tools.</li>
-            <li>Assist attorneys with case file organization, evidence handling, and filing support using CCMS.</li>
+            <li>Assist attorneys with case file organization, evidence handling, and filing support through CCMS.</li>
           </ul>
         </div>
       </div>
@@ -637,7 +660,7 @@
           <ul class="tl-list">
             <li>Provided technical support for hardware, software, and network-related issues in classrooms and labs.</li>
             <li>Maintained and troubleshot computers and instructional devices for students and staff.</li>
-            <li>Resolved technical issues for teachers to improve reliability and reduce classroom disruptions.</li>
+            <li>Resolved technical issues for teachers and staff to improve system reliability and reduce classroom disruptions.</li>
             <li>Tutored students in Algebra, Chemistry, and Computer Science.</li>
           </ul>
         </div>
@@ -646,50 +669,52 @@
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="inner">
     <div class="sec-eyebrow reveal">Projects</div>
-    <h2 class="sec-title reveal d1">Things I've <span>Built</span></h2>
-    <p class="sec-sub reveal d2">Real projects applying data, systems, and software skills.</p>
+    <h2 class="sec-title reveal d1">What I've <span>Built</span></h2>
+    <p class="sec-sub reveal d2">Projects applying data, systems, and software skills to real problems.</p>
     <div class="proj-grid">
       <div class="proj-card reveal d1">
         <div class="proj-num">01</div>
         <div class="proj-icon"><i class="fa-solid fa-chart-bar"></i></div>
         <h3 class="proj-title">Business Intelligence Dashboard</h3>
-        <p class="proj-desc">Interactive dashboard analyzing sales, profit trends, and category performance. Includes data cleaning, PivotTables, and visual reporting layers.</p>
+        <p class="proj-desc">Built an interactive dashboard to analyze sales, profit trends, and category performance using cleaned data, PivotTables, and visual reporting in Excel and Tableau.</p>
         <div class="proj-stack"><span class="tag">Excel</span><span class="tag">Tableau</span><span class="tag">PivotTables</span><span class="tag">Data Viz</span></div>
       </div>
       <div class="proj-card reveal d2">
         <div class="proj-num">02</div>
         <div class="proj-icon"><i class="fa-solid fa-database"></i></div>
         <h3 class="proj-title">Grocery Sales Database</h3>
-        <p class="proj-desc">Designed a relational database and wrote SQL queries to analyze sales trends, product performance, and business metrics for decision-making.</p>
+        <p class="proj-desc">Designed a relational database and wrote SQL queries to analyze sales trends, product performance, and key business metrics.</p>
         <div class="proj-stack"><span class="tag">MySQL</span><span class="tag">SQL</span><span class="tag">DB Design</span></div>
       </div>
       <div class="proj-card reveal d3">
         <div class="proj-num">03</div>
         <div class="proj-icon"><i class="fa-solid fa-microchip"></i></div>
         <h3 class="proj-title">System Resource Tracker</h3>
-        <p class="proj-desc">Python desktop tool that monitors CPU, RAM, and disk usage in real time with visual indicators. Built for personal productivity and performance awareness.</p>
+        <p class="proj-desc">Built a Python desktop tool that monitors CPU, RAM, and disk usage in real time to support system awareness and personal productivity.</p>
         <div class="proj-stack"><span class="tag">Python</span><span class="tag">psutil</span><span class="tag">Tkinter</span></div>
       </div>
       <div class="proj-card reveal d4">
         <div class="proj-num">04</div>
         <div class="proj-icon"><i class="fa-solid fa-robot"></i></div>
         <h3 class="proj-title">AI Web Scraper</h3>
-        <p class="proj-desc">AI-powered tool to collect, organize, and display website data through a clean Streamlit interface. Built for automation, testing, and data collection workflows.</p>
+        <p class="proj-desc">Developed an AI-powered web scraping tool that collects, organizes, and displays website data through a Streamlit interface for testing and automation workflows.</p>
         <div class="proj-stack"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Selenium</span><span class="tag">BeautifulSoup</span></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <div class="inner">
     <div class="sec-eyebrow reveal">Skills</div>
     <h2 class="sec-title reveal d1">Technical <span>Toolkit</span></h2>
     <p class="sec-sub reveal d2">Tools and technologies I use across work and projects.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;">
+    <div class="skills-wrap">
       <div class="reveal-left d1">
         <div class="skill-group-title">Languages & Tools</div>
         <div class="skill-chips">
@@ -716,27 +741,28 @@
       </div>
       <div class="reveal-right d2">
         <div class="skill-group-title">Proficiency</div>
-        <div class="skill-bars">
-          <div><div class="sbar-label"><span>Excel & Tableau</span><span class="sbar-pct">90%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="90"></div></div></div>
-          <div><div class="sbar-label"><span>SQL & Databases</span><span class="sbar-pct">82%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="82"></div></div></div>
-          <div><div class="sbar-label"><span>Python</span><span class="sbar-pct">78%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="78"></div></div></div>
-          <div><div class="sbar-label"><span>IT Support & Troubleshooting</span><span class="sbar-pct">85%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div></div>
-          <div><div class="sbar-label"><span>Cybersecurity Fundamentals</span><span class="sbar-pct">70%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="70"></div></div></div>
-          <div><div class="sbar-label"><span>Java</span><span class="sbar-pct">65%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="65"></div></div></div>
+        <div class="skill-levels">
+          <div class="slevel"><span class="slevel-name">Excel & Tableau</span><span class="slevel-badge lvl-adv">Advanced</span></div>
+          <div class="slevel"><span class="slevel-name">IT Support & Troubleshooting</span><span class="slevel-badge lvl-adv">Advanced</span></div>
+          <div class="slevel"><span class="slevel-name">SQL & Databases</span><span class="slevel-badge lvl-pro">Proficient</span></div>
+          <div class="slevel"><span class="slevel-name">Python</span><span class="slevel-badge lvl-pro">Proficient</span></div>
+          <div class="slevel"><span class="slevel-name">Cybersecurity Fundamentals</span><span class="slevel-badge lvl-wk">Working Knowledge</span></div>
+          <div class="slevel"><span class="slevel-name">Java</span><span class="slevel-badge lvl-wk">Working Knowledge</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="inner">
     <div class="sec-eyebrow reveal">Contact</div>
-    <h2 class="sec-title reveal d1">Let's <span>Connect</span></h2>
+    <h2 class="sec-title reveal d1">Get in <span>Touch</span></h2>
     <p class="sec-sub reveal d2">Open to internships, part-time roles, and collaborations.</p>
     <div class="contact-wrap">
       <div class="reveal-left d1">
-        <p class="contact-desc">I'm a junior at Cal Poly Pomona actively building experience in IT, data analytics, and cybersecurity. Whether you're looking to collaborate, hire, or just talk tech — feel free to reach out.</p>
+        <p class="contact-desc">I am a junior at Cal Poly Pomona building experience in IT, data analytics, and cybersecurity. If you are hiring, collaborating, or would like to connect, feel free to reach out.</p>
         <div class="contact-links">
           <a href="mailto:munimm764@gmail.com" class="clink">
             <div class="clink-icon"><i class="fa-solid fa-envelope"></i></div>munimm764@gmail.com
@@ -744,8 +770,8 @@
           <a href="https://github.com/Munim101" target="_blank" class="clink">
             <div class="clink-icon"><i class="fa-brands fa-github"></i></div>github.com/Munim101
           </a>
-          <a href="https://linkedin.com" target="_blank" class="clink">
-            <div class="clink-icon"><i class="fa-brands fa-linkedin"></i></div>Add your LinkedIn URL
+          <a href="https://www.linkedin.com/in/munimawal" target="_blank" class="clink">
+            <div class="clink-icon"><i class="fa-brands fa-linkedin"></i></div>linkedin.com/in/munimawal
           </a>
           <span class="clink" style="cursor:default;">
             <div class="clink-icon"><i class="fa-solid fa-location-dot"></i></div>Los Angeles, CA
@@ -808,14 +834,6 @@
     });
   }, { threshold: 0.12 });
   revealEls.forEach(el => revealObs.observe(el));
-
-  const bars = document.querySelectorAll('.sbar-fill');
-  const barObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.width = e.target.dataset.w + '%'; barObs.unobserve(e.target); }
-    });
-  }, { threshold: 0.5 });
-  bars.forEach(b => barObs.observe(b));
 
   const counters = document.querySelectorAll('[data-count]');
   const cntObs = new IntersectionObserver((entries) => {
