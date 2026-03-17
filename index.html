@@ -4,861 +4,449 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Munim Awal | Portfolio</title>
-  <meta name="description" content="Munim Awal — IT Data Analyst, CIS Student at Cal Poly Pomona." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <meta name="description" content="Munim Awal portfolio showcasing IT support, data analytics, cybersecurity, and technical projects." />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef2f7;
+      --text: #172033;
+      --muted: #5f6b7a;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border: #d8e0ea;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.92);
+      --badge-bg: #e8eefc;
+      --hero-accent: linear-gradient(135deg, #2563eb, #0f172a);
+    }
+
+    body.dark-mode {
+      --bg: #0f172a;
+      --surface: #111827;
+      --surface-2: #1f2937;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --border: #334155;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      --header-bg: rgba(15, 23, 42, 0.92);
+      --badge-bg: #1e3a8a;
+      --hero-accent: linear-gradient(135deg, #1d4ed8, #020617);
+    }
+
+    * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
-    :root {
-      --bg:        #07080d;
-      --surface:   #0e1018;
-      --card:      #131520;
-      --card-h:    #181a26;
-      --border:    rgba(255,255,255,0.06);
-      --border-h:  rgba(99,179,237,0.25);
-      --text:      #e8eaf0;
-      --muted:     #636880;
-      --accent:    #63b3ed;
-      --accent2:   #9f7aea;
-      --glow:      rgba(99,179,237,0.12);
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      line-height: 1.6;
     }
 
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+    a { color: inherit; text-decoration: none; }
 
-    #loader {
-      position: fixed; inset: 0; z-index: 9999;
-      background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-    #loader.gone { opacity: 0; visibility: hidden; }
-    .loader-text {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.5rem; font-weight: 800;
-      letter-spacing: 0.1em; color: var(--accent);
-      animation: pulse 1s ease infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-    .cursor-glow {
-      position: fixed; pointer-events: none; z-index: 9998;
-      width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(99,179,237,0.06) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      transition: left 0.1s ease, top 0.1s ease;
-    }
+    .container { width: min(1150px, 92%); margin: 0 auto; }
 
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 0 5%;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
     }
-    header.scrolled {
-      background: rgba(7,8,13,0.9);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 1px 0 var(--border);
-    }
-    .nav-inner {
-      max-width: 1100px; margin: 0 auto;
+
+    .nav-wrap {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 0;
-    }
-    .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.1rem;
-      letter-spacing: -0.02em; color: var(--text); text-decoration: none;
-    }
-    .logo span { color: var(--accent); }
-    nav { display: flex; align-items: center; gap: 2rem; }
-    nav a {
-      font-size: 0.8rem; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none;
-      transition: color 0.2s; position: relative;
-    }
-    nav a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 1px; background: var(--accent);
-      transition: width 0.3s ease;
-    }
-    nav a:hover { color: var(--text); }
-    nav a:hover::after { width: 100%; }
-    .nav-toggle {
-      background: transparent; border: 1px solid var(--border);
-      color: var(--muted); font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 8px 14px; border-radius: 6px; cursor: pointer;
-      transition: all 0.2s; font-family: 'Inter', sans-serif;
-    }
-    .nav-toggle:hover { border-color: var(--accent); color: var(--accent); }
-
-    body.light {
-      --bg:       #f0f4fb;
-      --surface:  #ffffff;
-      --card:     #f7f9fd;
-      --card-h:   #eef2f8;
-      --border:   rgba(0,0,0,0.07);
-      --border-h: rgba(37,99,235,0.25);
-      --text:     #111827;
-      --muted:    #6b7280;
-      --accent:   #2563eb;
-      --accent2:  #7c3aed;
-      --glow:     rgba(37,99,235,0.06);
+      gap: 20px; padding: 16px 0;
     }
 
-    section { padding: 100px 5%; }
-    .inner { max-width: 1100px; margin: 0 auto; }
+    .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 0.3px; }
 
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left {
-      opacity: 0; transform: translateX(-32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right {
-      opacity: 0; transform: translateX(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-    .d1{transition-delay:0.1s} .d2{transition-delay:0.2s}
-    .d3{transition-delay:0.3s} .d4{transition-delay:0.4s} .d5{transition-delay:0.5s}
+    nav { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 
-    .sec-eyebrow {
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--accent); font-weight: 600; margin-bottom: 0.6rem;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .sec-eyebrow::before {
-      content: ''; display: inline-block;
-      width: 28px; height: 1px; background: var(--accent);
-    }
-    h2.sec-title {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-      letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.5rem;
-    }
-    h2.sec-title span { color: var(--accent); }
-    .sec-sub {
-      color: var(--muted); font-size: 1rem; font-weight: 300;
-      margin-bottom: 3.5rem; max-width: 560px;
+    nav a { font-weight: 700; color: var(--muted); transition: color 0.2s ease; }
+    nav a:hover { color: var(--primary); }
+
+    .toggle-btn, .hero-buttons a {
+      border: none; border-radius: 10px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s ease;
     }
 
-    #hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 120px 5% 80px; position: relative; overflow: hidden;
+    .toggle-btn {
+      background: var(--surface-2); color: var(--text);
+      padding: 11px 14px; border: 1px solid var(--border);
     }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(99,179,237,0.06) 0%, transparent 70%),
-                  radial-gradient(ellipse 50% 50% at 10% 80%, rgba(159,122,234,0.05) 0%, transparent 60%);
-    }
+    .toggle-btn:hover { transform: translateY(-1px); }
+
+    .hero { padding: 82px 0 56px; }
+
     .hero-grid {
-      max-width: 1100px; width: 100%; margin: 0 auto;
-      display: grid; grid-template-columns: 1.25fr 0.75fr;
-      gap: 3rem; align-items: center; position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      gap: 28px; align-items: stretch;
     }
-    .hero-eyebrow {
-      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); font-weight: 600;
-      display: flex; align-items: center; gap: 10px; margin-bottom: 1.4rem;
+
+    .hero-text, .hero-card {
+      border-radius: 22px; box-shadow: var(--shadow); border: 1px solid var(--border);
     }
-    .hero-eyebrow .dot {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
-      animation: blink 2s ease infinite;
+
+    .hero-text {
+      background: var(--hero-accent); color: #fff; padding: 42px 36px;
     }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 800;
-      line-height: 1.0; letter-spacing: -0.04em; margin-bottom: 1.5rem;
+
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; margin: 0 0 14px;
     }
-    h1 .line2 {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+
+    .hero-text p {
+      font-size: 1.03rem; color: rgba(255,255,255,0.92);
+      max-width: 720px; margin-bottom: 24px;
     }
-    .hero-desc {
-      font-size: 1.05rem; color: var(--muted); max-width: 480px;
-      font-weight: 300; margin-bottom: 2.5rem; line-height: 1.8;
-    }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn {
+
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+
+    .hero-badges span, .skills span {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 26px; border-radius: 8px;
-      font-size: 0.83rem; font-weight: 600;
-      letter-spacing: 0.04em; text-transform: uppercase;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      cursor: pointer; border: none;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-primary {
-      background: var(--accent); color: #07080d;
-      box-shadow: 0 0 30px rgba(99,179,237,0.25);
-    }
-    .btn-primary:hover { box-shadow: 0 0 40px rgba(99,179,237,0.4); }
-    .btn-outline {
-      background: transparent; color: var(--text); border: 1px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-    body.light .btn-primary { color: #fff; }
-
-    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2rem; }
-    .hb {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 500;
-      border: 1px solid var(--border); color: var(--muted);
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .hb:hover { border-color: var(--accent); color: var(--accent); }
-    .hb i { color: var(--accent); font-size: 0.8rem; }
-
-    .hero-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 20px; padding: 2rem; position: relative; overflow: hidden;
-    }
-    .hero-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-    }
-    .card-title {
-      font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.2rem;
-    }
-    .info-label {
-      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); font-weight: 600;
-    }
-    .info-val {
-      font-size: 0.9rem; font-weight: 400; color: var(--text);
-      padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); margin-bottom: 0.8rem;
-    }
-    .info-val:last-of-type { border-bottom: none; }
-    .stat-row {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem;
-      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
-    }
-    .stat-box { text-align: center; }
-    .stat-num {
-      font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800;
-      color: var(--accent); display: block;
-    }
-    .stat-lbl {
-      font-size: 0.62rem; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--muted);
+      padding: 8px 13px; border-radius: 999px; font-weight: 700; font-size: 0.92rem;
     }
 
-    #about { background: var(--surface); }
-    .about-grid {
-      display: grid; grid-template-columns: 1.1fr 0.9fr;
-      gap: 4rem; align-items: start;
+    .hero-badges span {
+      background: rgba(255,255,255,0.12); color: #fff;
+      border: 1px solid rgba(255,255,255,0.16);
     }
-    .about-body p {
-      color: rgba(232,234,240,0.7); font-weight: 300;
-      font-size: 1rem; margin-bottom: 1.1rem; line-height: 1.85;
-    }
-    body.light .about-body p { color: var(--muted); }
-    .detail-grid {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
-    }
-    .detail-row {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1rem 1.25rem; border-bottom: 1px solid var(--border);
-      transition: background 0.2s;
-    }
-    .detail-row:last-child { border-bottom: none; }
-    .detail-row:hover { background: var(--card-h); }
-    .detail-key {
-      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); font-weight: 600; min-width: 90px; padding-top: 2px;
-    }
-    .detail-val { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
 
-    .edu-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.25rem;
-    }
-    .edu-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.75rem;
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .edu-card:hover {
-      border-color: var(--border-h); transform: translateY(-4px);
-      box-shadow: 0 20px 40px var(--glow);
-    }
-    .edu-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;
-    }
-    .edu-card:hover::after { transform: scaleX(1); }
-    .edu-icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: rgba(99,179,237,0.08); border: 1px solid rgba(99,179,237,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: var(--accent); margin-bottom: 1rem;
-    }
-    .edu-school {
-      font-family: 'Syne', sans-serif; font-size: 0.95rem;
-      font-weight: 700; margin-bottom: 0.25rem;
-    }
-    .edu-degree { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.6rem; }
-    .edu-date {
-      display: inline-block; font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--accent); background: rgba(99,179,237,0.08);
-      border: 1px solid rgba(99,179,237,0.15); padding: 3px 10px; border-radius: 20px;
-    }
-    .edu-detail { font-size: 0.82rem; color: var(--muted); margin-top: 0.75rem; line-height: 1.6; }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    #experience { background: var(--surface); }
-    .timeline { position: relative; padding-left: 2.5rem; }
-    .timeline::before {
-      content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
+    .hero-buttons .primary-btn {
+      background: #ffffff; color: #111827; padding: 11px 18px;
     }
-    .tl-item { position: relative; margin-bottom: 2.5rem; }
-    .tl-dot {
-      position: absolute; left: -2.5rem; top: 6px;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: var(--bg); border: 2px solid var(--accent);
-      transition: background 0.3s, box-shadow 0.3s;
+    .hero-buttons .primary-btn:hover { transform: translateY(-1px); }
+
+    .hero-buttons .secondary-btn {
+      background: transparent; color: #fff;
+      padding: 11px 18px; border: 1px solid rgba(255,255,255,0.35);
     }
-    .tl-item:hover .tl-dot { background: var(--accent); box-shadow: 0 0 16px rgba(99,179,237,0.5); }
-    .tl-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.75rem 2rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    .hero-buttons .secondary-btn:hover { background: rgba(255,255,255,0.08); }
+
+    .hero-card { background: var(--surface); padding: 28px; }
+    .hero-card h3 { margin-top: 0; margin-bottom: 16px; font-size: 1.15rem; }
+
+    .quick-info { display: grid; gap: 14px; }
+    .quick-info div {
+      padding: 14px 16px; background: var(--surface-2);
+      border: 1px solid var(--border); border-radius: 14px;
     }
-    .tl-card:hover {
-      border-color: var(--border-h); transform: translateX(4px);
-      box-shadow: 0 16px 40px var(--glow);
+    .quick-info strong { display: block; margin-bottom: 4px; color: var(--text); }
+
+    section { padding: 28px 0; }
+
+    .section-title { font-size: 1.95rem; margin-bottom: 8px; }
+    .section-subtitle { color: var(--muted); max-width: 780px; margin-bottom: 26px; }
+
+    .about-box, .education-card, .project, .experience-item, .contact-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; box-shadow: var(--shadow); padding: 24px;
     }
-    .tl-header {
+
+    .education-grid, .projects, .contact-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px;
+    }
+
+    .edu-school, .experience-title, .project h3 {
+      font-size: 1.08rem; font-weight: 800; margin-bottom: 6px;
+    }
+
+    .edu-meta, .experience-company { color: var(--muted); font-weight: 700; }
+
+    .project { transition: transform 0.2s ease; }
+    .project:hover, .experience-item:hover, .education-card:hover, .contact-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .project p, .contact-card p, .contact-card a { color: var(--muted); }
+
+    .project .stack {
+      font-size: 0.92rem; font-weight: 700; color: var(--primary); margin-top: 14px;
+    }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skills span { background: var(--badge-bg); color: var(--text); border: 1px solid var(--border); }
+
+    .experience-list { display: grid; gap: 18px; }
+
+    .experience-top {
       display: flex; justify-content: space-between;
-      align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;
-    }
-    .tl-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.2rem; }
-    .tl-org { font-size: 0.85rem; color: var(--accent); font-weight: 500; }
-    .tl-date {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--muted); white-space: nowrap;
-    }
-    .tl-list { list-style: none; padding: 0; }
-    .tl-list li {
-      font-size: 0.88rem; color: var(--muted); font-weight: 300;
-      padding: 0.45rem 0; padding-left: 1.1rem; position: relative;
-      line-height: 1.65; border-bottom: 1px solid var(--border);
-    }
-    .tl-list li:last-child { border-bottom: none; }
-    .tl-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-
-    .proj-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.25rem;
-    }
-    .proj-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.75rem;
-      display: flex; flex-direction: column; gap: 0.75rem;
-      position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    .proj-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      transform: scaleX(0); transition: transform 0.4s ease;
-    }
-    .proj-card:hover {
-      border-color: var(--border-h); transform: translateY(-5px);
-      box-shadow: 0 24px 48px var(--glow);
-    }
-    .proj-card:hover::before { transform: scaleX(1); }
-    .proj-num {
-      font-family: 'Syne', sans-serif; font-size: 0.65rem;
-      font-weight: 800; letter-spacing: 0.15em; color: var(--accent);
-    }
-    .proj-icon { font-size: 1.3rem; color: var(--accent); margin-bottom: 0.25rem; }
-    h3.proj-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; }
-    .proj-desc { font-size: 0.84rem; color: var(--muted); font-weight: 300; line-height: 1.7; flex: 1; }
-    .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.5rem; }
-    .tag {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em;
-      padding: 3px 10px; border-radius: 4px;
-      background: rgba(99,179,237,0.08); border: 1px solid rgba(99,179,237,0.14); color: var(--accent);
+      gap: 16px; flex-wrap: wrap; margin-bottom: 10px;
     }
 
-    #skills { background: var(--surface); }
-    .skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    .skill-group-title {
-      font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem;
-    }
-    .skill-chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 16px; border-radius: 8px; font-size: 0.82rem; font-weight: 500;
-      background: var(--card); border: 1px solid var(--border); color: var(--text);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, color 0.2s; cursor: default;
-    }
-    .chip:hover {
-      border-color: var(--accent); color: var(--accent);
-      transform: translateY(-2px); box-shadow: 0 8px 20px var(--glow);
-    }
-    .chip i { font-size: 0.8rem; color: var(--accent); }
+    .experience-date { color: var(--primary); font-weight: 800; }
 
-    .skill-levels { display: grid; gap: 0.75rem; }
-    .slevel {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.85rem 1.1rem;
-      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .slevel:hover { border-color: var(--border-h); transform: translateX(3px); }
-    .slevel-name { font-size: 0.88rem; font-weight: 500; }
-    .slevel-badge {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-      padding: 3px 10px; border-radius: 20px;
-    }
-    .lvl-adv { background: rgba(99,179,237,0.1); color: var(--accent); border: 1px solid rgba(99,179,237,0.2); }
-    .lvl-pro { background: rgba(159,122,234,0.1); color: var(--accent2); border: 1px solid rgba(159,122,234,0.2); }
-    .lvl-wk  { background: rgba(99,103,128,0.15); color: var(--muted); border: 1px solid var(--border); }
+    .experience-item ul { margin: 14px 0 0; padding-left: 20px; }
+    .experience-item li { margin-bottom: 10px; color: var(--muted); line-height: 1.7; }
 
-    .contact-wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
-    .contact-desc { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 2rem; line-height: 1.85; }
-    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
-    .clink {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 1rem 1.25rem; background: var(--card);
-      border: 1px solid var(--border); border-radius: 12px;
-      color: var(--muted); font-size: 0.88rem; text-decoration: none;
-      transition: border-color 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+    footer {
+      margin-top: 28px; border-top: 1px solid var(--border);
+      padding: 26px 0 34px; text-align: center; color: var(--muted);
     }
-    .clink:hover {
-      border-color: var(--accent); color: var(--text);
-      transform: translateX(4px); box-shadow: -4px 0 20px var(--glow);
-    }
-    .clink-icon {
-      width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
-      background: rgba(99,179,237,0.08); border: 1px solid rgba(99,179,237,0.15);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent); font-size: 0.85rem; transition: background 0.2s;
-    }
-    .clink:hover .clink-icon { background: rgba(99,179,237,0.15); }
-    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .contact-form input, .contact-form textarea {
-      width: 100%; background: var(--card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 0.9rem 1.1rem; color: var(--text);
-      font-family: 'Inter', sans-serif; font-size: 0.88rem; outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .contact-form input:focus, .contact-form textarea:focus {
-      border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,179,237,0.1);
-    }
-    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); }
-    .contact-form textarea { min-height: 140px; resize: vertical; }
 
-    footer { border-top: 1px solid var(--border); padding: 2rem 5%; }
-    .footer-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .nav-wrap { flex-direction: column; align-items: flex-start; }
+      nav { width: 100%; justify-content: flex-start; }
     }
-    .footer-left { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
-    .footer-left span { color: var(--accent); }
-    .footer-right { font-size: 0.8rem; color: var(--muted); }
 
-    @media (max-width: 860px) {
-      .hero-grid, .about-grid, .contact-wrap, .skills-wrap { grid-template-columns: 1fr; }
-      nav { gap: 1.2rem; }
-      .timeline { padding-left: 1.75rem; }
-      .form-row { grid-template-columns: 1fr; }
-    }
     @media (max-width: 560px) {
-      section { padding: 70px 5%; }
-      nav a { display: none; }
-      h1 { font-size: 2.8rem; }
+      .hero { padding-top: 58px; }
+      nav, .hero-buttons { gap: 10px; }
+      .toggle-btn, .hero-buttons a { width: 100%; text-align: center; }
+      .hero-text, .hero-card, .about-box, .education-card,
+      .project, .experience-item, .contact-card { padding: 20px; }
+      .section-title { font-size: 1.6rem; }
     }
   </style>
 </head>
 <body>
-
-<div id="loader"><div class="loader-text">MA</div></div>
-<div class="cursor-glow" id="cursorGlow"></div>
-
-<header id="header">
-  <div class="nav-inner">
-    <a class="logo" href="#hero">Munim<span>.</span></a>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="nav-toggle" id="themeBtn" onclick="toggleTheme()">☀ Light</button>
-  </div>
-</header>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid">
-    <div class="hero-left">
-      <div class="hero-eyebrow reveal d1"><div class="dot"></div>Available for opportunities</div>
-      <h1 class="reveal d2">Munim<br><span class="line2">Awal</span></h1>
-      <p class="hero-desc reveal d3">IT Data Analyst at the LA County Public Defender's Office and CIS student at Cal Poly Pomona. I build practical tools, improve workflows, and turn data into clear, useful insights.</p>
-      <div class="hero-actions reveal d4">
-        <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-code"></i> View Projects</a>
-        <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact Me</a>
-      </div>
-      <div class="hero-badges reveal d5">
-        <span class="hb"><i class="fa-solid fa-shield-halved"></i> Cybersecurity</span>
-        <span class="hb"><i class="fa-solid fa-database"></i> SQL & Data</span>
-        <span class="hb"><i class="fa-solid fa-chart-column"></i> Tableau & Excel</span>
-        <span class="hb"><i class="fa-solid fa-laptop-code"></i> IT Support</span>
-        <span class="hb"><i class="fa-brands fa-python"></i> Python</span>
-      </div>
+  <header>
+    <div class="container nav-wrap">
+      <div class="logo">Munim Awal</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <button class="toggle-btn" onclick="toggleDarkMode()" id="themeToggle">Dark Mode</button>
+      </nav>
     </div>
-    <div class="hero-card reveal-right d2">
-      <div class="card-title">Quick Overview</div>
-      <div class="info-label">School</div><div class="info-val">Cal Poly Pomona</div>
-      <div class="info-label">Major</div><div class="info-val">Business Administration, CIS</div>
-      <div class="info-label">Graduation</div><div class="info-val">Expected May 2027</div>
-      <div class="info-label">Location</div><div class="info-val">Los Angeles, CA</div>
-      <div class="info-label">Honors</div><div class="info-val">Kellogg Honors College</div>
-      <div class="stat-row">
-        <div class="stat-box">
-          <span class="stat-num" data-count="5">0</span>
-          <span class="stat-lbl">Languages Spoken</span>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>IT, Data, and Cybersecurity Student</h1>
+          <p>
+            IT Data Analyst at the LA County Public Defender's Office and CIS student at Cal Poly Pomona. I build practical tools, improve workflows, and turn data into clear, useful insights.
+          </p>
+          <div class="hero-badges">
+            <span><i class="fa-solid fa-shield-halved"></i> Cybersecurity</span>
+            <span><i class="fa-solid fa-database"></i> SQL & Data</span>
+            <span><i class="fa-solid fa-chart-column"></i> Tableau & Excel</span>
+            <span><i class="fa-solid fa-laptop-code"></i> IT Support</span>
+          </div>
+          <div class="hero-buttons">
+            <a href="#projects" class="primary-btn">View Projects</a>
+            <a href="#contact" class="secondary-btn">Contact Me</a>
+          </div>
         </div>
-        <div class="stat-box">
-          <span class="stat-num" data-count="400">0</span>
-          <span class="stat-lbl">Certifications Tracked</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-num" data-count="4">0</span>
-          <span class="stat-lbl">Featured Projects</span>
+
+        <div class="hero-card">
+          <h3>Quick Overview</h3>
+          <div class="quick-info">
+            <div><strong>School</strong>California State Polytechnic University, Pomona</div>
+            <div><strong>Major</strong>Business Administration, Computer Information Systems</div>
+            <div><strong>Graduation</strong>Expected May 2027</div>
+            <div><strong>Honors</strong>Kellogg Honors College</div>
+            <div><strong>Location</strong>Los Angeles, CA</div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="inner">
-    <div class="sec-eyebrow reveal">About Me</div>
-    <h2 class="sec-title reveal d1">Student. Analyst. <span>Builder.</span></h2>
-    <p class="sec-sub reveal d2">Based in Los Angeles with a growing background in IT, data, and cybersecurity.</p>
-    <div class="about-grid">
-      <div class="about-body reveal-left d1">
-        <p>I am a CIS student at Cal Poly Pomona with hands-on experience in IT support, data systems, analytics, and technical operations. My background includes internal systems work, SQL queries, dashboard development, and business technology tools that improve efficiency and organization.</p>
-        <p>At the LA County Public Defender's Office, I maintain 50+ records each week, organize 120+ documents each month, track 400+ employee certifications, and support attorneys with case files and filing operations.</p>
-        <p>Outside of work and school, I enjoy going to the gym, playing basketball, and building side projects.</p>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">Based in Los Angeles with a growing background in IT, data, and cybersecurity.</p>
+        <div class="about-box">
+          <p>I am a CIS student at Cal Poly Pomona with hands-on experience in IT support, data systems, analytics, and technical operations. My background includes internal systems work, SQL queries, dashboard development, and business technology tools that improve efficiency and organization.</p>
+          <p>At the LA County Public Defender's Office, I maintain 50+ records each week, organize 120+ documents each month, track 400+ employee certifications, and support attorneys with case files and filing operations.</p>
+          <p>Outside of work and school, I enjoy going to the gym, playing basketball, and building side projects.</p>
+        </div>
       </div>
-      <div class="detail-grid reveal-right d2">
-        <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">Los Angeles, CA</span></div>
-        <div class="detail-row"><span class="detail-key">University</span><span class="detail-val">Cal Poly Pomona</span></div>
-        <div class="detail-row"><span class="detail-key">Major</span><span class="detail-val">Business Admin (CIS)</span></div>
-        <div class="detail-row"><span class="detail-key">Honors</span><span class="detail-val">Kellogg Honors College · MISSA</span></div>
-        <div class="detail-row"><span class="detail-key">Languages</span><span class="detail-val">English · Bengali · Hindi · Urdu · Spanish</span></div>
-        <div class="detail-row"><span class="detail-key">Interests</span><span class="detail-val">Gym · Basketball · Family</span></div>
-        <div class="detail-row"><span class="detail-key">Open To</span><span class="detail-val">Internships · Part-time · Co-op</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="inner">
-    <div class="sec-eyebrow reveal">Education</div>
-    <h2 class="sec-title reveal d1">Academic <span>Background</span></h2>
-    <p class="sec-sub reveal d2">Where I have studied and the path I am building toward.</p>
-    <div class="edu-grid">
-      <div class="edu-card reveal d1">
-        <div class="edu-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-        <div class="edu-school">Cal Poly Pomona</div>
-        <div class="edu-degree">B.S. in Business Administration, Computer Information Systems</div>
-        <span class="edu-date">Expected May 2027</span>
-        <div class="edu-detail">Member of Kellogg Honors College and MISSA, with a focus on data systems, cybersecurity, and business intelligence.</div>
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <p class="section-subtitle">Where I have studied and the path I am building toward.</p>
+        <div class="education-grid">
+          <div class="education-card">
+            <div class="edu-school">Cal Poly Pomona</div>
+            <div class="edu-meta">Expected May 2027</div>
+            <p>B.S. in Business Administration, Computer Information Systems</p>
+            <p>Member of Kellogg Honors College and MISSA, with a focus on data systems, cybersecurity, and business intelligence.</p>
+          </div>
+          <div class="education-card">
+            <div class="edu-school">Cal State Los Angeles</div>
+            <div class="edu-meta">2023 – 2025</div>
+            <p>Computer Information Systems, Cybersecurity Focus</p>
+            <p>Studied Computer Information Systems with a cybersecurity focus, completing coursework in systems analysis, database design, cybersecurity, and business intelligence before transferring to CPP.</p>
+          </div>
+          <div class="education-card">
+            <div class="edu-school">Manual Arts Senior High School</div>
+            <div class="edu-meta">Graduated 2023</div>
+            <p>High School Diploma</p>
+            <p>Graduated with a 4.0 GPA and served as an IT Support Intern for the school's technology department.</p>
+          </div>
+        </div>
       </div>
-      <div class="edu-card reveal d2">
-        <div class="edu-icon"><i class="fa-solid fa-university"></i></div>
-        <div class="edu-school">Cal State Los Angeles</div>
-        <div class="edu-degree">Computer Information Systems, Cybersecurity Focus</div>
-        <span class="edu-date">2023 – 2025</span>
-        <div class="edu-detail">Studied Computer Information Systems with a cybersecurity focus, completing coursework in systems analysis, database design, cybersecurity, and business intelligence before transferring to CPP.</div>
-      </div>
-      <div class="edu-card reveal d3">
-        <div class="edu-icon"><i class="fa-solid fa-school"></i></div>
-        <div class="edu-school">Manual Arts Senior High School</div>
-        <div class="edu-degree">High School Diploma</div>
-        <span class="edu-date">Graduated 2023</span>
-        <div class="edu-detail">Graduated with a 4.0 GPA and served as an IT Support Intern for the school's technology department.</div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="inner">
-    <div class="sec-eyebrow reveal">Experience</div>
-    <h2 class="sec-title reveal d1">Professional <span>Experience</span></h2>
-    <p class="sec-sub reveal d2">Roles that helped build my technical, analytical, and support experience.</p>
-    <div class="timeline">
-      <div class="tl-item reveal d1">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-header">
-            <div>
-              <div class="tl-role">IT Data Analyst | Student Professional Worker I</div>
-              <div class="tl-org"><i class="fa-solid fa-building" style="font-size:0.75rem;margin-right:5px;"></i>Los Angeles County Public Defender's Office · Los Angeles, CA</div>
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">Roles that helped build my technical, analytical, and support experience.</p>
+        <div class="experience-list">
+          <div class="experience-item">
+            <div class="experience-top">
+              <div>
+                <div class="experience-title">IT Data Analyst | Student Professional Worker I</div>
+                <div class="experience-company">Los Angeles County Public Defender's Office · Los Angeles, CA</div>
+              </div>
+              <div class="experience-date">2025 – Present</div>
             </div>
-            <div class="tl-date">2025 – Present</div>
+            <ul>
+              <li>Support a centralized internal system used across departments to manage records, training data, certifications, and task tracking.</li>
+              <li>Maintain 50+ records each week through data entry, validation, database updates, and SQL queries.</li>
+              <li>Organize 120+ documents each month to improve access, retrieval, reporting, and workflow efficiency.</li>
+              <li>Track 25+ training sessions and monitor 400+ employee certifications using Excel and structured reporting tools to keep records accurate and up to date.</li>
+              <li>Assist attorneys with case file organization, evidence handling, and filing support through CCMS and related internal systems.</li>
+            </ul>
           </div>
-          <ul class="tl-list">
-            <li>Support a centralized internal system used across departments to manage records, training data, certifications, and task tracking.</li>
-            <li>Maintain 50+ records each week through data entry, validation, database updates, and SQL queries.</li>
-            <li>Organize 120+ documents each month to improve access, retrieval, reporting, and workflow efficiency.</li>
-            <li>Track 25+ training sessions and monitor 400+ employee certifications using Excel and structured reporting tools to keep records accurate and up to date.</li>
-            <li>Assist attorneys with case file organization, evidence handling, and filing support through CCMS and related internal systems.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="tl-item reveal d2">
-        <div class="tl-dot"></div>
-        <div class="tl-card">
-          <div class="tl-header">
-            <div>
-              <div class="tl-role">IT Support Intern</div>
-              <div class="tl-org"><i class="fa-solid fa-building" style="font-size:0.75rem;margin-right:5px;"></i>Manual Arts High School · Los Angeles, CA</div>
+
+          <div class="experience-item">
+            <div class="experience-top">
+              <div>
+                <div class="experience-title">IT Support Intern</div>
+                <div class="experience-company">Manual Arts High School · Los Angeles, CA</div>
+              </div>
+              <div class="experience-date">2021 – 2022</div>
             </div>
-            <div class="tl-date">2021 – 2022</div>
+            <ul>
+              <li>Provided technical support for hardware, software, and network issues in classrooms and computer labs.</li>
+              <li>Maintained and troubleshot computers, classroom devices, and instructional technology for students and staff.</li>
+              <li>Resolved technical issues for teachers and staff, helping improve system reliability and reduce classroom disruptions.</li>
+              <li>Tutored students in Algebra, Chemistry, and Computer Science.</li>
+            </ul>
           </div>
-          <ul class="tl-list">
-            <li>Provided technical support for hardware, software, and network issues in classrooms and computer labs.</li>
-            <li>Maintained and troubleshot computers, classroom devices, and instructional technology for students and staff.</li>
-            <li>Resolved technical issues for teachers and staff, helping improve system reliability and reduce classroom disruptions.</li>
-            <li>Tutored students in Algebra, Chemistry, and Computer Science.</li>
-          </ul>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="inner">
-    <div class="sec-eyebrow reveal">Projects</div>
-    <h2 class="sec-title reveal d1">What I've <span>Built</span></h2>
-    <p class="sec-sub reveal d2">Projects where I applied data, systems, and software skills to practical problems.</p>
-    <div class="proj-grid">
-      <div class="proj-card reveal d1">
-        <div class="proj-num">01</div>
-        <div class="proj-icon"><i class="fa-solid fa-chart-bar"></i></div>
-        <h3 class="proj-title">Business Intelligence Dashboard</h3>
-        <p class="proj-desc">Built an interactive dashboard in Excel and Tableau to analyze sales, profit trends, and category performance using cleaned data, PivotTables, and visual reporting.</p>
-        <div class="proj-stack"><span class="tag">Excel</span><span class="tag">Tableau</span><span class="tag">PivotTables</span><span class="tag">Data Viz</span></div>
-      </div>
-      <div class="proj-card reveal d2">
-        <div class="proj-num">02</div>
-        <div class="proj-icon"><i class="fa-solid fa-database"></i></div>
-        <h3 class="proj-title">Grocery Sales Database</h3>
-        <p class="proj-desc">Designed a relational database and wrote SQL queries to analyze sales trends, product performance, and key business metrics for decision-making.</p>
-        <div class="proj-stack"><span class="tag">MySQL</span><span class="tag">SQL</span><span class="tag">DB Design</span></div>
-      </div>
-      <div class="proj-card reveal d3">
-        <div class="proj-num">03</div>
-        <div class="proj-icon"><i class="fa-solid fa-microchip"></i></div>
-        <h3 class="proj-title">System Resource Tracker</h3>
-        <p class="proj-desc">Built a Python desktop tool that monitors CPU, RAM, and disk usage in real time to improve system awareness and personal productivity.</p>
-        <div class="proj-stack"><span class="tag">Python</span><span class="tag">psutil</span><span class="tag">Tkinter</span></div>
-      </div>
-      <div class="proj-card reveal d4">
-        <div class="proj-num">04</div>
-        <div class="proj-icon"><i class="fa-solid fa-robot"></i></div>
-        <h3 class="proj-title">AI Web Scraper</h3>
-        <p class="proj-desc">Developed an AI-powered web scraping tool that collects, organizes, and displays website data through a Streamlit interface for automation and testing workflows.</p>
-        <div class="proj-stack"><span class="tag">Python</span><span class="tag">Streamlit</span><span class="tag">Selenium</span><span class="tag">BeautifulSoup</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="inner">
-    <div class="sec-eyebrow reveal">Skills</div>
-    <h2 class="sec-title reveal d1">Technical <span>Toolkit</span></h2>
-    <p class="sec-sub reveal d2">Tools and technologies I use across work, projects, and coursework.</p>
-    <div class="skills-wrap">
-      <div class="reveal-left d1">
-        <div class="skill-group-title">Languages & Tools</div>
-        <div class="skill-chips">
-          <span class="chip"><i class="fa-brands fa-python"></i> Python</span>
-          <span class="chip"><i class="fa-brands fa-java"></i> Java</span>
-          <span class="chip"><i class="fa-solid fa-database"></i> SQL</span>
-          <span class="chip"><i class="fa-solid fa-file-excel"></i> Excel</span>
-          <span class="chip"><i class="fa-solid fa-chart-column"></i> Tableau</span>
-          <span class="chip"><i class="fa-brands fa-html5"></i> HTML/CSS</span>
-          <span class="chip"><i class="fa-brands fa-git-alt"></i> Git/GitHub</span>
-          <span class="chip"><i class="fa-solid fa-terminal"></i> Batch Script</span>
-          <span class="chip"><i class="fa-brands fa-microsoft"></i> Microsoft Office</span>
-          <span class="chip"><i class="fa-solid fa-table-cells"></i> PivotTables</span>
-        </div>
-        <div class="skill-group-title" style="margin-top:2rem;">Domains</div>
-        <div class="skill-chips">
-          <span class="chip"><i class="fa-solid fa-shield-halved"></i> Cybersecurity</span>
-          <span class="chip"><i class="fa-solid fa-laptop-code"></i> IT Support</span>
-          <span class="chip"><i class="fa-solid fa-wrench"></i> Troubleshooting</span>
-          <span class="chip"><i class="fa-solid fa-broom"></i> Data Cleaning</span>
-          <span class="chip"><i class="fa-solid fa-chart-pie"></i> Data Visualization</span>
-          <span class="chip"><i class="fa-solid fa-gears"></i> Systems Analysis</span>
-        </div>
-      </div>
-      <div class="reveal-right d2">
-        <div class="skill-group-title">Strengths</div>
-        <div class="skill-levels">
-          <div class="slevel"><span class="slevel-name">Excel & Tableau</span><span class="slevel-badge lvl-adv">Advanced</span></div>
-          <div class="slevel"><span class="slevel-name">IT Support & Troubleshooting</span><span class="slevel-badge lvl-adv">Advanced</span></div>
-          <div class="slevel"><span class="slevel-name">SQL & Databases</span><span class="slevel-badge lvl-pro">Proficient</span></div>
-          <div class="slevel"><span class="slevel-name">Python</span><span class="slevel-badge lvl-pro">Proficient</span></div>
-          <div class="slevel"><span class="slevel-name">Cybersecurity Fundamentals</span><span class="slevel-badge lvl-wk">Working Knowledge</span></div>
-          <div class="slevel"><span class="slevel-name">Java</span><span class="slevel-badge lvl-wk">Working Knowledge</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="inner">
-    <div class="sec-eyebrow reveal">Contact</div>
-    <h2 class="sec-title reveal d1">Let's <span>Connect</span></h2>
-    <p class="sec-sub reveal d2">Open to internships, part-time roles, and collaborations.</p>
-    <div class="contact-wrap">
-      <div class="reveal-left d1">
-        <p class="contact-desc">I am a junior at Cal Poly Pomona building experience in IT, data analytics, and cybersecurity. I am open to internships, part-time opportunities, and meaningful projects where I can keep learning, contribute, and grow.</p>
-        <div class="contact-links">
-          <a href="mailto:munimm764@gmail.com" class="clink">
-            <div class="clink-icon"><i class="fa-solid fa-envelope"></i></div>munimm764@gmail.com
-          </a>
-          <a href="https://github.com/Munim101" target="_blank" class="clink">
-            <div class="clink-icon"><i class="fa-brands fa-github"></i></div>github.com/Munim101
-          </a>
-          <a href="https://www.linkedin.com/in/munimawal" target="_blank" class="clink">
-            <div class="clink-icon"><i class="fa-brands fa-linkedin"></i></div>linkedin.com/in/munimawal
-          </a>
-          <span class="clink" style="cursor:default;">
-            <div class="clink-icon"><i class="fa-solid fa-location-dot"></i></div>Los Angeles, CA
-          </span>
-        </div>
-      </div>
-      <div class="reveal-right d2">
-        <div class="contact-form">
-          <div class="form-row">
-            <input type="text" placeholder="Your name" />
-            <input type="email" placeholder="Your email" />
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Projects where I applied data, systems, and software skills to practical problems.</p>
+        <div class="projects">
+          <div class="project">
+            <h3>Business Intelligence Dashboard</h3>
+            <p>Built an interactive dashboard in Excel and Tableau to analyze sales, profit trends, and category performance using cleaned data, PivotTables, and visual reporting.</p>
+            <div class="stack">Excel · Tableau · Data Visualization · PivotTables</div>
           </div>
-          <input type="text" placeholder="Subject" />
-          <textarea placeholder="Your message..."></textarea>
-          <button class="btn btn-primary" onclick="handleSend(this)" style="align-self:flex-start;font-family:'Inter',sans-serif;">
-            <i class="fa-solid fa-paper-plane"></i> Send Message
-          </button>
+          <div class="project">
+            <h3>Grocery Sales Database</h3>
+            <p>Designed a relational database and wrote SQL queries to analyze sales trends, product performance, and key business metrics for decision-making.</p>
+            <div class="stack">MySQL · SQL · Database Design</div>
+          </div>
+          <div class="project">
+            <h3>System Resource Tracker</h3>
+            <p>Built a Python desktop tool that monitors CPU, RAM, and disk usage in real time to improve system awareness and personal productivity.</p>
+            <div class="stack">Python · psutil · Tkinter</div>
+          </div>
+          <div class="project">
+            <h3>AI Web Scraper</h3>
+            <p>Developed an AI-powered web scraping tool that collects, organizes, and displays website data through a Streamlit interface for automation and testing workflows.</p>
+            <div class="stack">Python · Streamlit · Selenium · BeautifulSoup</div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <p class="section-subtitle">Tools and technologies I use across work, projects, and coursework.</p>
+        <div class="skills">
+          <span>Python</span>
+          <span>Java</span>
+          <span>SQL</span>
+          <span>Excel</span>
+          <span>Tableau</span>
+          <span>PivotTables</span>
+          <span>Data Visualization</span>
+          <span>Data Cleaning</span>
+          <span>HTML/CSS</span>
+          <span>Git/GitHub</span>
+          <span>Cybersecurity</span>
+          <span>IT Support</span>
+          <span>Troubleshooting</span>
+          <span>Microsoft Office</span>
+          <span>Hardware/Software Support</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-subtitle">I am a junior at Cal Poly Pomona building experience in IT, data analytics, and cybersecurity. I am open to internships, part-time opportunities, and meaningful projects where I can keep learning, contribute, and grow.</p>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Email</h3>
+            <p><a href="mailto:munimm764@gmail.com">munimm764@gmail.com</a></p>
+          </div>
+          <div class="contact-card">
+            <h3>GitHub</h3>
+            <p><a href="https://github.com/Munim101" target="_blank">github.com/Munim101</a></p>
+          </div>
+          <div class="contact-card">
+            <h3>LinkedIn</h3>
+            <p><a href="https://www.linkedin.com/in/munimawal" target="_blank">linkedin.com/in/munimawal</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Munim Awal. All rights reserved.</p>
     </div>
-  </div>
-</section>
+  </footer>
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-left">Munim<span>.</span></div>
-    <div class="footer-right">© 2026 Munim Awal · Los Angeles, CA</div>
-  </div>
-</footer>
+  <script>
+    function setThemeLabel() {
+      const button = document.getElementById("themeToggle");
+      const isDark = document.body.classList.contains("dark-mode");
+      button.textContent = isDark ? "Light Mode" : "Dark Mode";
+    }
 
-<script>
-  window.addEventListener('load', () => {
-    setTimeout(() => document.getElementById('loader').classList.add('gone'), 800);
-  });
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+      localStorage.setItem("theme", currentTheme);
+      setThemeLabel();
+    }
 
-  const glow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  });
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
-  });
-
-  function toggleTheme() {
-    const light = document.body.classList.toggle('light');
-    document.getElementById('themeBtn').textContent = light ? '☾ Dark' : '☀ Light';
-    localStorage.setItem('theme', light ? 'light' : 'dark');
-  }
-  if (localStorage.getItem('theme') === 'light') {
-    document.body.classList.add('light');
-    document.getElementById('themeBtn').textContent = '☾ Dark';
-  }
-
-  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    window.addEventListener("load", function () {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+      setThemeLabel();
     });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => revealObs.observe(el));
-
-  const counters = document.querySelectorAll('[data-count]');
-  const cntObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, target = +el.dataset.count;
-      let current = 0;
-      const step = Math.ceil(target / 40);
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        el.textContent = current + (target >= 100 ? '+' : '');
-        if (current >= target) clearInterval(timer);
-      }, 35);
-      cntObs.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  counters.forEach(c => cntObs.observe(c));
-
-  function handleSend(btn) {
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> Sent!';
-    btn.style.background = '#48bb78';
-    setTimeout(() => {
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-      btn.style.background = '';
-    }, 3000);
-  }
-</script>
+  </script>
 </body>
 </html>
