@@ -67,12 +67,10 @@
 
     .container { width: min(1160px, 92%); margin: 0 auto; }
 
-    /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
 
-    /* ── HEADER ── */
     header {
       position: sticky; top: 0; z-index: 1000;
       background: var(--header-bg);
@@ -84,6 +82,7 @@
     .nav-wrap {
       display: flex; align-items: center; justify-content: space-between;
       gap: 20px; padding: 15px 0;
+      position: relative;
     }
 
     .logo {
@@ -96,7 +95,9 @@
     }
     .logo:hover { color: var(--primary); }
 
-    nav { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+    nav {
+      display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+    }
 
     nav a {
       font-weight: 600; color: var(--muted);
@@ -106,17 +107,36 @@
     }
     nav a:hover { color: var(--primary); background: var(--primary-glow); }
 
-    .toggle-btn {
-      border: 1px solid var(--border); border-radius: 10px;
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toggle-btn,
+    .menu-btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
       font-weight: 700; cursor: pointer;
       background: var(--surface-2); color: var(--text);
       padding: 9px 16px; font-size: 0.9rem;
       font-family: 'DM Sans', sans-serif;
       transition: all 0.2s;
     }
-    .toggle-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
 
-    /* ── HERO ── */
+    .toggle-btn:hover,
+    .menu-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .menu-btn {
+      display: none;
+      font-size: 1rem;
+      padding: 9px 14px;
+    }
+
     .hero {
       background: var(--hero-bg);
       padding: 88px 0 64px;
@@ -124,7 +144,6 @@
       overflow: hidden;
     }
 
-    /* animated mesh background */
     .hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -140,7 +159,6 @@
       100% { opacity: 1; transform: scale(1.04); }
     }
 
-    /* grid overlay */
     .hero::after {
       content: '';
       position: absolute; inset: 0;
@@ -277,7 +295,6 @@
 
     .quick-info span { color: rgba(255,255,255,0.82); font-size: 0.92rem; }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -304,7 +321,6 @@
     .stagger-3 { transition-delay: 0.19s; }
     .stagger-4 { transition-delay: 0.26s; }
 
-    /* ── SECTIONS ── */
     section { padding: 72px 0 20px; }
 
     .section-label {
@@ -327,7 +343,6 @@
 
     .section-sub { color: var(--muted); max-width: 680px; margin-bottom: 36px; font-size: 1rem; }
 
-    /* ── ABOUT ── */
     .about-box {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -359,7 +374,6 @@
     }
     .stat-label { color: var(--muted); font-size: 0.83rem; font-weight: 600; margin-top: 4px; }
 
-    /* ── EDUCATION ── */
     .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; }
 
     .edu-card {
@@ -390,7 +404,6 @@
     .edu-meta { color: var(--primary); font-weight: 700; font-size: 0.85rem; margin-bottom: 10px; }
     .edu-card p { color: var(--muted); font-size: 0.91rem; line-height: 1.65; }
 
-    /* ── EXPERIENCE ── */
     .experience-list { display: grid; gap: 20px; }
 
     .exp-card {
@@ -430,7 +443,6 @@
       background: var(--primary);
     }
 
-    /* ── PROJECTS ── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; }
 
     .proj-card {
@@ -469,7 +481,6 @@
       font-size: 0.78rem; font-weight: 700;
     }
 
-    /* ── SKILLS ── */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
 
     .skill-group {
@@ -503,7 +514,6 @@
       transform: translateY(-2px);
     }
 
-    /* ── CONTACT ── */
     .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 
     .contact-card {
@@ -534,7 +544,6 @@
     .contact-card a { color: var(--muted); font-size: 0.9rem; font-weight: 600; transition: color 0.2s; }
     .contact-card:hover a { color: var(--primary); }
 
-    /* ── FOOTER ── */
     footer {
       margin-top: 60px;
       border-top: 1px solid var(--border);
@@ -545,134 +554,46 @@
 
     footer p { font-size: 0.88rem; }
 
-    .footer-admin-trigger {
-      display: inline-block;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--border);
-      margin-left: 10px;
-      cursor: pointer;
-      transition: background 0.2s;
-      vertical-align: middle;
-    }
-    .footer-admin-trigger:hover { background: var(--primary); }
-
-    /* ── ADMIN PANEL ── */
-    .admin-overlay {
-      position: fixed; inset: 0; z-index: 9999;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(8px);
-      display: none; align-items: center; justify-content: center;
-    }
-    .admin-overlay.open { display: flex; }
-
-    .admin-modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow-lg);
-      padding: 36px 40px;
-      width: min(560px, 94vw);
-      max-height: 88vh;
-      overflow-y: auto;
-      position: relative;
-    }
-
-    .admin-close {
-      position: absolute; top: 16px; right: 18px;
-      background: var(--surface-2); border: 1px solid var(--border);
-      border-radius: 9px; width: 34px; height: 34px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; color: var(--muted);
-      transition: all 0.2s; font-size: 1rem;
-    }
-    .admin-close:hover { background: var(--badge-bg); color: var(--primary); }
-
-    .admin-modal h2 {
-      font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .admin-modal .admin-sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 24px; }
-
-    .admin-input-wrap { position: relative; margin-bottom: 16px; }
-    .admin-input-wrap input {
-      width: 100%; padding: 12px 16px 12px 44px;
-      background: var(--surface-2); border: 1px solid var(--border);
-      border-radius: 12px; color: var(--text);
-      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-      outline: none; transition: border-color 0.2s;
-    }
-    .admin-input-wrap input:focus { border-color: var(--primary); }
-    .admin-input-wrap i {
-      position: absolute; left: 14px; top: 50%;
-      transform: translateY(-50%); color: var(--muted);
-    }
-
-    .admin-login-btn {
-      width: 100%; padding: 12px;
-      background: var(--primary); color: #fff;
-      border: none; border-radius: 12px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 700;
-      cursor: pointer; transition: all 0.2s;
-    }
-    .admin-login-btn:hover { background: var(--primary-light); transform: translateY(-1px); }
-
-    .admin-error { color: #f87171; font-size: 0.85rem; margin-top: 8px; display: none; }
-
-    #admin-dashboard { display: none; }
-
-    .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-
-    .analytic-card {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 18px 16px; text-align: center;
-    }
-    .analytic-num {
-      font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
-      color: var(--primary); display: block;
-    }
-    .analytic-label { color: var(--muted); font-size: 0.8rem; font-weight: 600; margin-top: 4px; }
-
-    .activity-log { margin-top: 6px; }
-    .activity-log h4 {
-      font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 800;
-      margin-bottom: 12px; color: var(--text);
-    }
-    .log-list { max-height: 200px; overflow-y: auto; }
-    .log-item {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 9px 12px;
-      background: var(--surface-2); border-radius: 10px; margin-bottom: 6px;
-      font-size: 0.84rem;
-    }
-    .log-item .log-event { color: var(--text); font-weight: 600; }
-    .log-item .log-time { color: var(--muted); }
-
-    .admin-clear-btn {
-      margin-top: 16px; padding: 9px 16px;
-      background: transparent; color: #f87171;
-      border: 1px solid #f87171; border-radius: 10px;
-      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 700;
-      cursor: pointer; transition: all 0.2s;
-    }
-    .admin-clear-btn:hover { background: #f87171; color: #fff; }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; }
       .about-box { grid-template-columns: 1fr; gap: 28px; }
-      .nav-wrap { flex-direction: column; align-items: flex-start; gap: 12px; }
-      nav { width: 100%; }
+
+      .nav-wrap {
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding-top: 10px;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      nav a,
+      nav .toggle-btn {
+        width: 100%;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     @media (max-width: 560px) {
       .hero { padding: 64px 0 48px; }
       section { padding: 52px 0 10px; }
       .about-stats { grid-template-columns: 1fr 1fr; }
-      .analytics-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    /* ── FLOATING PARTICLES ── */
     .particles {
       position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
     }
@@ -691,24 +612,27 @@
 </head>
 
 <body>
-  <!-- ── HEADER ── -->
   <header>
     <div class="container nav-wrap">
       <div class="logo" id="logoClick">Munim Awal</div>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
+
+      <div class="nav-actions">
+        <button class="menu-btn" onclick="toggleMenu()" id="menuBtn">☰ Menu</button>
         <button class="toggle-btn" onclick="toggleDark()" id="themeBtn">🌙 Dark</button>
+      </div>
+
+      <nav id="mainNav">
+        <a href="#about" onclick="closeMenu()">About</a>
+        <a href="#education" onclick="closeMenu()">Education</a>
+        <a href="#experience" onclick="closeMenu()">Experience</a>
+        <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#skills" onclick="closeMenu()">Skills</a>
+        <a href="#contact" onclick="closeMenu()">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- ── HERO ── -->
     <section class="hero">
       <div class="particles" id="particles"></div>
       <div class="container hero-inner">
@@ -727,8 +651,8 @@
               <span><i class="fa-solid fa-laptop-code"></i> IT Support</span>
             </div>
             <div class="hero-buttons">
-              <a href="#projects" class="btn-primary" onclick="track('btn_projects')">View Projects</a>
-              <a href="#contact" class="btn-outline" onclick="track('btn_contact')">Contact Me</a>
+              <a href="#projects" class="btn-primary">View Projects</a>
+              <a href="#contact" class="btn-outline">Contact Me</a>
             </div>
           </div>
 
@@ -746,7 +670,6 @@
       </div>
     </section>
 
-    <!-- ── ABOUT ── -->
     <section id="about">
       <div class="container">
         <div class="reveal">
@@ -782,7 +705,6 @@
       </div>
     </section>
 
-    <!-- ── EDUCATION ── -->
     <section id="education">
       <div class="container">
         <div class="reveal">
@@ -813,7 +735,6 @@
       </div>
     </section>
 
-    <!-- ── EXPERIENCE ── -->
     <section id="experience">
       <div class="container">
         <div class="reveal">
@@ -858,7 +779,6 @@
       </div>
     </section>
 
-    <!-- ── PROJECTS ── -->
     <section id="projects">
       <div class="container">
         <div class="reveal">
@@ -867,7 +787,7 @@
           <p class="section-sub">Projects where I applied data, systems, and software skills to practical problems.</p>
         </div>
         <div class="projects-grid">
-          <div class="proj-card reveal stagger-1" onclick="track('project_bi_dashboard')">
+          <div class="proj-card reveal stagger-1">
             <div class="proj-icon"><i class="fa-solid fa-chart-bar"></i></div>
             <h3>Business Intelligence Dashboard</h3>
             <p>Built an interactive dashboard in Excel and Tableau to analyze sales, profit trends, and category performance using cleaned data, PivotTables, and visual reporting.</p>
@@ -875,7 +795,7 @@
               <span>Excel</span><span>Tableau</span><span>PivotTables</span><span>Data Viz</span>
             </div>
           </div>
-          <div class="proj-card reveal stagger-2" onclick="track('project_grocery_db')">
+          <div class="proj-card reveal stagger-2">
             <div class="proj-icon"><i class="fa-solid fa-database"></i></div>
             <h3>Grocery Sales Database</h3>
             <p>Designed a relational database and wrote SQL queries to analyze sales trends, product performance, and key business metrics for decision-making.</p>
@@ -883,7 +803,7 @@
               <span>MySQL</span><span>SQL</span><span>Database Design</span>
             </div>
           </div>
-          <div class="proj-card reveal stagger-3" onclick="track('project_sys_tracker')">
+          <div class="proj-card reveal stagger-3">
             <div class="proj-icon"><i class="fa-solid fa-microchip"></i></div>
             <h3>System Resource Tracker</h3>
             <p>Built a Python desktop tool that monitors CPU, RAM, and disk usage in real time to improve system awareness and personal productivity.</p>
@@ -891,7 +811,7 @@
               <span>Python</span><span>psutil</span><span>Tkinter</span>
             </div>
           </div>
-          <div class="proj-card reveal stagger-4" onclick="track('project_ai_scraper')">
+          <div class="proj-card reveal stagger-4">
             <div class="proj-icon"><i class="fa-solid fa-robot"></i></div>
             <h3>AI Web Scraper</h3>
             <p>Developed an AI-powered web scraping tool that collects, organizes, and displays website data through a Streamlit interface for automation and testing workflows.</p>
@@ -903,7 +823,6 @@
       </div>
     </section>
 
-    <!-- ── SKILLS ── -->
     <section id="skills">
       <div class="container">
         <div class="reveal">
@@ -940,7 +859,6 @@
       </div>
     </section>
 
-    <!-- ── CONTACT ── -->
     <section id="contact">
       <div class="container">
         <div class="reveal">
@@ -952,17 +870,17 @@
           <div class="contact-card reveal stagger-1">
             <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
             <h3>Email</h3>
-            <a href="mailto:munimm764@gmail.com" onclick="track('contact_email')">munimm764@gmail.com</a>
+            <a href="mailto:munimm764@gmail.com">munimm764@gmail.com</a>
           </div>
           <div class="contact-card reveal stagger-2">
             <div class="contact-icon"><i class="fa-brands fa-github"></i></div>
             <h3>GitHub</h3>
-            <a href="https://github.com/Munim101" target="_blank" onclick="track('contact_github')">github.com/Munim101</a>
+            <a href="https://github.com/Munim101" target="_blank">github.com/Munim101</a>
           </div>
           <div class="contact-card reveal stagger-3">
             <div class="contact-icon"><i class="fa-brands fa-linkedin"></i></div>
             <h3>LinkedIn</h3>
-            <a href="https://www.linkedin.com/in/munim-awal-441859289" target="_blank" onclick="track('contact_linkedin')">linkedin.com/in/munim-awal</a>
+            <a href="https://www.linkedin.com/in/munim-awal-441859289" target="_blank">linkedin.com/in/munim-awal</a>
           </div>
         </div>
       </div>
@@ -971,63 +889,11 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 Munim Awal. All rights reserved.<span class="footer-admin-trigger" id="adminTrigger" title=""></span></p>
+      <p>© 2026 Munim Awal. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- ── ADMIN PANEL ── -->
-  <div class="admin-overlay" id="adminOverlay">
-    <div class="admin-modal">
-      <div class="admin-close" onclick="closeAdmin()"><i class="fa-solid fa-xmark"></i></div>
-
-      <!-- Login Screen -->
-      <div id="admin-login">
-        <h2>Admin Access</h2>
-        <p class="admin-sub">Enter your password to view site analytics.</p>
-        <div class="admin-input-wrap">
-          <i class="fa-solid fa-lock"></i>
-          <input type="password" id="adminPass" placeholder="Password" onkeydown="if(event.key==='Enter') adminLogin()" />
-        </div>
-        <button class="admin-login-btn" onclick="adminLogin()">Access Dashboard</button>
-        <div class="admin-error" id="adminErr">Incorrect password. Try again.</div>
-      </div>
-
-      <!-- Dashboard -->
-      <div id="admin-dashboard">
-        <h2>📊 Site Analytics</h2>
-        <p class="admin-sub">Real-time activity for MunimAwal.com</p>
-
-        <div class="analytics-grid">
-          <div class="analytic-card">
-            <span class="analytic-num" id="stat-visits">0</span>
-            <div class="analytic-label">Total Visits</div>
-          </div>
-          <div class="analytic-card">
-            <span class="analytic-num" id="stat-linkedin">0</span>
-            <div class="analytic-label">LinkedIn Clicks</div>
-          </div>
-          <div class="analytic-card">
-            <span class="analytic-num" id="stat-github">0</span>
-            <div class="analytic-label">GitHub Clicks</div>
-          </div>
-          <div class="analytic-card">
-            <span class="analytic-num" id="stat-projects">0</span>
-            <div class="analytic-label">Project Views</div>
-          </div>
-        </div>
-
-        <div class="activity-log">
-          <h4>Recent Activity</h4>
-          <div class="log-list" id="logList"></div>
-        </div>
-
-        <button class="admin-clear-btn" onclick="clearAnalytics()">Clear All Data</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    /* ── THEME ── */
     function toggleDark() {
       const d = document.body.classList.toggle('dark');
       localStorage.setItem('theme', d ? 'dark' : 'light');
@@ -1042,7 +908,22 @@
       }
     })();
 
-    /* ── PARTICLES ── */
+    function toggleMenu() {
+      const nav = document.getElementById('mainNav');
+      const btn = document.getElementById('menuBtn');
+      nav.classList.toggle('open');
+      btn.textContent = nav.classList.contains('open') ? '✕ Close' : '☰ Menu';
+    }
+
+    function closeMenu() {
+      const nav = document.getElementById('mainNav');
+      const btn = document.getElementById('menuBtn');
+      if (window.innerWidth <= 900) {
+        nav.classList.remove('open');
+        btn.textContent = '☰ Menu';
+      }
+    }
+
     (function () {
       const container = document.getElementById('particles');
       for (let i = 0; i < 18; i++) {
@@ -1057,16 +938,17 @@
       }
     })();
 
-    /* ── SCROLL REVEAL ── */
     const ro = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          ro.unobserve(e.target);
+        }
       });
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal, .reveal-left').forEach(el => ro.observe(el));
 
-    /* ── COUNTERS ── */
     const co = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1085,121 +967,12 @@
 
     document.querySelectorAll('.counter').forEach(el => co.observe(el));
 
-    /* ── ANALYTICS / TRACKING ── */
-    function getAnalytics() {
-      try {
-        return JSON.parse(localStorage.getItem('ma_analytics') || '{}');
-      } catch { return {}; }
-    }
-
-    function saveAnalytics(data) {
-      localStorage.setItem('ma_analytics', JSON.stringify(data));
-    }
-
-    function track(event) {
-      const data = getAnalytics();
-      data.events = data.events || [];
-      data.events.unshift({ event, time: new Date().toISOString() });
-      if (data.events.length > 60) data.events = data.events.slice(0, 60);
-      data.counts = data.counts || {};
-      data.counts[event] = (data.counts[event] || 0) + 1;
-      saveAnalytics(data);
-    }
-
-    // Record visit on load
-    (function () {
-      const data = getAnalytics();
-      data.visits = (data.visits || 0) + 1;
-      data.events = data.events || [];
-      data.events.unshift({ event: 'page_visit', time: new Date().toISOString() });
-      if (data.events.length > 60) data.events = data.events.slice(0, 60);
-      saveAnalytics(data);
-    })();
-
-    /* ── ADMIN PANEL ── */
-    let adminOpen = false;
-    const ADMIN_PW = 'Bangla1976@';
-
-    document.getElementById('adminTrigger').addEventListener('click', function () {
-      document.getElementById('adminOverlay').classList.add('open');
-      document.getElementById('admin-login').style.display = 'block';
-      document.getElementById('admin-dashboard').style.display = 'none';
-      document.getElementById('adminPass').value = '';
-      document.getElementById('adminErr').style.display = 'none';
-    });
-
-    document.getElementById('adminOverlay').addEventListener('click', function (e) {
-      if (e.target === this) closeAdmin();
-    });
-
-    function closeAdmin() {
-      document.getElementById('adminOverlay').classList.remove('open');
-    }
-
-    function adminLogin() {
-      const val = document.getElementById('adminPass').value;
-      if (val === ADMIN_PW) {
-        document.getElementById('admin-login').style.display = 'none';
-        document.getElementById('admin-dashboard').style.display = 'block';
-        loadDashboard();
-      } else {
-        const err = document.getElementById('adminErr');
-        err.style.display = 'block';
-        document.getElementById('adminPass').value = '';
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        document.getElementById('mainNav').classList.remove('open');
+        document.getElementById('menuBtn').textContent = '☰ Menu';
       }
-    }
-
-    function loadDashboard() {
-      const data = getAnalytics();
-      const counts = data.counts || {};
-      const events = data.events || [];
-
-      document.getElementById('stat-visits').textContent = data.visits || 0;
-      document.getElementById('stat-linkedin').textContent = counts['contact_linkedin'] || 0;
-      document.getElementById('stat-github').textContent = counts['contact_github'] || 0;
-
-      let projTotal = 0;
-      ['project_bi_dashboard', 'project_grocery_db', 'project_sys_tracker', 'project_ai_scraper'].forEach(k => {
-        projTotal += counts[k] || 0;
-      });
-      document.getElementById('stat-projects').textContent = projTotal;
-
-      const logList = document.getElementById('logList');
-      const labels = {
-        page_visit: '🌐 Page visited',
-        contact_linkedin: '💼 LinkedIn clicked',
-        contact_github: '🐙 GitHub clicked',
-        contact_email: '✉️ Email clicked',
-        btn_projects: '📁 Projects button clicked',
-        btn_contact: '📬 Contact button clicked',
-        project_bi_dashboard: '📊 BI Dashboard viewed',
-        project_grocery_db: '🗄️ Grocery DB viewed',
-        project_sys_tracker: '💻 System Tracker viewed',
-        project_ai_scraper: '🤖 AI Scraper viewed',
-      };
-
-      logList.innerHTML = events.length === 0
-        ? '<div style="color:var(--muted);font-size:0.85rem;padding:10px">No activity recorded yet.</div>'
-        : events.slice(0, 30).map(e => {
-            const d = new Date(e.time);
-            const timeStr = d.toLocaleDateString('en-US', { month:'short', day:'numeric' }) + ' ' +
-                            d.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
-            return `<div class="log-item">
-              <span class="log-event">${labels[e.event] || e.event}</span>
-              <span class="log-time">${timeStr}</span>
-            </div>`;
-          }).join('');
-    }
-
-    function clearAnalytics() {
-      if (confirm('Clear all analytics data?')) {
-        localStorage.removeItem('ma_analytics');
-        loadDashboard();
-      }
-    }
-
-    /* Keyboard shortcut to close admin */
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAdmin(); });
+    });
   </script>
 </body>
 </html>
