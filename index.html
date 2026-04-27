@@ -553,7 +553,142 @@
     .modal-link-text span { color: var(--muted); font-size: 0.82rem; }
     .modal-link-arrow { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
 
+    /* ── PLAYGROUND ── */
+    .playground-tabs {
+      display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 10px 22px; border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.93rem; cursor: pointer;
+      transition: all 0.22s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: var(--primary); color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .games-selector { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
+    .game-btn {
+      padding: 8px 18px; border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.88rem; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .game-btn.active { background: var(--badge-bg); color: var(--badge-text); border-color: var(--primary); }
+    .game-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .game-wrapper { display: none; }
+    .game-wrapper.active { display: block; }
+    .game-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: var(--shadow);
+      padding: 28px; display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .game-score-row {
+      display: flex; gap: 24px; align-items: center;
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 1rem; color: var(--text);
+    }
+    .game-score-row span { color: var(--primary); }
+    canvas#snakeCanvas { border-radius: 12px; border: 2px solid var(--border); display: block; max-width: 100%; }
+    .ttt-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 240px; }
+    .ttt-cell {
+      width: 72px; height: 72px; border-radius: 14px;
+      background: var(--surface-2); border: 2px solid var(--border);
+      font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+      cursor: pointer; transition: all 0.18s;
+      display: flex; align-items: center; justify-content: center; color: var(--text);
+    }
+    .ttt-cell:hover:not(.taken) { background: var(--badge-bg); border-color: var(--primary); }
+    .ttt-cell.x { color: var(--primary); }
+    .ttt-cell.o { color: #f97316; }
+    .ttt-cell.win { background: var(--badge-bg); border-color: var(--primary); }
+    .ttt-status { font-weight: 700; font-size: 1rem; color: var(--muted); min-height: 24px; text-align: center; }
+    .game-control-btn {
+      padding: 10px 24px; border-radius: 10px;
+      background: var(--primary); color: #fff;
+      border: none; font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.9rem; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .game-control-btn:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+    .ai-demo-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: var(--shadow); padding: 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+    }
+    .ai-input-side label {
+      display: block; font-weight: 700; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 0.8px;
+      color: var(--muted); margin-bottom: 10px;
+    }
+    .ai-textarea {
+      width: 100%; min-height: 160px; padding: 14px 16px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 14px; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 0.93rem;
+      line-height: 1.6; resize: vertical; outline: none; transition: border-color 0.2s;
+    }
+    .ai-textarea:focus { border-color: var(--primary); }
+    .ai-textarea::placeholder { color: var(--muted); }
+    .ai-presets { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+    .preset-btn {
+      padding: 5px 12px; border-radius: 99px;
+      border: 1px solid var(--border);
+      background: var(--surface-2); color: var(--muted);
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; transition: all 0.18s;
+    }
+    .preset-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .ai-analyze-btn {
+      width: 100%; padding: 13px; border-radius: 12px;
+      background: var(--primary); color: #fff;
+      border: none; font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 0.95rem; cursor: pointer;
+      transition: all 0.22s; margin-top: 4px;
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+    .ai-analyze-btn:hover { background: var(--primary-light); transform: translateY(-2px); }
+    .ai-result-side { display: flex; flex-direction: column; gap: 16px; }
+    .risk-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 18px; border-radius: 12px;
+      font-weight: 800; font-size: 1rem; font-family: 'Syne', sans-serif; border: 2px solid;
+    }
+    .risk-safe { background: rgba(34,197,94,0.12); color: #16a34a; border-color: #16a34a; }
+    .risk-suspicious { background: rgba(234,179,8,0.12); color: #ca8a04; border-color: #ca8a04; }
+    .risk-high { background: rgba(239,68,68,0.12); color: #dc2626; border-color: #dc2626; }
+    .risk-placeholder { background: var(--surface-2); color: var(--muted); border-color: var(--border); }
+    .confidence-bar-wrap { width: 100%; }
+    .confidence-label { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+    .confidence-bar { height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+    .confidence-fill { height: 100%; border-radius: 99px; background: var(--primary); transition: width 0.6s ease; width: 0%; }
+    .flags-list { display: flex; flex-direction: column; gap: 8px; }
+    .flag-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px; border-radius: 11px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      font-size: 0.87rem; line-height: 1.5;
+    }
+    .flag-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 1px; }
+    .flag-text { color: var(--text); }
+    .flags-empty { color: var(--muted); font-size: 0.9rem; font-style: italic; }
+    .ai-note {
+      font-size: 0.78rem; color: var(--muted);
+      padding: 10px 14px; border-radius: 10px;
+      background: var(--surface-2); border: 1px solid var(--border); line-height: 1.5;
+    }
+
     /* ── RESPONSIVE ── */
+    @media (max-width: 768px) { .ai-demo-box { grid-template-columns: 1fr; } }
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; }
       .about-box { grid-template-columns: 1fr; gap: 28px; }
@@ -604,6 +739,7 @@
         <a href="#education" onclick="closeMenu()">Education</a>
         <a href="#experience" onclick="closeMenu()">Experience</a>
         <a href="#projects" onclick="closeMenu()">Projects</a>
+        <a href="#playground" onclick="closeMenu()">Playground</a>
         <a href="#skills" onclick="closeMenu()">Skills</a>
         <a href="#contact" onclick="closeMenu()">Contact</a>
       </nav>
@@ -855,6 +991,102 @@
       </div>
     </section>
 
+    <!-- ── PLAYGROUND ── -->
+    <section id="playground">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-label">Playground</div>
+          <h2 class="section-title">Try It Out</h2>
+          <p class="section-sub">Interactive demos and games. The AI Safety Coach uses the same detection logic I built for the hackathon — paste any suspicious message and see how it scores.</p>
+        </div>
+
+        <div class="playground-tabs reveal">
+          <button class="tab-btn active" onclick="switchTab('games')">🎮 Games</button>
+          <button class="tab-btn" onclick="switchTab('ai-demo')">🛡️ AI Safety Coach Demo</button>
+        </div>
+
+        <!-- GAMES TAB -->
+        <div id="tab-games" class="tab-content active reveal">
+          <div class="games-selector">
+            <button class="game-btn active" onclick="switchGame('snake')">🐍 Snake</button>
+            <button class="game-btn" onclick="switchGame('ttt')">⭕ Tic-Tac-Toe</button>
+          </div>
+
+          <!-- Snake -->
+          <div id="game-snake" class="game-wrapper active">
+            <div class="game-box">
+              <div class="game-score-row">
+                Score: <span id="snakeScore">0</span>
+                &nbsp;&nbsp;High Score: <span id="snakeHigh">0</span>
+              </div>
+              <canvas id="snakeCanvas" width="380" height="380"></canvas>
+              <div style="color:var(--muted);font-size:0.85rem;text-align:center;">
+                Arrow keys or WASD to move &nbsp;·&nbsp; Press Space or click Start to begin
+              </div>
+              <button class="game-control-btn" id="snakeStartBtn" onclick="startSnake()">▶ Start Game</button>
+            </div>
+          </div>
+
+          <!-- Tic-Tac-Toe -->
+          <div id="game-ttt" class="game-wrapper">
+            <div class="game-box">
+              <div class="game-score-row">
+                You (X): <span id="tttWins">0</span>
+                &nbsp;&nbsp;AI (O): <span id="tttLosses">0</span>
+                &nbsp;&nbsp;Draws: <span id="tttDraws">0</span>
+              </div>
+              <div class="ttt-board" id="tttBoard"></div>
+              <div class="ttt-status" id="tttStatus">Your turn — click a square</div>
+              <button class="game-control-btn" onclick="resetTTT()">↺ New Game</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI DEMO TAB -->
+        <div id="tab-ai-demo" class="tab-content reveal">
+          <div class="ai-demo-box">
+            <div class="ai-input-side">
+              <label>Paste a message to analyze</label>
+              <textarea class="ai-textarea" id="aiInput" placeholder="Paste an email, text message, or any suspicious content here..."></textarea>
+              <div style="font-size:0.78rem;color:var(--muted);margin-top:6px;">Try a sample:</div>
+              <div class="ai-presets">
+                <button class="preset-btn" onclick="loadPreset('phishing')">📧 Phishing Email</button>
+                <button class="preset-btn" onclick="loadPreset('gift')">🎁 Gift Card Scam</button>
+                <button class="preset-btn" onclick="loadPreset('irs')">🏛️ IRS Threat</button>
+                <button class="preset-btn" onclick="loadPreset('safe')">✅ Normal Message</button>
+              </div>
+              <button class="ai-analyze-btn" onclick="analyzeMessage()">🔍 Analyze Message</button>
+              <div class="ai-note" style="margin-top:12px;">
+                💡 This demo runs the rule-based detection engine from the AI Cyber Safety Coach hackathon project. It scans for 9 threat categories and 5 high-risk flag combinations — no server required.
+              </div>
+            </div>
+
+            <div class="ai-result-side">
+              <div>
+                <div style="font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;">Risk Level</div>
+                <div class="risk-badge risk-placeholder" id="riskBadge">⬜ Awaiting Input</div>
+              </div>
+              <div class="confidence-bar-wrap">
+                <div class="confidence-label">
+                  <span>Threat Confidence</span>
+                  <span id="confidenceVal">—</span>
+                </div>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" id="confidenceFill"></div>
+                </div>
+              </div>
+              <div>
+                <div style="font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;">Detected Flags</div>
+                <div class="flags-list" id="flagsList">
+                  <div class="flags-empty">No flags detected yet.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ── SKILLS ── -->
     <section id="skills">
       <div class="container">
@@ -1098,6 +1330,267 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal();
     });
+
+    /* ── PLAYGROUND TABS ── */
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach((b, i) => {
+        b.classList.toggle('active', (i === 0 && tab === 'games') || (i === 1 && tab === 'ai-demo'));
+      });
+      document.getElementById('tab-games').classList.toggle('active', tab === 'games');
+      document.getElementById('tab-ai-demo').classList.toggle('active', tab === 'ai-demo');
+    }
+
+    function switchGame(game) {
+      document.querySelectorAll('.game-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.game-wrapper').forEach(w => w.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('game-' + game).classList.add('active');
+      if (game === 'ttt') initTTT();
+    }
+
+    /* ── SNAKE GAME ── */
+    const GRID = 20, SIZE = 380;
+    let snakeGame = null;
+
+    function startSnake() {
+      if (snakeGame) { clearInterval(snakeGame.loop); }
+      const canvas = document.getElementById('snakeCanvas');
+      const ctx = canvas.getContext('2d');
+      const cols = SIZE / GRID;
+      let snake = [{x:10,y:10}], dir = {x:1,y:0}, nextDir = {x:1,y:0};
+      let food = randomFood(snake), score = 0, running = true;
+      document.getElementById('snakeStartBtn').textContent = '↺ Restart';
+
+      function randomFood(s) {
+        let f;
+        do { f = {x:Math.floor(Math.random()*cols), y:Math.floor(Math.random()*cols)}; }
+        while (s.some(seg => seg.x===f.x && seg.y===f.y));
+        return f;
+      }
+
+      function getColor(varName) {
+        return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+      }
+
+      function draw() {
+        const bg = document.body.classList.contains('dark') ? '#0f1c2e' : '#eef1f8';
+        const primary = document.body.classList.contains('dark') ? '#4d7cff' : '#1e4de7';
+        const foodColor = '#f97316';
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, SIZE, SIZE);
+        snake.forEach((seg, i) => {
+          ctx.fillStyle = i === 0 ? primary : (document.body.classList.contains('dark') ? '#2a4a9e' : '#93b4ff');
+          ctx.beginPath();
+          ctx.roundRect(seg.x*GRID+1, seg.y*GRID+1, GRID-2, GRID-2, 4);
+          ctx.fill();
+        });
+        ctx.fillStyle = foodColor;
+        ctx.beginPath();
+        ctx.arc(food.x*GRID+GRID/2, food.y*GRID+GRID/2, GRID/2-2, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      function tick() {
+        dir = nextDir;
+        const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+        if (head.x < 0 || head.x >= cols || head.y < 0 || head.y >= cols || snake.some(s=>s.x===head.x&&s.y===head.y)) {
+          clearInterval(snakeGame.loop);
+          running = false;
+          ctx.fillStyle = 'rgba(0,0,0,0.55)';
+          ctx.fillRect(0,0,SIZE,SIZE);
+          ctx.fillStyle = '#fff';
+          ctx.font = 'bold 24px Syne, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('Game Over', SIZE/2, SIZE/2 - 10);
+          ctx.font = '16px DM Sans, sans-serif';
+          ctx.fillText('Score: ' + score, SIZE/2, SIZE/2 + 18);
+          return;
+        }
+        snake.unshift(head);
+        if (head.x === food.x && head.y === food.y) {
+          score++;
+          document.getElementById('snakeScore').textContent = score;
+          const hi = parseInt(localStorage.getItem('snakeHi')||'0');
+          if (score > hi) { localStorage.setItem('snakeHi', score); document.getElementById('snakeHigh').textContent = score; }
+          food = randomFood(snake);
+        } else { snake.pop(); }
+        draw();
+      }
+
+      snakeGame = { loop: setInterval(tick, 120) };
+      document.getElementById('snakeHigh').textContent = localStorage.getItem('snakeHi') || '0';
+      document.getElementById('snakeScore').textContent = '0';
+
+      document.onkeydown = (e) => {
+        const map = { ArrowUp:{x:0,y:-1}, ArrowDown:{x:0,y:1}, ArrowLeft:{x:-1,y:0}, ArrowRight:{x:1,y:0},
+                      w:{x:0,y:-1}, s:{x:0,y:1}, a:{x:-1,y:0}, d:{x:1,y:0},
+                      ' ': null };
+        const k = map[e.key];
+        if (k === null) { if (!running) startSnake(); e.preventDefault(); return; }
+        if (k && !(k.x === -dir.x && k.y === -dir.y)) { nextDir = k; e.preventDefault(); }
+      };
+      draw();
+    }
+
+    // Draw idle snake board on load
+    (function() {
+      const canvas = document.getElementById('snakeCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const bg = document.body.classList.contains('dark') ? '#0f1c2e' : '#eef1f8';
+      ctx.fillStyle = bg;
+      ctx.fillRect(0,0,380,380);
+      ctx.fillStyle = document.body.classList.contains('dark') ? '#4d7cff' : '#1e4de7';
+      ctx.font = 'bold 18px Syne, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Press Start to Play', 190, 200);
+    })();
+
+    /* ── TIC-TAC-TOE ── */
+    let tttBoard = [], tttActive = true, tttWins = 0, tttLosses = 0, tttDraws = 0;
+    const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+    function initTTT() {
+      tttBoard = Array(9).fill(null);
+      tttActive = true;
+      document.getElementById('tttStatus').textContent = 'Your turn — click a square';
+      renderTTT();
+    }
+
+    function renderTTT(winCells) {
+      const el = document.getElementById('tttBoard');
+      el.innerHTML = tttBoard.map((v,i) => `
+        <div class="ttt-cell${v?' taken':''}${v==='X'?' x':v==='O'?' o':''}${winCells&&winCells.includes(i)?' win':''}" onclick="tttClick(${i})">
+          ${v||''}
+        </div>`).join('');
+    }
+
+    function checkWinner(b, p) {
+      return WINS.find(([a,c,d]) => b[a]===p && b[c]===p && b[d]===p) || null;
+    }
+
+    function minimax(b, isMax) {
+      const oWin = checkWinner(b,'O'), xWin = checkWinner(b,'X');
+      if (oWin) return 10; if (xWin) return -10;
+      if (b.every(v=>v)) return 0;
+      const moves = b.map((v,i)=>v?null:i).filter(v=>v!==null);
+      if (isMax) {
+        let best = -Infinity;
+        for (const m of moves) { b[m]='O'; best=Math.max(best,minimax(b,false)); b[m]=null; }
+        return best;
+      } else {
+        let best = Infinity;
+        for (const m of moves) { b[m]='X'; best=Math.min(best,minimax(b,true)); b[m]=null; }
+        return best;
+      }
+    }
+
+    function aiMove() {
+      const moves = tttBoard.map((v,i)=>v?null:i).filter(v=>v!==null);
+      let best = -Infinity, bestMove = moves[0];
+      for (const m of moves) {
+        tttBoard[m]='O';
+        const score = minimax(tttBoard, false);
+        tttBoard[m]=null;
+        if (score > best) { best=score; bestMove=m; }
+      }
+      tttBoard[bestMove] = 'O';
+    }
+
+    function tttClick(i) {
+      if (!tttActive || tttBoard[i]) return;
+      tttBoard[i] = 'X';
+      const xWin = checkWinner(tttBoard,'X');
+      if (xWin) { tttWins++; document.getElementById('tttWins').textContent=tttWins; tttActive=false; renderTTT(xWin); document.getElementById('tttStatus').textContent='🎉 You win!'; return; }
+      if (tttBoard.every(v=>v)) { tttDraws++; document.getElementById('tttDraws').textContent=tttDraws; tttActive=false; renderTTT(); document.getElementById('tttStatus').textContent="It's a draw!"; return; }
+      document.getElementById('tttStatus').textContent = 'AI is thinking...';
+      setTimeout(() => {
+        aiMove();
+        const oWin = checkWinner(tttBoard,'O');
+        if (oWin) { tttLosses++; document.getElementById('tttLosses').textContent=tttLosses; tttActive=false; renderTTT(oWin); document.getElementById('tttStatus').textContent='AI wins this one!'; return; }
+        if (tttBoard.every(v=>v)) { tttDraws++; document.getElementById('tttDraws').textContent=tttDraws; tttActive=false; renderTTT(); document.getElementById('tttStatus').textContent="It's a draw!"; return; }
+        renderTTT();
+        document.getElementById('tttStatus').textContent = 'Your turn — click a square';
+      }, 350);
+      renderTTT();
+    }
+
+    function resetTTT() { initTTT(); }
+    initTTT();
+
+    /* ── AI SAFETY COACH ── */
+    const PRESETS = {
+      phishing: "URGENT: Your account has been compromised. Click here immediately to verify your identity and prevent suspension. Enter your password and social security number to restore access: bit.ly/secure-verify. This expires in 24 hours.",
+      gift: "Congratulations! You've been selected as a winner. To claim your $500 Amazon gift card, we need your credit card number to verify your identity. Send $25 via gift card to process your prize. Act now — limited time offer!",
+      irs: "This is the IRS. You owe back taxes and will be arrested unless you call us immediately. Pay via wire transfer or Bitcoin within 2 hours or face legal action. Warrant will be issued. Call 1-800-555-0000 now.",
+      safe: "Hey, just checking in — are we still on for lunch tomorrow at noon? Let me know if the time works for you. We could try that new place on 5th Street."
+    };
+
+    const FLAGS = [
+      { id: 'urgency',    icon: '⏰', label: 'Urgency Language',       words: ['urgent','immediately','expires','act now','limited time','asap','deadline','right away','within 24','within 2','hurry','quickly','time sensitive','act fast','respond now'] },
+      { id: 'financial',  icon: '💸', label: 'Financial Request',       words: ['wire transfer','gift card','bitcoin','cryptocurrency','send money','western union','bank account','routing number','payment','credit card','debit card','cash app','venmo','zelle','money order'] },
+      { id: 'links',      icon: '🔗', label: 'Suspicious Link/Action',  words: ['bit.ly','tinyurl','click here','verify your','login link','confirm your account','reset password','secure link','update your information','click below'] },
+      { id: 'personal',   icon: '🪪', label: 'Personal Info Request',   words: ['social security','ssn','password','credit card number','bank account','pin number','date of birth','passport','drivers license','account number','full name and address'] },
+      { id: 'prize',      icon: '🎁', label: 'Prize / Lottery Claim',   words: ['winner','congratulations','you\'ve been selected','prize','lottery','inheritance','reward','claim your','free gift','you won','sweepstakes'] },
+      { id: 'threat',     icon: '⚖️', label: 'Threat / Legal Action',   words: ['arrested','legal action','warrant','authorities','suspended','terminated','consequences','law enforcement','sheriff','will be charged','criminal charges'] },
+      { id: 'imperson',   icon: '🎭', label: 'Impersonation',           words: ['irs','fbi','microsoft','apple support','amazon','paypal','bank of america','chase','social security administration','medicare','government','federal'] },
+      { id: 'toogood',    icon: '✨', label: 'Too Good to Be True',      words: ['million dollars','guaranteed','no risk','get rich','free money','make money fast','risk free','100%','no catch','once in a lifetime','exclusive offer'] },
+      { id: 'grammar',    icon: '📝', label: 'Suspicious Formatting',   test: t => (t.match(/!{2,}/g)||[]).length > 1 || (t.match(/\?{2,}/g)||[]).length > 0 || (t.match(/[A-Z]{4,}/g)||[]).length > 2 }
+    ];
+
+    const HIGH_RISK_COMBOS = [
+      ['financial','personal'],
+      ['threat','financial'],
+      ['imperson','financial'],
+      ['urgency','personal'],
+      ['prize','financial']
+    ];
+
+    function loadPreset(key) { document.getElementById('aiInput').value = PRESETS[key]; }
+
+    function analyzeMessage() {
+      const text = document.getElementById('aiInput').value.trim();
+      if (!text) { alert('Please paste a message first.'); return; }
+      const lower = text.toLowerCase();
+
+      const detected = FLAGS.filter(f => {
+        if (f.words) return f.words.some(w => lower.includes(w));
+        if (f.test) return f.test(text);
+        return false;
+      });
+
+      const detectedIds = detected.map(f => f.id);
+      const isHighRiskCombo = HIGH_RISK_COMBOS.some(([a,b]) => detectedIds.includes(a) && detectedIds.includes(b));
+      const count = detected.length;
+
+      let level, cssClass, confidence;
+      if (isHighRiskCombo || count >= 4) { level = '🚨 HIGH RISK'; cssClass = 'risk-high'; confidence = Math.min(95, 60 + count * 8); }
+      else if (count >= 2) { level = '⚠️ SUSPICIOUS'; cssClass = 'risk-suspicious'; confidence = Math.min(75, 30 + count * 12); }
+      else { level = '✅ LIKELY SAFE'; cssClass = 'risk-safe'; confidence = Math.max(5, count * 15); }
+
+      const badge = document.getElementById('riskBadge');
+      badge.textContent = level;
+      badge.className = 'risk-badge ' + cssClass;
+
+      document.getElementById('confidenceVal').textContent = confidence + '%';
+      const fill = document.getElementById('confidenceFill');
+      fill.style.width = '0%';
+      setTimeout(() => { fill.style.width = confidence + '%'; }, 50);
+
+      const fillColor = cssClass === 'risk-high' ? '#dc2626' : cssClass === 'risk-suspicious' ? '#ca8a04' : '#16a34a';
+      fill.style.background = fillColor;
+
+      const flagsList = document.getElementById('flagsList');
+      if (detected.length === 0) {
+        flagsList.innerHTML = '<div class="flags-empty">No threat flags detected.</div>';
+      } else {
+        flagsList.innerHTML = detected.map(f => `
+          <div class="flag-item">
+            <span class="flag-icon">${f.icon}</span>
+            <span class="flag-text"><strong>${f.label}</strong></span>
+          </div>`).join('');
+      }
+    }
   </script>
 </body>
 </html>
