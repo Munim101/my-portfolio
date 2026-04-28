@@ -1,33 +1,23 @@
-import time
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from bs4 import BeautifulSoup
+import streamlit as st
+from scrape import scrape_website, extract_body_content, clean_body_content, split_dom_content
+from parse import parse_with_ollama
 
-def scrape_website(website):
-    print("Launching Chrome browser...")
-    chrome_driver_path = "./chromedriver.exe"
-    options = webdriver.ChromeOptions()
-    driver = webdriver.Chrome(service=Service(chrome_driver_path), options=options)
-    try:
-        driver.get(website)
-        time.sleep(5)
-        html = driver.page_source
-        return html
-    finally:
-        driver.quit()
+st.title("AI Web Scraper")
+url = st.text_input("Enter a website URL")
 
-def extract_body_content(html):
-    soup = BeautifulSoup(html, "html.parser")
-    body = soup.body
-    return str(body) if body else ""
+if st.button("Scrape Site"):
+    result = scrape_website(url)
+    body_content = extract_body_content(result)
+    cleaned_content = clean_body_content(body_content)
+    st.session_state.dom_content = cleaned_content
 
-def clean_body_content(body_content):
-    soup = BeautifulSoup(body_content, "html.parser")
-    for tag in soup(["script", "style"]):
-        tag.decompose()
-    cleaned = soup.get_text(separator="\n")
-    cleaned = "\n".join([line.strip() for line in cleaned.splitlines() if line.strip()])
-    return cleaned
+    with st.expander("View DOM Content"):
+        st.text_area("DOM Content", cleaned_content, height=300)
 
-def split_dom_content(dom_content, max_length=6000):
-    return [dom_content[i:i+max_length] for i in range(0, len(dom_content), max_length)]
+if "dom_content" in st.session_state:
+    parse_description = st.text_area("Describe what you want to parse")
+    if st.button("Parse Content") and parse_description:
+        st.write("Parsing the content...")
+        dom_chunks = split_dom_content(st.session_state.dom_content)
+        result = parse_with_ollama(dom_chunks, parse_description)
+        st.write(result)
