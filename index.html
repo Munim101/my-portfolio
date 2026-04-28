@@ -978,7 +978,7 @@
           </div>
 
           <!-- AI Web Scraper -->
-          <div class="proj-card reveal stagger-6">
+          <div class="proj-card clickable reveal stagger-6" onclick="openModal('webscraper')">
             <div class="proj-icon"><i class="fa-solid fa-robot"></i></div>
             <h3>AI Web Scraper</h3>
             <p>Developed an AI-powered web scraping tool that collects, organizes, and displays website data through a Streamlit interface for automation and testing workflows.</p>
@@ -1273,6 +1273,19 @@
 
     /* ── PROJECT MODAL ── */
     const projectData = {
+      webscraper: {
+        icon: '<i class="fa-solid fa-robot"></i>',
+        title: 'AI Web Scraper',
+        desc: 'Python tool that uses Selenium to scrape any website, cleans the DOM with BeautifulSoup, then lets you describe what to extract — LLaMA 3 (via Ollama) parses and returns structured results. Built and run locally with Streamlit.',
+        links: [
+          {
+            icon: '<i class="fa-solid fa-file-zipper"></i>',
+            label: 'Download Source Code',
+            sub: 'ZIP · main.py, scrape.py, parse.py, requirements.txt, README',
+            href: 'ai-web-scraper.zip'
+          }
+        ]
+      },
       hackathon: {
         icon: '<i class="fa-solid fa-shield-halved"></i>',
         title: 'AI Cyber Safety Coach',
