@@ -1047,38 +1047,64 @@
           <div class="ai-demo-box">
             <div class="ai-input-side">
               <label>Paste a message to analyze</label>
-              <textarea class="ai-textarea" id="aiInput" placeholder="Paste an email, text message, or any suspicious content here..."></textarea>
+              <textarea class="ai-textarea" id="aiInput" placeholder="Paste an email, text message, link, or any suspicious content here..."></textarea>
               <div style="font-size:0.78rem;color:var(--muted);margin-top:6px;">Try a sample:</div>
               <div class="ai-presets">
                 <button class="preset-btn" onclick="loadPreset('phishing')">📧 Phishing Email</button>
                 <button class="preset-btn" onclick="loadPreset('gift')">🎁 Gift Card Scam</button>
                 <button class="preset-btn" onclick="loadPreset('irs')">🏛️ IRS Threat</button>
+                <button class="preset-btn" onclick="loadPreset('romance')">💘 Romance Scam</button>
                 <button class="preset-btn" onclick="loadPreset('safe')">✅ Normal Message</button>
               </div>
-              <button class="ai-analyze-btn" onclick="analyzeMessage()">🔍 Analyze Message</button>
+              <button class="ai-analyze-btn" id="analyzeBtn" onclick="analyzeMessage()">🔍 Analyze Message</button>
               <div class="ai-note" style="margin-top:12px;">
-                💡 This demo runs the rule-based detection engine from the AI Cyber Safety Coach hackathon project. It scans for 9 threat categories and 5 high-risk flag combinations — no server required.
+                🤖 <strong>Two-layer detection:</strong> Rule-based scanning (instant) + Claude AI deep analysis. Detects phishing, social engineering, suspicious URLs, impersonation, and manipulation patterns.
               </div>
             </div>
 
             <div class="ai-result-side">
+              <!-- Risk badge -->
               <div>
                 <div style="font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;">Risk Level</div>
                 <div class="risk-badge risk-placeholder" id="riskBadge">⬜ Awaiting Input</div>
               </div>
+
+              <!-- Score breakdown -->
+              <div id="scoreBreakdown" style="display:none;">
+                <div style="font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;">Risk Breakdown</div>
+                <div id="scoreRows" style="display:flex;flex-direction:column;gap:8px;"></div>
+              </div>
+
+              <!-- Confidence bar -->
               <div class="confidence-bar-wrap">
                 <div class="confidence-label">
-                  <span>Threat Confidence</span>
+                  <span>Overall Threat Score</span>
                   <span id="confidenceVal">—</span>
                 </div>
                 <div class="confidence-bar">
                   <div class="confidence-fill" id="confidenceFill"></div>
                 </div>
               </div>
+
+              <!-- Detected flags -->
               <div>
                 <div style="font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;">Detected Flags</div>
                 <div class="flags-list" id="flagsList">
                   <div class="flags-empty">No flags detected yet.</div>
+                </div>
+              </div>
+
+              <!-- AI analysis -->
+              <div id="aiAnalysisWrap" style="display:none;">
+                <div style="font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px;">🤖 AI Analysis</div>
+                <div id="aiAnalysisText" class="ai-note" style="font-size:0.88rem;line-height:1.65;color:var(--text);"></div>
+              </div>
+
+              <!-- Loading state -->
+              <div id="aiLoadingWrap" style="display:none;">
+                <div class="ai-note" style="display:flex;align-items:center;gap:10px;">
+                  <span id="aiLoadingDot" style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--primary);animation:blink 1s infinite;"></span>
+                  <span style="color:var(--muted);font-size:0.88rem;">AI is analyzing the message...</span>
                 </div>
               </div>
             </div>
@@ -1518,56 +1544,97 @@
     function resetTTT() { initTTT(); }
     initTTT();
 
-    /* ── AI SAFETY COACH ── */
+    /* ── AI SAFETY COACH (Two-Layer: Rule-Based + Claude AI) ── */
     const PRESETS = {
-      phishing: "URGENT: Your account has been compromised. Click here immediately to verify your identity and prevent suspension. Enter your password and social security number to restore access: bit.ly/secure-verify. This expires in 24 hours.",
-      gift: "Congratulations! You've been selected as a winner. To claim your $500 Amazon gift card, we need your credit card number to verify your identity. Send $25 via gift card to process your prize. Act now — limited time offer!",
-      irs: "This is the IRS. You owe back taxes and will be arrested unless you call us immediately. Pay via wire transfer or Bitcoin within 2 hours or face legal action. Warrant will be issued. Call 1-800-555-0000 now.",
-      safe: "Hey, just checking in — are we still on for lunch tomorrow at noon? Let me know if the time works for you. We could try that new place on 5th Street."
+      phishing: "URGENT: Your account has been compromised. Click here immediately to verify your identity and prevent suspension. Enter your password and social security number to restore access: bit.ly/secure-verify-2026. This expires in 24 hours. Failure to comply will result in permanent account termination.",
+      gift: "Congratulations! You've been selected as a winner from our database. To claim your $500 Amazon gift card, we need your credit card number to verify your identity and process shipping. Send $25 via gift card to activate your prize. Act now — offer expires tonight! Reply STOP to unsubscribe.",
+      irs: "This is a final notice from the IRS Criminal Investigation Division. You owe $3,847 in back taxes. You will be arrested unless you call us immediately at 1-800-555-0199. Payment must be made via wire transfer or Bitcoin within 2 hours or a warrant will be issued for your arrest. This is your last warning.",
+      romance: "My darling, I have fallen deeply in love with you. I am a US soldier stationed overseas. I need $2,000 sent via Western Union for emergency medical treatment. I will repay you when I return. God bless you. I will marry you when this deployment is over. Please send quickly my love.",
+      safe: "Hey, just checking in — are we still on for lunch tomorrow at noon? Let me know if the time works for you. We could try that new Thai place on 5th Street. Also, did you get a chance to look at the project notes I sent?"
     };
 
+    // ── LAYER 1: Rule-based scanner ──
     const FLAGS = [
-      { id: 'urgency',    icon: '⏰', label: 'Urgency Language',       words: ['urgent','immediately','expires','act now','limited time','asap','deadline','right away','within 24','within 2','hurry','quickly','time sensitive','act fast','respond now'] },
-      { id: 'financial',  icon: '💸', label: 'Financial Request',       words: ['wire transfer','gift card','bitcoin','cryptocurrency','send money','western union','bank account','routing number','payment','credit card','debit card','cash app','venmo','zelle','money order'] },
-      { id: 'links',      icon: '🔗', label: 'Suspicious Link/Action',  words: ['bit.ly','tinyurl','click here','verify your','login link','confirm your account','reset password','secure link','update your information','click below'] },
-      { id: 'personal',   icon: '🪪', label: 'Personal Info Request',   words: ['social security','ssn','password','credit card number','bank account','pin number','date of birth','passport','drivers license','account number','full name and address'] },
-      { id: 'prize',      icon: '🎁', label: 'Prize / Lottery Claim',   words: ['winner','congratulations','you\'ve been selected','prize','lottery','inheritance','reward','claim your','free gift','you won','sweepstakes'] },
-      { id: 'threat',     icon: '⚖️', label: 'Threat / Legal Action',   words: ['arrested','legal action','warrant','authorities','suspended','terminated','consequences','law enforcement','sheriff','will be charged','criminal charges'] },
-      { id: 'imperson',   icon: '🎭', label: 'Impersonation',           words: ['irs','fbi','microsoft','apple support','amazon','paypal','bank of america','chase','social security administration','medicare','government','federal'] },
-      { id: 'toogood',    icon: '✨', label: 'Too Good to Be True',      words: ['million dollars','guaranteed','no risk','get rich','free money','make money fast','risk free','100%','no catch','once in a lifetime','exclusive offer'] },
-      { id: 'grammar',    icon: '📝', label: 'Suspicious Formatting',   test: t => (t.match(/!{2,}/g)||[]).length > 1 || (t.match(/\?{2,}/g)||[]).length > 0 || (t.match(/[A-Z]{4,}/g)||[]).length > 2 }
+      {
+        id: 'urgency', icon: '⏰', label: 'Urgency / Pressure Tactics', weight: 15,
+        words: ['urgent','immediately','expires','act now','limited time','asap','deadline','right away','within 24','within 2 hours','hurry','quickly','time sensitive','act fast','respond now','final notice','last warning','last chance','today only','tonight only']
+      },
+      {
+        id: 'financial', icon: '💸', label: 'Financial Request / Payment', weight: 25,
+        words: ['wire transfer','gift card','bitcoin','cryptocurrency','send money','western union','moneygram','bank account','routing number','credit card number','debit card','cash app','venmo','zelle','money order','paypal','send $','pay $','transfer $','payment required']
+      },
+      {
+        id: 'links', icon: '🔗', label: 'Suspicious URL / Link', weight: 20,
+        words: ['bit.ly','tinyurl','t.co/','goo.gl','ow.ly','is.gd','rebrand.ly','click here','verify your account','login link','confirm your account','reset password','secure link','update your information','click below','access here'],
+        test: t => /https?:\/\/(?!(?:www\.)?(google|microsoft|apple|amazon|github|linkedin)\.com)[^\s]{20,}/i.test(t)
+      },
+      {
+        id: 'personal', icon: '🪪', label: 'Personal Info Harvesting', weight: 25,
+        words: ['social security','ssn','your password','credit card number','bank account number','pin number','date of birth','passport number','drivers license','account number','full name and address','mother\'s maiden','security question','cvv','card verification']
+      },
+      {
+        id: 'prize', icon: '🎁', label: 'Prize / Lottery / Inheritance', weight: 15,
+        words: ['you\'ve been selected','you have won','prize','lottery','inheritance','unclaimed funds','reward','claim your','free gift','you won','sweepstakes','selected from our database','lucky winner','jackpot']
+      },
+      {
+        id: 'threat', icon: '⚖️', label: 'Threat / Legal Action', weight: 20,
+        words: ['will be arrested','legal action','warrant','law enforcement','sheriff','will be charged','criminal charges','prosecution','sue you','lawsuit','police','federal agents','deportation','suspended','account closed','terminated']
+      },
+      {
+        id: 'imperson', icon: '🎭', label: 'Impersonation Attempt', weight: 20,
+        words: ['irs','fbi','cia','microsoft support','apple support','amazon support','paypal','bank of america','wells fargo','chase bank','social security administration','medicare','medicaid','government','federal bureau','department of treasury','tech support']
+      },
+      {
+        id: 'romance', icon: '💘', label: 'Romance / Emotional Manipulation', weight: 20,
+        words: ['fallen in love','deeply in love','god bless','soldier','deployed','overseas','send quickly','marry you','my darling','my love','i trust you','only you can help','destiny','fate brought us']
+      },
+      {
+        id: 'toogood', icon: '✨', label: 'Too Good to Be True', weight: 15,
+        words: ['million dollars','guaranteed profit','no risk','get rich','free money','make money fast','risk free','100% guaranteed','no catch','once in a lifetime','exclusive offer','double your investment','passive income','work from home and earn']
+      },
+      {
+        id: 'urlshort', icon: '🔀', label: 'URL Shortener Detected', weight: 15,
+        test: t => /\b(bit\.ly|tinyurl\.com|t\.co|goo\.gl|ow\.ly|is\.gd|rebrand\.ly|short\.io|cutt\.ly|buff\.ly)\b/i.test(t)
+      },
+      {
+        id: 'grammar', icon: '📝', label: 'Suspicious Formatting / Caps', weight: 10,
+        test: t => (t.match(/!{2,}/g)||[]).length > 1 || (t.match(/[A-Z]{5,}/g)||[]).length > 2 || (t.match(/\$\d/g)||[]).length > 2
+      },
+      {
+        id: 'spoofed', icon: '📧', label: 'Spoofed Sender Pattern', weight: 15,
+        test: t => /\b(no.?reply|support|security|alert|notification|team)@(?!(?:google|microsoft|apple|amazon|paypal)\.com)[a-z0-9\-]+\.(xyz|top|click|loan|work|online|site|info|biz|cc|tk)\b/i.test(t)
+      }
     ];
 
     const HIGH_RISK_COMBOS = [
-      ['financial','personal'],
-      ['threat','financial'],
-      ['imperson','financial'],
-      ['urgency','personal'],
-      ['prize','financial']
+      { flags: ['financial','personal'],  bonus: 20, label: 'Payment + Personal Info = Extreme Risk' },
+      { flags: ['threat','financial'],    bonus: 18, label: 'Legal Threat + Payment Demand' },
+      { flags: ['imperson','financial'],  bonus: 18, label: 'Identity Spoofing + Financial Request' },
+      { flags: ['urgency','personal'],    bonus: 15, label: 'Pressure Tactics + Data Harvesting' },
+      { flags: ['prize','financial'],     bonus: 15, label: 'Prize Bait + Payment Required' },
+      { flags: ['romance','financial'],   bonus: 20, label: 'Romance Scam + Financial Ask' },
+      { flags: ['links','personal'],      bonus: 15, label: 'Suspicious Link + Info Request' },
+      { flags: ['imperson','threat'],     bonus: 18, label: 'Authority Impersonation + Threats' }
     ];
 
     function loadPreset(key) { document.getElementById('aiInput').value = PRESETS[key]; }
 
-    function analyzeMessage() {
-      const text = document.getElementById('aiInput').value.trim();
-      if (!text) { alert('Please paste a message first.'); return; }
+    function runRuleEngine(text) {
       const lower = text.toLowerCase();
-
       const detected = FLAGS.filter(f => {
-        if (f.words) return f.words.some(w => lower.includes(w));
-        if (f.test) return f.test(text);
-        return false;
+        const wordMatch = f.words ? f.words.some(w => lower.includes(w)) : false;
+        const testMatch = f.test ? f.test(text) : false;
+        return wordMatch || testMatch;
       });
-
       const detectedIds = detected.map(f => f.id);
-      const isHighRiskCombo = HIGH_RISK_COMBOS.some(([a,b]) => detectedIds.includes(a) && detectedIds.includes(b));
-      const count = detected.length;
+      const triggeredCombos = HIGH_RISK_COMBOS.filter(c => c.flags.every(id => detectedIds.includes(id)));
+      const baseScore = detected.reduce((sum, f) => sum + f.weight, 0);
+      const comboBonus = triggeredCombos.reduce((sum, c) => sum + c.bonus, 0);
+      const rawScore = Math.min(100, baseScore + comboBonus);
+      return { detected, triggeredCombos, rawScore };
+    }
 
-      let level, cssClass, confidence;
-      if (isHighRiskCombo || count >= 4) { level = '🚨 HIGH RISK'; cssClass = 'risk-high'; confidence = Math.min(95, 60 + count * 8); }
-      else if (count >= 2) { level = '⚠️ SUSPICIOUS'; cssClass = 'risk-suspicious'; confidence = Math.min(75, 30 + count * 12); }
-      else { level = '✅ LIKELY SAFE'; cssClass = 'risk-safe'; confidence = Math.max(5, count * 15); }
-
+    function setUIResult(level, cssClass, confidence, detected, triggeredCombos, aiText) {
       const badge = document.getElementById('riskBadge');
       badge.textContent = level;
       badge.className = 'risk-badge ' + cssClass;
@@ -1575,21 +1642,140 @@
       document.getElementById('confidenceVal').textContent = confidence + '%';
       const fill = document.getElementById('confidenceFill');
       fill.style.width = '0%';
-      setTimeout(() => { fill.style.width = confidence + '%'; }, 50);
-
       const fillColor = cssClass === 'risk-high' ? '#dc2626' : cssClass === 'risk-suspicious' ? '#ca8a04' : '#16a34a';
       fill.style.background = fillColor;
+      setTimeout(() => { fill.style.width = confidence + '%'; }, 80);
 
-      const flagsList = document.getElementById('flagsList');
-      if (detected.length === 0) {
-        flagsList.innerHTML = '<div class="flags-empty">No threat flags detected.</div>';
+      // Score breakdown bars
+      const breakdown = document.getElementById('scoreBreakdown');
+      const rows = document.getElementById('scoreRows');
+      if (detected.length > 0) {
+        breakdown.style.display = 'block';
+        const categories = [
+          { label: 'Phishing Indicators', ids: ['links','urlshort','spoofed','personal'] },
+          { label: 'Social Engineering', ids: ['urgency','threat','imperson','romance'] },
+          { label: 'Financial Fraud', ids: ['financial','prize','toogood'] },
+          { label: 'Message Integrity', ids: ['grammar'] }
+        ];
+        rows.innerHTML = categories.map(cat => {
+          const hits = detected.filter(d => cat.ids.includes(d.id));
+          const pct = Math.min(100, hits.length * 35);
+          if (pct === 0) return '';
+          return `<div style="margin-bottom:4px;">
+            <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--muted);margin-bottom:3px;">
+              <span>${cat.label}</span><span>${pct}%</span>
+            </div>
+            <div style="height:5px;border-radius:99px;background:var(--surface-2);overflow:hidden;">
+              <div style="height:100%;width:${pct}%;background:${fillColor};border-radius:99px;transition:width 0.7s ease;"></div>
+            </div>
+          </div>`;
+        }).join('');
       } else {
-        flagsList.innerHTML = detected.map(f => `
+        breakdown.style.display = 'none';
+      }
+
+      // Flags list
+      const flagsList = document.getElementById('flagsList');
+      let flagHTML = '';
+      if (detected.length === 0) {
+        flagHTML = '<div class="flags-empty">No threat flags detected.</div>';
+      } else {
+        flagHTML = detected.map(f => `
           <div class="flag-item">
             <span class="flag-icon">${f.icon}</span>
-            <span class="flag-text"><strong>${f.label}</strong></span>
+            <span class="flag-text"><strong>${f.label}</strong>${f.weight >= 20 ? ' <span style="color:#dc2626;font-size:0.75rem;font-weight:700;">HIGH WEIGHT</span>' : ''}</span>
           </div>`).join('');
+        if (triggeredCombos.length > 0) {
+          flagHTML += triggeredCombos.map(c => `
+            <div class="flag-item" style="border-color:#dc2626;background:rgba(239,68,68,0.07);">
+              <span class="flag-icon">🔴</span>
+              <span class="flag-text" style="color:#dc2626;"><strong>Combo: ${c.label}</strong></span>
+            </div>`).join('');
+        }
       }
+      flagsList.innerHTML = flagHTML;
+
+      // AI analysis
+      const aiWrap = document.getElementById('aiAnalysisWrap');
+      const aiText2 = document.getElementById('aiAnalysisText');
+      if (aiText) {
+        aiWrap.style.display = 'block';
+        aiText2.textContent = aiText;
+      } else {
+        aiWrap.style.display = 'none';
+      }
+    }
+
+    async function analyzeMessage() {
+      const text = document.getElementById('aiInput').value.trim();
+      if (!text) { alert('Please paste a message first.'); return; }
+
+      const btn = document.getElementById('analyzeBtn');
+      btn.disabled = true;
+      btn.textContent = '⏳ Analyzing...';
+
+      // Layer 1: Rule engine (instant)
+      const { detected, triggeredCombos, rawScore } = runRuleEngine(text);
+      let level, cssClass;
+      if (rawScore >= 55) { level = '🚨 HIGH RISK'; cssClass = 'risk-high'; }
+      else if (rawScore >= 25) { level = '⚠️ SUSPICIOUS'; cssClass = 'risk-suspicious'; }
+      else { level = '✅ LIKELY SAFE'; cssClass = 'risk-safe'; }
+
+      setUIResult(level, cssClass, rawScore, detected, triggeredCombos, null);
+      document.getElementById('aiLoadingWrap').style.display = 'block';
+
+      // Layer 2: Claude AI deep analysis
+      try {
+        const resp = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            system: `You are a cybersecurity threat analyst specializing in scam, phishing, and social engineering detection. Analyze the given message and respond ONLY with a JSON object — no markdown, no explanation outside the JSON.
+
+Format:
+{
+  "risk_score": <integer 0-100>,
+  "risk_level": "<SAFE|SUSPICIOUS|HIGH RISK>",
+  "summary": "<2-3 sentence plain-English explanation of the threat or why it's safe>",
+  "tactics": ["<tactic1>", "<tactic2>"],
+  "red_flags": ["<specific red flag from the message text>"],
+  "safe_probability": <integer 0-100>
+}
+
+Be precise. Cite specific phrases from the message as evidence. Consider: social engineering patterns, urgency manipulation, authority impersonation, URL patterns, grammatical anomalies, emotional manipulation, and financial coercion.`,
+            messages: [{ role: 'user', content: `Analyze this message for threats:\n\n${text}` }]
+          })
+        });
+
+        const data = await resp.json();
+        const raw = data.content[0].text.replace(/```json|```/g,'').trim();
+        const ai = JSON.parse(raw);
+
+        // Blend AI score with rule score
+        const blendedScore = Math.round(rawScore * 0.4 + ai.risk_score * 0.6);
+        let finalLevel, finalClass;
+        if (blendedScore >= 55) { finalLevel = '🚨 HIGH RISK'; finalClass = 'risk-high'; }
+        else if (blendedScore >= 25) { finalLevel = '⚠️ SUSPICIOUS'; finalClass = 'risk-suspicious'; }
+        else { finalLevel = '✅ LIKELY SAFE'; finalClass = 'risk-safe'; }
+
+        const aiSummary = [
+          ai.summary,
+          ai.tactics?.length ? `Tactics used: ${ai.tactics.join(', ')}.` : '',
+          ai.safe_probability !== undefined ? `Safe probability: ${ai.safe_probability}%.` : ''
+        ].filter(Boolean).join(' ');
+
+        setUIResult(finalLevel, finalClass, blendedScore, detected, triggeredCombos, aiSummary);
+
+      } catch(e) {
+        // If AI fails, show rule results with note
+        setUIResult(level, cssClass, rawScore, detected, triggeredCombos, 'AI analysis unavailable — showing rule-based results only.');
+      }
+
+      document.getElementById('aiLoadingWrap').style.display = 'none';
+      btn.disabled = false;
+      btn.textContent = '🔍 Analyze Message';
     }
   </script>
 </body>
