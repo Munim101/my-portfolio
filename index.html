@@ -553,6 +553,37 @@
     .modal-link-text span { color: var(--muted); font-size: 0.82rem; }
     .modal-link-arrow { margin-left: auto; color: var(--muted); font-size: 0.9rem; }
 
+    .modal-code-preview {
+      margin-top: 18px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .modal-code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px;
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      font-size: 0.78rem; font-weight: 700;
+      color: #7d8590;
+    }
+    .modal-code-header span { color: #58a6ff; }
+    .modal-code-body {
+      padding: 14px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.78rem;
+      line-height: 1.65;
+      color: #e6edf3;
+      max-height: 200px;
+      overflow-y: auto;
+      white-space: pre;
+    }
+    .modal-code-body .kw  { color: #ff7b72; }
+    .modal-code-body .fn  { color: #d2a8ff; }
+    .modal-code-body .st  { color: #a5d6ff; }
+    .modal-code-body .cm  { color: #8b949e; font-style: italic; }
+
     /* ── PLAYGROUND ── */
     .playground-tabs {
       display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;
@@ -1282,9 +1313,44 @@
             icon: '<i class="fa-solid fa-file-zipper"></i>',
             label: 'Download Source Code',
             sub: 'ZIP · main.py, scrape.py, parse.py, requirements.txt, README',
-            href: 'ai-web-scraper.zip'
+            href: 'ai-web-scraper.zip',
+            download: true
+          },
+          {
+            icon: '<i class="fa-brands fa-github"></i>',
+            label: 'View on GitHub',
+            sub: 'github.com/Munim101',
+            href: 'https://github.com/Munim101',
+            download: false
           }
-        ]
+        ],
+        codePreview: {
+          filename: 'main.py',
+          code: `<span class="kw">import</span> streamlit <span class="kw">as</span> st
+<span class="kw">from</span> scrape <span class="kw">import</span> scrape_website, extract_body_content,
+         clean_body_content, split_dom_content
+<span class="kw">from</span> parse <span class="kw">import</span> parse_with_ollama
+
+st.<span class="fn">title</span>(<span class="st">"AI Web Scraper"</span>)
+url = st.<span class="fn">text_input</span>(<span class="st">"Enter a website URL"</span>)
+
+<span class="kw">if</span> st.<span class="fn">button</span>(<span class="st">"Scrape Site"</span>):
+    result = <span class="fn">scrape_website</span>(url)
+    body_content = <span class="fn">extract_body_content</span>(result)
+    cleaned_content = <span class="fn">clean_body_content</span>(body_content)
+    st.session_state.dom_content = cleaned_content
+
+    <span class="kw">with</span> st.<span class="fn">expander</span>(<span class="st">"View DOM Content"</span>):
+        st.<span class="fn">text_area</span>(<span class="st">"DOM Content"</span>, cleaned_content, height=<span class="st">300</span>)
+
+<span class="kw">if</span> <span class="st">"dom_content"</span> <span class="kw">in</span> st.session_state:
+    parse_description = st.<span class="fn">text_area</span>(<span class="st">"Describe what you want to parse"</span>)
+    <span class="kw">if</span> st.<span class="fn">button</span>(<span class="st">"Parse Content"</span>) <span class="kw">and</span> parse_description:
+        st.<span class="fn">write</span>(<span class="st">"Parsing the content..."</span>)
+        dom_chunks = <span class="fn">split_dom_content</span>(st.session_state.dom_content)
+        result = <span class="fn">parse_with_ollama</span>(dom_chunks, parse_description)
+        st.<span class="fn">write</span>(result)`
+        }
       },
       hackathon: {
         icon: '<i class="fa-solid fa-shield-halved"></i>',
@@ -1294,8 +1360,9 @@
           {
             icon: '<i class="fa-brands fa-github"></i>',
             label: 'Source Code',
-            sub: 'ai-cyber-safety-coach.zip',
-            href: 'ai-cyber-safety-coach_1.zip'
+            sub: 'ai-cyber-safety-coach_1.zip',
+            href: 'ai-cyber-safety-coach_1.zip',
+            download: true
           }
         ]
       },
@@ -1308,7 +1375,8 @@
             icon: '<i class="fa-solid fa-file-zipper"></i>',
             label: 'Full Project Files',
             sub: 'ZIP · SQL, data, charts & slides',
-            href: 'Grocery%20Sales%20Database%20PROJECT%20(4)%20(2).zip'
+            href: 'Grocery%20Sales%20Database%20PROJECT%20(4)%20(2).zip',
+            download: true
           }
         ]
       },
@@ -1321,13 +1389,15 @@
             icon: '<i class="fa-solid fa-file-pdf"></i>',
             label: 'Final Report',
             sub: 'PDF · Full research paper',
-            href: 'Final_Report_00.pdf'
+            href: 'Final_Report_00.pdf',
+            download: true
           },
           {
             icon: '<i class="fa-solid fa-file-powerpoint"></i>',
             label: 'Presentation Slides',
             sub: 'PPTX · Project presentation',
-            href: 'Munim_Awal_Project4_Presentation.pptx'
+            href: 'Munim_Awal_Project4_Presentation.pptx',
+            download: true
           }
         ]
       }
@@ -1342,16 +1412,28 @@
       document.getElementById('modalDesc').textContent = data.desc;
 
       const linksEl = document.getElementById('modalLinks');
-      linksEl.innerHTML = data.links.map(link => `
-        <a class="modal-link-btn" href="${link.href}" target="_blank" rel="noopener">
+      let html = data.links.map(link => `
+        <a class="modal-link-btn" href="${link.href}" target="_blank" rel="noopener" ${link.download ? 'download' : ''}>
           <div class="modal-link-icon">${link.icon}</div>
           <div class="modal-link-text">
             <strong>${link.label}</strong>
             <span>${link.sub}</span>
           </div>
-          <span class="modal-link-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+          <span class="modal-link-arrow"><i class="fa-solid fa-${link.download ? 'download' : 'arrow-up-right-from-square'}"></i></span>
         </a>
       `).join('');
+
+      if (data.codePreview) {
+        html += `<div class="modal-code-preview">
+          <div class="modal-code-header">
+            <span>${data.codePreview.filename}</span>
+            <span>Code Preview</span>
+          </div>
+          <div class="modal-code-body">${data.codePreview.code}</div>
+        </div>`;
+      }
+
+      linksEl.innerHTML = html;
 
       document.getElementById('projectModal').classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -1789,14 +1871,6 @@
         btn.textContent = '🔍 Analyze Message';
       }, 600);
     }
-  </script>
-      phishing: "URGENT: Your account has been compromised. Click here immediately to verify your identity and prevent suspension. Enter your password and social security number to restore access: bit.ly/secure-verify-2026. This expires in 24 hours. Failure to comply will result in permanent account termination.",
-      gift: "Congratulations! You've been selected as a winner from our database. To claim your $500 Amazon gift card, we need your credit card number to verify your identity and process shipping. Send $25 via gift card to activate your prize. Act now — offer expires tonight! Reply STOP to unsubscribe.",
-      irs: "This is a final notice from the IRS Criminal Investigation Division. You owe $3,847 in back taxes. You will be arrested unless you call us immediately at 1-800-555-0199. Payment must be made via wire transfer or Bitcoin within 2 hours or a warrant will be issued for your arrest. This is your last warning.",
-      romance: "My darling, I have fallen deeply in love with you. I am a US soldier stationed overseas. I need $2,000 sent via Western Union for emergency medical treatment. I will repay you when I return. God bless you. I will marry you when this deployment is over. Please send quickly my love.",
-      safe: "Hey, just checking in — are we still on for lunch tomorrow at noon? Let me know if the time works for you. We could try that new Thai place on 5th Street. Also, did you get a chance to look at the project notes I sent?"
-    };
-
   </script>
 </body>
 </html>
