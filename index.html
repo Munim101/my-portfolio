@@ -771,6 +771,147 @@
       background: var(--surface-2); border: 1px solid var(--border); line-height: 1.5;
     }
 
+    /* ── ADMIN PANEL ── */
+    .admin-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(4,8,16,0.92); backdrop-filter: blur(12px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .admin-overlay.open { display: flex; }
+
+    .admin-box {
+      background: #0a1628; border: 1px solid #1f3152;
+      border-radius: 20px; width: min(860px, 100%);
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+      animation: slideUp 0.3s ease;
+    }
+
+    .admin-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px; border-bottom: 1px solid #1f3152;
+      position: sticky; top: 0; background: #0a1628; z-index: 1;
+    }
+    .admin-header h2 {
+      font-family: 'Syne', sans-serif; font-size: 1.1rem;
+      font-weight: 800; color: #eef2fb;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .admin-badge {
+      background: #0f2050; color: #4d7cff;
+      padding: 3px 10px; border-radius: 99px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .admin-close {
+      width: 32px; height: 32px; border-radius: 8px;
+      border: 1px solid #1f3152; background: #172035;
+      color: #8da4c4; cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: inherit; transition: all 0.2s;
+    }
+    .admin-close:hover { background: #dc2626; color: #fff; border-color: #dc2626; }
+
+    .admin-body { padding: 24px 28px; display: grid; gap: 20px; }
+
+    .admin-section-title {
+      font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1.2px; color: #4d7cff; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .admin-section-title::before {
+      content: ''; width: 20px; height: 2px;
+      background: #4d7cff; border-radius: 99px;
+    }
+
+    /* Quick links grid */
+    .admin-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+    .admin-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px; border-radius: 12px;
+      border: 1px solid #1f3152; background: #172035;
+      color: #eef2fb; text-decoration: none;
+      font-size: 0.85rem; font-weight: 600;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .admin-link:hover { background: #0f2050; border-color: #4d7cff; color: #4d7cff; transform: translateY(-2px); }
+    .admin-link i { color: #4d7cff; width: 16px; text-align: center; }
+
+    /* Stats grid */
+    .admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+    .admin-stat {
+      background: #172035; border: 1px solid #1f3152;
+      border-radius: 12px; padding: 16px 14px; text-align: center;
+    }
+    .admin-stat-num {
+      font-family: 'Syne', sans-serif; font-size: 1.6rem;
+      font-weight: 800; color: #4d7cff; display: block;
+    }
+    .admin-stat-label { color: #8da4c4; font-size: 0.75rem; font-weight: 600; margin-top: 4px; }
+
+    /* Notes */
+    .admin-notes-area {
+      width: 100%; min-height: 100px; padding: 12px 14px;
+      background: #172035; border: 1px solid #1f3152;
+      border-radius: 12px; color: #eef2fb;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+      line-height: 1.6; resize: vertical; outline: none;
+      transition: border-color 0.2s;
+    }
+    .admin-notes-area:focus { border-color: #4d7cff; }
+    .admin-notes-area::placeholder { color: #536179; }
+    .admin-save-btn {
+      padding: 8px 18px; border-radius: 8px;
+      background: #4d7cff; color: #fff; border: none;
+      font-family: 'DM Sans', sans-serif; font-weight: 700;
+      font-size: 0.85rem; cursor: pointer; margin-top: 8px;
+      transition: all 0.2s;
+    }
+    .admin-save-btn:hover { background: #6b93ff; transform: translateY(-1px); }
+
+    /* Analytics iframe */
+    .admin-analytics {
+      background: #172035; border: 1px solid #1f3152;
+      border-radius: 12px; overflow: hidden; min-height: 200px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Password screen */
+    .admin-pw-screen {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 48px 28px; gap: 16px;
+    }
+    .admin-pw-icon {
+      width: 60px; height: 60px; border-radius: 18px;
+      background: #0f2050; color: #4d7cff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 8px;
+    }
+    .admin-pw-title {
+      font-family: 'Syne', sans-serif; font-size: 1.2rem;
+      font-weight: 800; color: #eef2fb;
+    }
+    .admin-pw-input {
+      width: 100%; max-width: 320px; padding: 12px 16px;
+      background: #172035; border: 1px solid #1f3152;
+      border-radius: 12px; color: #eef2fb;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      outline: none; text-align: center; letter-spacing: 2px;
+      transition: border-color 0.2s;
+    }
+    .admin-pw-input:focus { border-color: #4d7cff; }
+    .admin-pw-btn {
+      padding: 12px 32px; border-radius: 12px;
+      background: #4d7cff; color: #fff; border: none;
+      font-family: 'DM Sans', sans-serif; font-weight: 700;
+      font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
+    }
+    .admin-pw-btn:hover { background: #6b93ff; transform: translateY(-2px); }
+    .admin-pw-error {
+      color: #dc2626; font-size: 0.85rem; font-weight: 600;
+      display: none;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) { .ai-demo-box { grid-template-columns: 1fr; } }
     @media (max-width: 900px) {
@@ -1268,6 +1409,108 @@
       <p>© 2026 Munim Awal. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- ── ADMIN PANEL ── -->
+  <div id="adminOverlay" class="admin-overlay" onclick="handleAdminOverlay(event)">
+    <div class="admin-box" id="adminBox">
+
+      <!-- PASSWORD SCREEN -->
+      <div id="adminPwScreen" class="admin-pw-screen">
+        <div class="admin-pw-icon"><i class="fa-solid fa-lock"></i></div>
+        <div class="admin-pw-title">Admin Access</div>
+        <input type="password" class="admin-pw-input" id="adminPwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkAdminPw()" />
+        <div class="admin-pw-error" id="adminPwError">Incorrect password</div>
+        <button class="admin-pw-btn" onclick="checkAdminPw()">Unlock</button>
+      </div>
+
+      <!-- DASHBOARD (hidden until login) -->
+      <div id="adminDashboard" style="display:none;">
+        <div class="admin-header">
+          <h2><i class="fa-solid fa-shield-halved" style="color:#4d7cff;"></i> Admin Panel <span class="admin-badge">Private</span></h2>
+          <button class="admin-close" onclick="closeAdmin()">✕</button>
+        </div>
+        <div class="admin-body">
+
+          <!-- QUICK LINKS -->
+          <div>
+            <div class="admin-section-title">Quick Links</div>
+            <div class="admin-links">
+              <a class="admin-link" href="https://github.com/Munim101" target="_blank"><i class="fa-brands fa-github"></i> GitHub Repo</a>
+              <a class="admin-link" href="https://app.netlify.com" target="_blank"><i class="fa-solid fa-cloud"></i> Netlify</a>
+              <a class="admin-link" href="https://search.google.com/search-console" target="_blank"><i class="fa-brands fa-google"></i> Search Console</a>
+              <a class="admin-link" href="https://account.squarespace.com/domains" target="_blank"><i class="fa-solid fa-globe"></i> Domain (Squarespace)</a>
+              <a class="admin-link" href="https://www.linkedin.com/in/munim-awal-441859289" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+              <a class="admin-link" onclick="window.open('https://munimawal.goatcounter.com','_blank')"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+            </div>
+          </div>
+
+          <!-- SITE STATS -->
+          <div>
+            <div class="admin-section-title">Site Stats</div>
+            <div class="admin-stats">
+              <div class="admin-stat">
+                <span class="admin-stat-num" id="adminVisits">—</span>
+                <div class="admin-stat-label">Total Views</div>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat-num" id="adminProjects">6</span>
+                <div class="admin-stat-label">Projects</div>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat-num" id="adminExp">3</span>
+                <div class="admin-stat-label">Roles Listed</div>
+              </div>
+              <div class="admin-stat">
+                <span class="admin-stat-num" id="adminGoogleRank">#1</span>
+                <div class="admin-stat-label">Google Rank</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANALYTICS EMBED -->
+          <div>
+            <div class="admin-section-title">Visitor Analytics</div>
+            <div class="admin-analytics" id="adminAnalyticsBox">
+              <div style="text-align:center;color:#536179;padding:24px;">
+                <i class="fa-solid fa-chart-bar" style="font-size:2rem;color:#1f3152;margin-bottom:12px;display:block;"></i>
+                <div style="font-weight:700;color:#8da4c4;margin-bottom:8px;">Set up GoatCounter to see live visitor data</div>
+                <div style="font-size:0.82rem;margin-bottom:16px;">Free, private, no cookies — trusted by browsers</div>
+                <a href="https://www.goatcounter.com" target="_blank" style="background:#4d7cff;color:#fff;padding:8px 18px;border-radius:8px;font-weight:700;font-size:0.85rem;text-decoration:none;">Set Up Free Analytics →</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO STATUS -->
+          <div>
+            <div class="admin-section-title">SEO Checklist</div>
+            <div style="display:grid;gap:8px;">
+              <div class="admin-link" style="pointer-events:none;"><i class="fa-solid fa-check" style="color:#16a34a;"></i> munimawal.com live & indexed</div>
+              <div class="admin-link" style="pointer-events:none;"><i class="fa-solid fa-check" style="color:#16a34a;"></i> Google Search Console verified</div>
+              <div class="admin-link" style="pointer-events:none;"><i class="fa-solid fa-check" style="color:#16a34a;"></i> Structured data (JSON-LD) added</div>
+              <div class="admin-link" style="pointer-events:none;"><i class="fa-solid fa-check" style="color:#16a34a;"></i> Favicon files uploaded</div>
+              <div class="admin-link" style="pointer-events:none;"><i class="fa-solid fa-clock" style="color:#ca8a04;"></i> GoatCounter analytics — pending setup</div>
+            </div>
+          </div>
+
+          <!-- PRIVATE NOTES -->
+          <div>
+            <div class="admin-section-title">Private Notes</div>
+            <textarea class="admin-notes-area" id="adminNotes" placeholder="Write private notes here — only you can see these. Saved in your browser."></textarea>
+            <button class="admin-save-btn" onclick="saveAdminNotes()">💾 Save Notes</button>
+            <span id="adminNotesSaved" style="color:#16a34a;font-size:0.8rem;font-weight:700;margin-left:10px;display:none;">Saved!</span>
+          </div>
+
+          <!-- LOGOUT -->
+          <div style="text-align:center;padding-bottom:8px;">
+            <button onclick="logoutAdmin()" style="background:transparent;border:1px solid #1f3152;color:#536179;padding:8px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='#dc2626';this.style.color='#dc2626'" onmouseout="this.style.borderColor='#1f3152';this.style.color='#536179'">
+              Log Out
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ── PROJECT MODAL ── -->
   <div id="projectModal" class="modal-overlay" onclick="handleOverlayClick(event)">
@@ -1924,6 +2167,84 @@ url = st.<span class="fn">text_input</span>(<span class="st">"Enter a website UR
         btn.textContent = '🔍 Analyze Message';
       }, 600);
     }
+
+    /* ── ADMIN PANEL ── */
+    const ADMIN_HASH = '625c87ccc561db52b1e5d6c0c1dfc4c10c068f37f2f33710f47cebe4fed5687b';
+    let adminLogoClicks = 0, adminLogoTimer = null, adminLoggedIn = false;
+
+    // 5 clicks on logo within 3 seconds opens admin
+    document.getElementById('logoClick').addEventListener('click', () => {
+      adminLogoClicks++;
+      clearTimeout(adminLogoTimer);
+      adminLogoTimer = setTimeout(() => { adminLogoClicks = 0; }, 3000);
+      if (adminLogoClicks >= 5) {
+        adminLogoClicks = 0;
+        openAdmin();
+      }
+    });
+
+    function openAdmin() {
+      document.getElementById('adminOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (adminLoggedIn) {
+        showAdminDashboard();
+      } else {
+        document.getElementById('adminPwScreen').style.display = 'flex';
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('adminPwInput').value = '';
+        document.getElementById('adminPwError').style.display = 'none';
+        setTimeout(() => document.getElementById('adminPwInput').focus(), 100);
+      }
+    }
+
+    function closeAdmin() {
+      document.getElementById('adminOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function handleAdminOverlay(e) {
+      if (e.target === document.getElementById('adminOverlay')) closeAdmin();
+    }
+
+    async function checkAdminPw() {
+      const input = document.getElementById('adminPwInput').value;
+      const encoded = new TextEncoder().encode(input);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      if (hashHex === ADMIN_HASH) {
+        adminLoggedIn = true;
+        showAdminDashboard();
+      } else {
+        document.getElementById('adminPwError').style.display = 'block';
+        document.getElementById('adminPwInput').value = '';
+        document.getElementById('adminPwInput').focus();
+      }
+    }
+
+    function showAdminDashboard() {
+      document.getElementById('adminPwScreen').style.display = 'none';
+      document.getElementById('adminDashboard').style.display = 'block';
+      // Load saved notes
+      const notes = localStorage.getItem('adminNotes') || '';
+      document.getElementById('adminNotes').value = notes;
+    }
+
+    function logoutAdmin() {
+      adminLoggedIn = false;
+      closeAdmin();
+    }
+
+    function saveAdminNotes() {
+      localStorage.setItem('adminNotes', document.getElementById('adminNotes').value);
+      const saved = document.getElementById('adminNotesSaved');
+      saved.style.display = 'inline';
+      setTimeout(() => { saved.style.display = 'none'; }, 2000);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeModal(); closeAdmin(); }
+    });
   </script>
 </body>
 </html>
