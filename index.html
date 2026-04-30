@@ -599,8 +599,8 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
         <span class="hero-chip">🐍 Python &amp; SQL</span>
       </div>
       <div class="hero-cta">
-        <a href="#projects" class="btn-primary">📁 View My Work</a>
-        <a href="#contact" class="btn-ghost">✉️ Get In Touch</a>
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-ghost">Get In Touch</a>
       </div>
       <div class="hero-socials">
         <a href="https://github.com/Munim101" target="_blank" class="hero-social" title="GitHub">
@@ -677,8 +677,8 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
         <div class="lang-pills" style="margin-top:12px;">
           <span class="lang-pill native" style="padding:8px 18px;font-size:.92rem;">English</span>
           <span class="lang-pill native" style="padding:8px 18px;font-size:.92rem;">Bengali</span>
-          <span class="lang-pill" style="padding:8px 18px;font-size:.92rem;">Hindi</span>
-          <span class="lang-pill" style="padding:8px 18px;font-size:.92rem;">Urdu</span>
+          <span class="lang-pill" style="padding:8px 18px;font-size:.92rem;">Hindi <span style="font-size:.7rem;opacity:.62;">(beginner)</span></span>
+          <span class="lang-pill" style="padding:8px 18px;font-size:.92rem;">Urdu <span style="font-size:.7rem;opacity:.62;">(beginner)</span></span>
           <span class="lang-pill" style="padding:8px 18px;font-size:.92rem;">Spanish <span style="font-size:.75rem;opacity:.7;">(learning)</span></span>
         </div>
       </div>
@@ -694,10 +694,26 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
           <div class="int-item"><div class="int-icon">👨‍💻</div>Side Projects</div>
         </div>
       </div>
-      <div class="bento-card bc-gpa d3">
-        <div class="bento-label">⭐ Academic Standing</div>
-        <div class="gpa-display" id="edit-gpa">3.5</div>
-        <div class="gpa-label">GPA · Kellogg Honors College · MISSA E-Board</div>
+      <div class="bento-card bc-gpa d3" style="display:flex;flex-direction:column;gap:0;">
+        <div class="bento-label">⭐ Honors & Leadership</div>
+        <div style="display:grid;gap:9px;margin-top:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:var(--s2);border:1px solid var(--border);border-radius:11px;">
+            <div style="font-size:.82rem;font-weight:700;color:var(--text);">GPA</div>
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;" id="edit-gpa">3.5</div>
+          </div>
+          <div style="padding:11px 14px;background:var(--s2);border:1px solid var(--border);border-radius:11px;">
+            <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--primary);margin-bottom:3px;">Role</div>
+            <div style="font-size:.86rem;font-weight:700;color:var(--text);">Technical Lead · MISSA E-Board</div>
+          </div>
+          <div style="padding:11px 14px;background:var(--s2);border:1px solid var(--border);border-radius:11px;">
+            <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--primary);margin-bottom:3px;">Honors Program</div>
+            <div style="font-size:.86rem;font-weight:700;color:var(--text);">Kellogg Honors College</div>
+          </div>
+          <div style="padding:11px 14px;background:var(--s2);border:1px solid var(--border);border-radius:11px;">
+            <div style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--primary);margin-bottom:3px;">Expected</div>
+            <div style="font-size:.86rem;font-weight:700;color:var(--text);">December 2027 · Cal Poly Pomona</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1067,55 +1083,44 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
+<!-- CONTACT ANCHOR (content moved to footer) -->
+<div id="contact" style="height:1px;margin-top:-1px;"></div>
+
+<footer>
   <div class="container">
-    <div class="contact-inner">
-      <div class="contact-text reveal">
-        <div class="section-eyebrow">Contact</div>
-        <h2>Let's build<br>something<br><span style="background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">together.</span></h2>
-        <p>I am a junior at Cal Poly Pomona building experience in IT, data analytics, and cybersecurity. Open to internships, part-time roles, and meaningful projects. Let's connect.</p>
-        <div class="hero-socials">
-          <a href="https://github.com/Munim101" target="_blank" class="hero-social">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    <div style="border-top:1px solid var(--border);padding-top:32px;margin-top:0;">
+      <!-- Let's Connect CTA -->
+      <div style="text-align:center;padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:32px;">
+        <div class="section-eyebrow" style="justify-content:center;margin-bottom:12px;">Let's Connect</div>
+        <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.5px;margin-bottom:16px;">Ready to build<br>something <span style="background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">together?</span></h2>
+        <p style="color:var(--muted);max-width:440px;margin:0 auto 28px;font-size:1rem;line-height:1.65;">I am a junior at Cal Poly Pomona building experience in IT, data analytics, and cybersecurity. Open to internships, part-time roles, and projects where I can contribute and grow.</p>
+        <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+          <a href="mailto:munimm764@gmail.com" style="display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;padding:13px 26px;border-radius:13px;font-weight:700;font-size:.95rem;box-shadow:0 4px 20px var(--glow-lg);transition:var(--transition);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            Send Me an Email
           </a>
-          <a href="https://www.linkedin.com/in/munim-awal-441859289" target="_blank" class="hero-social">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <a href="https://www.linkedin.com/in/munim-awal-441859289" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:var(--surface);color:var(--text);padding:13px 26px;border-radius:13px;font-weight:700;font-size:.95rem;border:1px solid var(--border);transition:var(--transition);" onmouseover="this.style.borderColor='var(--primary)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Connect on LinkedIn
           </a>
-          <a href="mailto:munimm764@gmail.com" class="hero-social">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        </div>
+        <div style="display:flex;justify-content:center;gap:12px;margin-top:20px;">
+          <a href="https://github.com/Munim101" target="_blank" style="width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:var(--s2);color:var(--muted);display:flex;align-items:center;justify-content:center;transition:var(--transition);" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
         </div>
       </div>
-      <div class="contact-cards reveal">
-        <a href="mailto:munimm764@gmail.com" class="contact-card">
-          <div class="cc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg></div>
-          <div><div class="cc-label">Email</div><div class="cc-val">munimm764@gmail.com</div></div>
-          <span class="cc-arrow">→</span>
-        </a>
-        <a href="https://github.com/Munim101" target="_blank" class="contact-card">
-          <div class="cc-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></div>
-          <div><div class="cc-label">GitHub</div><div class="cc-val">github.com/Munim101</div></div>
-          <span class="cc-arrow">→</span>
-        </a>
-        <a href="https://www.linkedin.com/in/munim-awal-441859289" target="_blank" class="contact-card">
-          <div class="cc-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
-          <div><div class="cc-label">LinkedIn</div><div class="cc-val">linkedin.com/in/munim-awal</div></div>
-          <span class="cc-arrow">→</span>
-        </a>
+      <!-- Bottom bar -->
+      <div class="footer-inner">
+        <div class="footer-logo"><span class="nav-logo-dot"></span>Munim Awal</div>
+        <p class="footer-copy" id="footerCopy" style="cursor:default;user-select:none;">© 2026 Munim Awal. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#home">Top</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-logo"><span class="nav-logo-dot"></span>Munim Awal</div>
-    <p class="footer-copy">© 2026 Munim Awal. All rights reserved.</p>
-    <div class="footer-links">
-      <a href="#home">Top</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
@@ -1521,29 +1526,26 @@ function modalOverClick(e) { if (e.target === document.getElementById('modalOver
 
 /* ─────────────────────────────────────
    ADMIN PANEL
-   TRIGGER: Konami Code ↑↑↓↓←→←→
-   (undetectable — no clicks, no hints)
+   TRIGGER: Click the copyright text
+   in the footer 5 times quickly.
+   Zero hints. Completely invisible.
 ───────────────────────────────────── */
 const ADMIN_HASH = '625c87ccc561db52b1e5d6c0c1dfc4c10c068f37f2f33710f47cebe4fed5687b';
-const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight'];
-let konamiIdx = 0, adminLoggedIn = false;
+let footerClicks = 0, footerTimer = null, adminLoggedIn = false;
 
-document.addEventListener('keydown', e => {
-  if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') { konamiIdx = 0; return; }
-  if (e.key === KONAMI[konamiIdx]) {
-    konamiIdx++;
-    if (konamiIdx === KONAMI.length) {
-      konamiIdx = 0;
-      showKonamiToast();
-    }
-  } else { konamiIdx = 0; }
+document.getElementById('footerCopy').addEventListener('click', function() {
+  footerClicks++;
+  if (footerTimer) clearTimeout(footerTimer);
+  footerTimer = setTimeout(() => { footerClicks = 0; }, 2800);
+  if (footerClicks >= 5) {
+    footerClicks = 0;
+    clearTimeout(footerTimer);
+    // Brief invisible flash then open
+    const t = document.getElementById('konamiToast');
+    t.classList.add('show');
+    setTimeout(() => { t.classList.remove('show'); setTimeout(openAdmin, 180); }, 700);
+  }
 });
-
-function showKonamiToast() {
-  const t = document.getElementById('konamiToast');
-  t.classList.add('show');
-  setTimeout(() => { t.classList.remove('show'); setTimeout(openAdmin, 200); }, 900);
-}
 
 function openAdmin() {
   document.getElementById('adminOver').classList.add('open');
