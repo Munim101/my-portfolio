@@ -1005,6 +1005,8 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
           </div>
         </div>
       </div>
+    </div><!-- end pg-ai -->
+
     <div class="pg-panel" id="pg-data">
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:28px;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
@@ -1038,7 +1040,11 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
         </div>
         <div class="ai-note" style="margin-top:14px;">📊 This dashboard simulates the kind of data tracking I do daily at the LA County Public Defender's Office — validating records, managing documents, and monitoring certification compliance across 6+ departments.</div>
       </div>
-    </div>
+    </div><!-- end pg-data -->
+  </div><!-- end container -->
+</section><!-- end playground -->
+
+<!-- SKILLS -->
 <section id="skills">
   <div class="container">
     <div class="reveal"><div class="section-eyebrow">Skills</div><h2 class="section-title">Tech Stack</h2><p class="section-sub">Tools and technologies across my work, coursework, and personal projects — built and proven in real environments.</p></div>
@@ -1112,7 +1118,7 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
       </div>
       <!-- Bottom bar -->
       <div class="footer-inner">
-        <div class="footer-logo"><span class="nav-logo-dot"></span>Munim Awal</div>
+        <div class="footer-logo" id="footerName" style="cursor:default;user-select:none;"><span class="nav-logo-dot"></span>Munim Awal</div>
         <p id="footerCopy" style="font-size:.88rem;font-weight:600;color:var(--muted);cursor:default;user-select:none;text-align:center;">Copyright © 2026 Munim Awal. All Rights Reserved.</p>
         <div class="footer-links">
           <a href="#home">Top</a>
@@ -1204,6 +1210,51 @@ footer { margin-top: 100px; border-top: 1px solid var(--border); padding: 32px 0
 
 <!-- PROJECT MODAL -->
 <div class="modal-over" id="modalOver" onclick="modalOverClick(event)">
+
+<!-- EDIT PANEL (7-click name, separate from admin) -->
+<div class="admin-over" id="editPanelOver" onclick="if(event.target===this)closeEditPanel()" style="display:none;">
+  <div class="admin-box" style="max-width:640px;">
+    <div id="editPwScreen" class="admin-pw">
+      <div class="admin-pw-shield">✏️</div>
+      <div class="admin-pw-title">Content Editor</div>
+      <div class="admin-pw-sub">Enter your password to edit website content.</div>
+      <input type="password" class="admin-pw-in" id="editPwIn" placeholder="••••••••••" onkeydown="if(event.key==='Enter')editPwCheck()"/>
+      <div class="admin-pw-err" id="editPwErr">Incorrect password. Try again.</div>
+      <button class="admin-pw-btn" onclick="editPwCheck()">Unlock Editor</button>
+    </div>
+    <div id="editPanelDash" style="display:none;">
+      <div class="admin-hdr">
+        <div class="admin-hdr-left">
+          <span style="font-size:1rem;">✏️</span>
+          <h2>Content Editor</h2>
+          <span class="admin-pill">Edit Mode</span>
+        </div>
+        <button class="admin-x" onclick="closeEditPanel()">✕</button>
+      </div>
+      <div class="admin-body">
+        <div>
+          <div class="admin-section-label">What You Can Edit</div>
+          <div style="display:grid;gap:8px;margin-bottom:4px;">
+            <div style="padding:11px 14px;background:#0f1e34;border:1px solid #1a3154;border-radius:11px;font-size:.83rem;color:#7d9ac4;line-height:1.6;">
+              After clicking <strong style="color:#edf2ff;">Activate Edit Mode</strong> below, close this panel. Then click any text on the page to edit it directly — About section, job experience bullets, status items, and more. A floating bar will appear at the bottom with Save and Cancel buttons.
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+            <div style="padding:10px 13px;background:#0f1e34;border:1px solid #1a3154;border-radius:10px;font-size:.8rem;color:#6b93ff;">📝 About / Summary</div>
+            <div style="padding:10px 13px;background:#0f1e34;border:1px solid #1a3154;border-radius:10px;font-size:.8rem;color:#6b93ff;">💼 Job Experience bullets</div>
+            <div style="padding:10px 13px;background:#0f1e34;border:1px solid #1a3154;border-radius:10px;font-size:.8rem;color:#6b93ff;">🟢 Currently Active status</div>
+            <div style="padding:10px 13px;background:#0f1e34;border:1px solid #1a3154;border-radius:10px;font-size:.8rem;color:#6b93ff;">🎓 GPA & Academic info</div>
+          </div>
+        </div>
+        <div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;padding-bottom:8px;">
+          <button class="admin-edit-btn" id="editPanelBtn" onclick="activateEditFromPanel()" style="font-size:.95rem;padding:13px 32px;">✏️ Activate Edit Mode</button>
+          <span style="color:#22c55e;font-size:.78rem;font-weight:700;display:none;" id="editPanelStatus">● Edit Mode is Active — close this panel and click any text</span>
+          <button class="admin-logout" onclick="closeEditPanelAndLogout()" style="margin-top:4px;">Lock & Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="modal-box">
     <button class="modal-x" onclick="closeModal()">✕</button>
     <div class="modal-icon" id="mIcon"></div>
@@ -1526,9 +1577,8 @@ function modalOverClick(e) { if (e.target === document.getElementById('modalOver
 
 /* ─────────────────────────────────────
    ADMIN PANEL
-   TRIGGER: Click the copyright text
-   in the footer 5 times quickly.
-   Zero hints. Completely invisible.
+   TRIGGER: Click "Copyright © 2026..."
+   text in the footer 5 times quickly.
 ───────────────────────────────────── */
 const ADMIN_HASH = '625c87ccc561db52b1e5d6c0c1dfc4c10c068f37f2f33710f47cebe4fed5687b';
 let footerClicks = 0, footerTimer = null, adminLoggedIn = false;
@@ -1540,12 +1590,90 @@ document.getElementById('footerCopy').addEventListener('click', function() {
   if (footerClicks >= 5) {
     footerClicks = 0;
     clearTimeout(footerTimer);
-    // Brief invisible flash then open
     const t = document.getElementById('konamiToast');
     t.classList.add('show');
     setTimeout(() => { t.classList.remove('show'); setTimeout(openAdmin, 180); }, 700);
   }
 });
+
+/* ─────────────────────────────────────
+   EDIT PANEL
+   TRIGGER: Click "Munim Awal" name
+   in the footer 7 times quickly.
+   Password: Bangla1976@
+───────────────────────────────────── */
+const EDIT_HASH = '625c87ccc561db52b1e5d6c0c1dfc4c10c068f37f2f33710f47cebe4fed5687b';
+let nameClicks = 0, nameTimer = null, editPanelLoggedIn = false;
+
+document.getElementById('footerName').addEventListener('click', function() {
+  nameClicks++;
+  if (nameTimer) clearTimeout(nameTimer);
+  nameTimer = setTimeout(() => { nameClicks = 0; }, 3000);
+  if (nameClicks >= 7) {
+    nameClicks = 0;
+    clearTimeout(nameTimer);
+    openEditPanel();
+  }
+});
+
+function openEditPanel() {
+  document.getElementById('editPanelOver').style.display = 'flex';
+  document.getElementById('editPanelOver').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (editPanelLoggedIn) {
+    showEditDash();
+  } else {
+    document.getElementById('editPwScreen').style.display = 'flex';
+    document.getElementById('editPanelDash').style.display = 'none';
+    document.getElementById('editPwIn').value = '';
+    document.getElementById('editPwErr').style.display = 'none';
+    setTimeout(() => document.getElementById('editPwIn').focus(), 150);
+  }
+}
+
+function closeEditPanel() {
+  document.getElementById('editPanelOver').style.display = 'none';
+  document.getElementById('editPanelOver').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeEditPanelAndLogout() {
+  editPanelLoggedIn = false;
+  editModeActive = false;
+  document.querySelectorAll('[contenteditable="true"]').forEach(el => el.setAttribute('contenteditable','false'));
+  document.body.classList.remove('edit-mode');
+  closeEditPanel();
+}
+
+async function editPwCheck() {
+  const val = document.getElementById('editPwIn').value;
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(val));
+  const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  if (hex === EDIT_HASH) {
+    editPanelLoggedIn = true;
+    showEditDash();
+  } else {
+    document.getElementById('editPwErr').style.display = 'block';
+    document.getElementById('editPwIn').value = '';
+    document.getElementById('editPwIn').focus();
+  }
+}
+
+function showEditDash() {
+  document.getElementById('editPwScreen').style.display = 'none';
+  document.getElementById('editPanelDash').style.display = 'block';
+}
+
+function activateEditFromPanel() {
+  addEditableIDs();
+  editModeActive = true;
+  const editableEls = document.querySelectorAll('.intro-text p, .hero-role, .exp-bullets li, .status-item, #edit-gpa, .tl-desc, .section-sub, .proj-desc');
+  editableEls.forEach(el => el.setAttribute('contenteditable', 'true'));
+  document.body.classList.add('edit-mode');
+  document.getElementById('editPanelBtn').textContent = '✅ Edit Mode Active';
+  document.getElementById('editPanelStatus').style.display = 'block';
+  setTimeout(() => closeEditPanel(), 1200);
+}
 
 function openAdmin() {
   document.getElementById('adminOver').classList.add('open');
@@ -1588,7 +1716,7 @@ function adminSaveNotes() {
 
 /* Global ESC */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal(); closeAdmin(); document.getElementById('cmdOverlay').classList.remove('open'); editCancel(); }
+  if (e.key === 'Escape') { closeModal(); closeAdmin(); closeEditPanel(); document.getElementById('cmdOverlay').classList.remove('open'); editCancel(); }
 });
 
 /* ─────────────────────────────────────
@@ -1768,13 +1896,3 @@ loadSavedEdits();
 <script data-goatcounter="https://munimawal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
-
-
-       <p class="footer-copy">© 2026 Munim Awal. All Rights Reserved.</p>
-       <footer>
-  <div class="container footer-inner">
-    <div class="footer-logo">
-      <span class="nav-logo-dot"></span>
-      Munim Awal
-    </div>
-
